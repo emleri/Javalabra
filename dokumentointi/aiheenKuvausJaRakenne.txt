@@ -12,11 +12,15 @@ Toiminnot:
   - uuden pelin aloittaminen
   - parhaat pisteet
 
-- Peli:
+- Pelaaja pelin aikana:
   - hahmon liikuttaminen
   - ympäristön tarkastelu
   - hirviön lyöminen
   - erikoistaidon käyttö
+
+- Pelimekaniikka:
+  - hirviöiden liikkumisen/hyökkäysten ohjaus
+  - uusien hirviöiden spawnaaminen
 
 - Pelin jälkeen:
   - voitettujen vihollisten listan tarkastelu
