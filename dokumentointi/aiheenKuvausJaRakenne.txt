@@ -1,0 +1,23 @@
+Aihe: Gladiaattoripeli
+
+Pieni, vuoropohjainen kirjaingrafiikkapeli Nethackin, ADOMin ja Dwarf Fortressin henkeen, jossa taistellaan areenalla erilaisia tietokoneen ohjaamia ökkömönkiäisiä vastaan.
+
+
+Käyttäjät: Pelaaja(t) (jos aikaa tuntuu riittävän, voisi peliä laajentaa kahdelle pelaajalle)
+
+
+Toiminnot:
+
+- Valikko:
+  - uuden pelin aloittaminen
+  - parhaat pisteet
+
+- Peli:
+  - hahmon liikuttaminen
+  - ympäristön tarkastelu
+  - hirviön lyöminen
+  - erikoistaidon käyttö
+
+- Pelin jälkeen:
+  - voitettujen vihollisten listan tarkastelu
+  - nimen syöttäminen pistelistausta varten
