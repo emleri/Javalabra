@@ -1,9 +1,23 @@
 Aihe: Gladiaattoripeli
 
-Pieni, vuoropohjainen kirjaingrafiikkapeli Nethackin, ADOMin ja Dwarf Fortressin henkeen, jossa taistellaan areenalla erilaisia tietokoneen ohjaamia ökkömönkiäisiä vastaan.
+Pieni, vuoropohjainen kirjaingrafiikkapeli Nethackin, ADOMin ja Dwarf Fortressin henkeen, 
+jossa taistellaan areenalla erilaisia tietokoneen ohjaamia ökkömönkiäisiä vastaan.
+
+Pelin kulku:
+Pelin alussa pelaajahahmo ja ensimmäinen vastustajahirviö ovat suljetussa, ruutuihin 
+jaetussa tilassa. Areenalla on myös satunnaisgeneroituja esteitä.
+Pelaaja ja hirviöt toimivat vuorotellen yhdellä seuraavista tavoista kerrallaan: liikkuen 
+askeleen ruudusta toiseen, hyökäten kerran viereisessä ruudussa olevaa vihollista vastaan, 
+käyttäen erikoistaitoaan tai hypäten vuoronsa yli. Pelaajalla on lisäksi mahdollisuus 
+tarkastella ympäristöään (lukea hirviön ominaisuusarvot, tarkistaa mitä mikäkin symboli 
+kartalla tarkoittaa) ilman, että kuluttaa toimintoaan siihen.
+Kun pelaaja tappaa kaikki hirviöt areenalta, alueen laidalle saapuu portista seuraava 
+aalto. Peli jatkuu näin kunnes pelaajahahmo kuolee, jonka jälkeen peli pisteytetään 
+tapettujen hirviöiden perusteella.
 
 
-Käyttäjät: Pelaaja(t) (jos aikaa tuntuu riittävän, voisi peliä laajentaa kahdelle pelaajalle)
+Käyttäjät: Pelaaja(t) (jos aikaa tuntuu riittävän, voisi peliä laajentaa kahdelle 
+pelaajalle)
 
 
 Toiminnot:
