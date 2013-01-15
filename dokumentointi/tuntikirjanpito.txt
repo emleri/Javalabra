@@ -1,0 +1,5 @@
+14.1.
+- Repositorion tekeminen ja git-harjoittelua, n. 30 min
+
+15.1.
+- Aihem‰‰rittely ja projektikansio + alustavaa suunnittelua, 45 min
