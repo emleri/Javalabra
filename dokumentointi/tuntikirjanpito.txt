@@ -3,3 +3,21 @@
 
 15.1.
 - Aihemäärittely ja projektikansio + alustavaa suunnittelua, 45 min
+
+16.1.
+- Luokkakaavio, hahmon ja hirviöiden perustoiminnallisuuden koodaamista n. 30min
+
+17.1.
+- Hahmo, hirviö -> Liikutettava-luokka, hallinnoivan Areenan alku, testejä: 1h
+
+19.1.
+- Paljon refaktorointia: koordinaatti-luokka käyttöön numeroiden sijaan, 
+luokkien vastuualueita järkevämmiksi, suunta-enum selkeytäämään koodia. ~2h
+
+21.1.
+- Pientä käyttöliittymän kanssa puuhailua, sovelluslogiikan raakarunko, yleistä
+koodin kanssa pähkäilyä: 1h
+
+22.1.
+- Testien uusiksikirjoittamista, koska refaktorointi sotkenut vanhoja, ja areenan ja 
+koordinaattien laajentamista: 2h
