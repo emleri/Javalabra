@@ -23,7 +23,6 @@ public class KayttoliittymanOhjaaja {
     public void aloitaPeli() {
         this.logiikka.luoHirvioita(100);
         SwingUtilities.invokeLater(kayttoliittyma);
-        
     }
     
     public void pelaajanLiike(Suunta s) {

@@ -24,6 +24,6 @@ public class TapahtumanRaportoija {
         }
         raportit.append("</html>");
         raporttiKentta.setText(raportit.toString());
-        raporttiKentta.getParent().revalidate();
+        raporttiKentta.getParent().repaint();
     }
 }

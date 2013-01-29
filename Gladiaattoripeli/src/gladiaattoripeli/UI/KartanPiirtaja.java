@@ -36,6 +36,6 @@ public class KartanPiirtaja {
         }
         kartta.append("</html>");
         this.piirtoalue.setText(kartta.toString());
-        this.piirtoalue.getParent().revalidate();
+        this.piirtoalue.getParent().repaint();
     }
 }

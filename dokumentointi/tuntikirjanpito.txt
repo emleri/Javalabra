@@ -21,3 +21,12 @@ koodin kanssa pähkäilyä: 1h
 22.1.
 - Testien uusiksikirjoittamista, koska refaktorointi sotkenut vanhoja, ja areenan ja 
 koordinaattien laajentamista: 2h
+
+25.1.
+- Käyttöliittymän koodausta: 3h
+
+26.1.
+- Pientä korjailua moneen eri luokkaan: 1h
+
+29.1.
+- Luokkakaavio, lisää testejä, vähän koodia: 2h

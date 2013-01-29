@@ -65,6 +65,7 @@ public class Areena {
             hahmo.hyokkaa(h, v);
         } else {
             hahmo.liikuSuuntaan(suunta);
+            v.lisaaTapahtuma("Hahmo liikkuu");
         }
     }
 

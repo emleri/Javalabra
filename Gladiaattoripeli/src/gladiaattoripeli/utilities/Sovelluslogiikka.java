@@ -24,9 +24,11 @@ public class Sovelluslogiikka {
             }
         }
     }
-
+    
     public Vuororaportti pelaaVuoro(Suunta s) {
         Vuororaportti v = new Vuororaportti();
+        v.setHahmo(this.areena.getHahmo());
+        v.setHirviot(this.areena.getHirviot());
         if (!this.peliOhi) {
             areena.toimiHahmollaSuuntaan(s, v);
             areena.paivitaTilanne(v);
