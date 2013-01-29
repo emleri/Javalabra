@@ -38,7 +38,7 @@ public class Koordinaatit {
         if (x < this.maxX) {
             this.x = x;
         } else {
-            this.x = maxX;
+            this.x = maxX-1;
         }
         if (x < 0) {
             this.x = 0;
@@ -49,7 +49,7 @@ public class Koordinaatit {
         if (y < this.maxY) {
             this.y = y;
         } else {
-            this.y = maxY;
+            this.y = maxY-1;
         }
         if (y < 0) {
             this.y = 0;
@@ -69,42 +69,42 @@ public class Koordinaatit {
         Koordinaatit viereiset;
 
         if (suunta == Suunta.ETELA) {
-            viereiset = new Koordinaatit(0, 1);
+            viereiset = new Koordinaatit(0, 1, this.maxX, this.maxY);
             viereiset.lisaaKoordinaatit(this);
             return viereiset;
         }
         if (suunta == Suunta.POHJOINEN) {
-            viereiset = new Koordinaatit(0, -1);
+            viereiset = new Koordinaatit(0, -1, this.maxX, this.maxY);
             viereiset.lisaaKoordinaatit(this);
             return viereiset;
         }
         if (suunta == Suunta.LANSI) {
-            viereiset = new Koordinaatit(-1, 0);
+            viereiset = new Koordinaatit(-1, 0, this.maxX, this.maxY);
             viereiset.lisaaKoordinaatit(this);
             return viereiset;
         }
         if (suunta == Suunta.ITA) {
-            viereiset = new Koordinaatit(1, 0);
+            viereiset = new Koordinaatit(1, 0, this.maxX, this.maxY);
             viereiset.lisaaKoordinaatit(this);
             return viereiset;
         }
         if (suunta == Suunta.KOILLINEN) {
-            viereiset = new Koordinaatit(1, -1);
+            viereiset = new Koordinaatit(1, -1, this.maxX, this.maxY);
             viereiset.lisaaKoordinaatit(this);
             return viereiset;
         }
         if (suunta == Suunta.KAAKKO) {
-            viereiset = new Koordinaatit(1, 1);
+            viereiset = new Koordinaatit(1, 1, this.maxX, this.maxY);
             viereiset.lisaaKoordinaatit(this);
             return viereiset;
         }
         if (suunta == Suunta.LOUNAS) {
-            viereiset = new Koordinaatit(-1, 1);
+            viereiset = new Koordinaatit(-1, 1, this.maxX, this.maxY);
             viereiset.lisaaKoordinaatit(this);
             return viereiset;
         }
         if (suunta == Suunta.LUODE) {
-            viereiset = new Koordinaatit(-1, -1);
+            viereiset = new Koordinaatit(-1, -1, this.maxX, this.maxY);
             viereiset.lisaaKoordinaatit(this);
             return viereiset;
         }

@@ -1,17 +1,30 @@
 
 package gladiaattoripeli.UI;
 
+import gladiaattoripeli.utilities.Sovelluslogiikka;
+import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import javax.swing.JFrame;
-import javax.swing.JTextArea;
+import javax.swing.JLabel;
 import javax.swing.WindowConstants;
 
 public class Kayttoliittyma implements Runnable {
     private JFrame frame;
+    private Sovelluslogiikka logiikka;
+    private KartanPiirtaja piirtaja;
+    private TapahtumanRaportoija raportoija;
+    private KayttoliittymanOhjaaja ohjaaja;
 
-    public Kayttoliittyma() {
+    public Kayttoliittyma(Sovelluslogiikka s, KartanPiirtaja k, 
+            TapahtumanRaportoija r, KayttoliittymanOhjaaja o) {
+        this.logiikka = s;
+        this.piirtaja = k;
+        this.raportoija = r;
+        this.ohjaaja = o;
     }
+    
 
     @Override
     public void run() {
@@ -27,9 +40,21 @@ public class Kayttoliittyma implements Runnable {
     }
 
     private void luoKomponentit(Container container) {
-        JTextArea textArea = new JTextArea();
+        BorderLayout layout = new BorderLayout();
+        container.setLayout(layout);
         
-        container.add(textArea);
+        JLabel kartta = new JLabel();
+        JLabel raportit = new JLabel();
+        
+        container.add(kartta, BorderLayout.CENTER);
+        container.add(raportit, BorderLayout.SOUTH);
+        
+        this.piirtaja.setPiirtoalue(kartta);
+        this.raportoija.setRaporttikentta(raportit);
+        
+        this.piirtaja.piirra(logiikka.getAreena());
+        
+        frame.addKeyListener(new NappaimistonKuuntelija(ohjaaja));
     }
     
     public JFrame getFrame() {

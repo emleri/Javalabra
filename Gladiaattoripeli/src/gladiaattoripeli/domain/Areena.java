@@ -2,6 +2,7 @@ package gladiaattoripeli.domain;
 
 import gladiaattoripeli.utilities.Koordinaatit;
 import gladiaattoripeli.utilities.Suunta;
+import gladiaattoripeli.utilities.Vuororaportti;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class Areena {
     public Gladiaattori getHahmo() {
         return hahmo;
     }
-    
+
     public List<Hirvio> getHirviot() {
         return this.hirviot;
     }
@@ -39,26 +40,29 @@ public class Areena {
         this.hirviot.add(h);
     }
 
-    public void liikutaHirvioita() {
+    public void liikutaHirvioita(Vuororaportti v) {
         Koordinaatit hahmonKoordinaatit = this.hahmo.getSijainti();
-        
+
         for (Hirvio h : this.hirviot) {
             Koordinaatit hirvionKoordinaatit = h.getSijainti();
-            
+
             if (hirvionKoordinaatit.onVieressa(hahmonKoordinaatit)) {
-                h.hyokkaa(this.hahmo);
+                h.hyokkaa(this.hahmo, v);
             } else {
-                h.siirry(hirvionKoordinaatit.getViereinenRuutuKohtiKoordinaatteja(hahmonKoordinaatit));
+                Koordinaatit kohderuutu = hirvionKoordinaatit.getViereinenRuutuKohtiKoordinaatteja(hahmonKoordinaatit);
+                if (!this.onkoRuudussaHirviota(kohderuutu)) {
+                    h.siirry(kohderuutu);
+                }
             }
         }
     }
 
-    public void toimiHahmollaSuuntaan(Suunta suunta) {
+    public void toimiHahmollaSuuntaan(Suunta suunta, Vuororaportti v) {
         Koordinaatit kohdeRuutu = this.hahmo.getSijainti().getViereisetKoordinaatitSuunnassa(suunta);
 
         if (this.onkoRuudussaHirviota(kohdeRuutu)) {
             Hirvio h = this.haeHirvioRuudusta(kohdeRuutu);
-            hahmo.hyokkaa(h);
+            hahmo.hyokkaa(h, v);
         } else {
             hahmo.liikuSuuntaan(suunta);
         }
@@ -80,5 +84,30 @@ public class Areena {
             }
         }
         return null;
+    }
+
+    public void poistaKuolleet() {
+        List<Hirvio> poistettavat = new ArrayList<Hirvio>();
+        for (Hirvio h : this.hirviot) {
+            if (h.getOsumaPisteet() < 1) {
+                poistettavat.add(h);
+            }
+        }
+        this.hirviot.removeAll(poistettavat);
+    }
+
+    public Boolean onkoHahmoKuollut() {
+        if (this.hahmo.getOsumapisteet() < 1) {
+            return true;
+        }
+        return false;
+    }
+
+    public void paivitaTilanne(Vuororaportti v) {
+        this.poistaKuolleet();
+        if (this.onkoHahmoKuollut()) {
+            v.lisaaTapahtuma("Hirviöt lyövät gladiaattorin kuoliaaksi. Peli on ohi.");
+            v.lopetaPeli();
+        }
     }
 }

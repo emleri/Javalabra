@@ -1,6 +1,8 @@
 
 package gladiaattoripeli.domain;
 
+import gladiaattoripeli.utilities.Vuororaportti;
+
 public class Gladiaattori extends Liikutettava {
     private int osumapisteet;
     
@@ -10,8 +12,9 @@ public class Gladiaattori extends Liikutettava {
         this.osumapisteet = 15;
     }
 
-    public void hyokkaa(Hirvio h) {
+    public void hyokkaa(Hirvio h, Vuororaportti v) {
         h.otaVahinkoa(5);
+        v.lisaaTapahtuma("Gladiaattori lyö hirviötä, 5 vahinkoa");
     }
 
     public void otaVahinkoa(int i) {
