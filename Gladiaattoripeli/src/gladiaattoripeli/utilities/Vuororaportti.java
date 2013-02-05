@@ -6,6 +6,10 @@ import gladiaattoripeli.domain.Hirvio;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Tiedonkuljettajaluokka, joka välittää pelitapahtumat ja -tilanteen ylöspäin 
+ * käyttöliittymälle.
+ */
 public class Vuororaportti {
     private List<String> tapahtumat;
     private List<Hirvio> hirviot;

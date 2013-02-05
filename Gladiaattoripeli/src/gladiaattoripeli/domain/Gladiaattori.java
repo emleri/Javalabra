@@ -3,6 +3,11 @@ package gladiaattoripeli.domain;
 
 import gladiaattoripeli.utilities.Vuororaportti;
 
+/**
+ * Pelaajahahmoa kuvaava luokka, joka kokoaa yhteen vahingoittumis-, 
+ * sijainti- ja hyökkäysmekanismit. Perii Liikutettava-luokalta 
+ * sijaintiominaisuutensa ja sisältää Keho-olion vahingon kirjanpitäjänä.
+ */
 public class Gladiaattori extends Liikutettava {
     private int osumapisteet;
     
@@ -13,8 +18,7 @@ public class Gladiaattori extends Liikutettava {
     }
 
     public void hyokkaa(Hirvio h, Vuororaportti v) {
-        h.otaVahinkoa(5);
-        v.lisaaTapahtuma("Gladiaattori lyö hirviötä, 5 vahinkoa");
+        h.otaVahinkoa(v, 5);
     }
 
     public void otaVahinkoa(int i) {

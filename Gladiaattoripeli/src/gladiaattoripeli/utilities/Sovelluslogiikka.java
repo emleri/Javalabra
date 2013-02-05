@@ -3,6 +3,11 @@ package gladiaattoripeli.utilities;
 import gladiaattoripeli.domain.Areena;
 import gladiaattoripeli.domain.Hirvio;
 
+/**
+ * Sovelluslogiikka ohjaa ohjelman perustoimintoja: pelin aloittamista, 
+ * lopettamista ja vuorojen pelaamista. Luokka on keskeinen, kokoava osa 
+ * pelimekaniikalle ja linkki käyttöliittymään.
+ */
 public class Sovelluslogiikka {
 
     private Areena areena;

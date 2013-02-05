@@ -4,6 +4,10 @@ import gladiaattoripeli.utilities.Suunta;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+/**
+ * Luokka lukee näppäinkomentoja ja välittää ne käyttöliittymän ohjaajan kautta 
+ * sovelluslogiikalle.
+ */
 public class NappaimistonKuuntelija implements KeyListener {
 
     private KayttoliittymanOhjaaja ohjaaja;

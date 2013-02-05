@@ -30,3 +30,12 @@ koordinaattien laajentamista: 2h
 
 29.1.
 - Luokkakaavio, lisää testejä, vähän koodia: 2h
+
+3.2.
+- Haavoittumismekanismin laajennusta: 1h
+
+4.2.
+- Keho- ja Ruumiinosa-luokat, haavoittumisen työstöä: ~2h
+
+5.2.
+- Kaavioita, javadokkia...: 2h

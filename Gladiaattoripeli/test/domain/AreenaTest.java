@@ -4,6 +4,7 @@ import gladiaattoripeli.domain.Areena;
 import gladiaattoripeli.domain.Hirvio;
 import gladiaattoripeli.utilities.Koordinaatit;
 import gladiaattoripeli.utilities.Suunta;
+import gladiaattoripeli.utilities.Vuororaportti;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -55,26 +56,26 @@ public class AreenaTest {
     
     @Test
     public void hahmonHyokkaysHirvioonToimii() {
-        a.toimiHahmollaSuuntaan(Suunta.POHJOINEN);
+        a.toimiHahmollaSuuntaan(Suunta.POHJOINEN, new Vuororaportti());
         assertEquals(5, h.getOsumaPisteet());
     }
     
     @Test
     public void hahmonLiikeToimii() {
-        a.toimiHahmollaSuuntaan(Suunta.ETELA);
+        a.toimiHahmollaSuuntaan(Suunta.ETELA, new Vuororaportti());
         assertEquals(14, a.getHahmo().getSijainti().getX());
         assertEquals(15, a.getHahmo().getSijainti().getY());
     }
     
     @Test
     public void liikutaHirvioitaToimiiHyokkayksena() {
-        a.liikutaHirvioita();
+        a.liikutaHirvioita(new Vuororaportti());
         assertEquals(14, a.getHahmo().getOsumapisteet());
     }
     
     @Test
     public void liikutaHirvioitaToimiiLiikkeena() {
-        a.liikutaHirvioita();
+        a.liikutaHirvioita(new Vuororaportti());
         assertEquals(1, a.getHirviot().get(1).getSijainti().getX());
         assertEquals(1, a.getHirviot().get(1).getSijainti().getY());
     }

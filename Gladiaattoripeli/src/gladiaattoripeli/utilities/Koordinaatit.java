@@ -1,5 +1,8 @@
 package gladiaattoripeli.utilities;
 
+/**
+ * Kapseloitu (x, y)-koordinaatti ja siihen liittyviä apumetodeja.
+ */
 public class Koordinaatit {
 
     private int x;

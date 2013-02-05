@@ -4,6 +4,10 @@ import gladiaattoripeli.utilities.Vuororaportti;
 import java.util.List;
 import javax.swing.JLabel;
 
+/**
+ * Pelitapahtumat tekstinä tulostava luokka. Purkaa vuororaportista saadut 
+ * tapahtumat ja käskee käyttöliittymäikkunaa tulostamaan ne.
+ */
 public class TapahtumanRaportoija {
 
     private JLabel raporttiKentta;

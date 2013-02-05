@@ -6,6 +6,10 @@ import gladiaattoripeli.utilities.Suunta;
 import gladiaattoripeli.utilities.Vuororaportti;
 import javax.swing.SwingUtilities;
 
+/**
+ * Käyttöliittymän ohjaaja on käyttöliittymän kokoava luokka, joka hallitsee eri osia ja pitää 
+ * yhteyttä sovelluslogiikkaan.
+ */
 public class KayttoliittymanOhjaaja {
     private Sovelluslogiikka logiikka;
     private KartanPiirtaja piirtaja;

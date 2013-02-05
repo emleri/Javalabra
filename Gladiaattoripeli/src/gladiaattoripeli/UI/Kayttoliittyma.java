@@ -10,6 +10,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.WindowConstants;
 
+/**
+ * Käyttöliittymäikkunan luova luokka. Ikkuna sisältää kaksi kenttää: kartta- ja 
+ * tekstikentän, joista toiseen piirretään pelitilanne ja toiseen tulostetaan 
+ * tekstimuotoisena tapahtumaraportteja.
+ */
 public class Kayttoliittyma implements Runnable {
     private JFrame frame;
     private Sovelluslogiikka logiikka;

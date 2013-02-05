@@ -5,6 +5,10 @@ import gladiaattoripeli.utilities.Koordinaatit;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
 
+/**
+ * Pelialueen piirtävä luokka. Lukee pelitilanteen vuororaportista ja piirtää sen 
+ * käyttöliittymäikkunaan.
+ */
 public class KartanPiirtaja {
 
     private JLabel piirtoalue;
