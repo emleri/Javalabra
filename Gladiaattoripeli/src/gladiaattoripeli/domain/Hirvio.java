@@ -17,13 +17,20 @@ public class Hirvio extends Liikutettava {
     private int hyokkays;
     private int puolustus;
 
+    /**
+     * Konstruktori. Osa toteutuksesta siirtyy pian hahmogeneraattorin vastuulle,
+     * JavaD päivitetään sitten.
+     * @param sijaintiX
+     * @param sijaintiY
+     * @param osumaPisteet
+     */
     public Hirvio(int sijaintiX, int sijaintiY, int osumaPisteet) {
         super(sijaintiX, sijaintiY);
         this.osumapisteet = osumaPisteet;
         this.hyokkays = 5;
         this.puolustus = 12;
         this.nimi = "Hirviö";
-        
+
         // Siirrä hahmogeneraattoriin...
         this.keho = new Keho("Hirviö", osumaPisteet);
         this.keho.lisaaRaaja(new Ruumiinosa(RuumiinosanNimi.OIKEAKASI, "Hirviö", osumaPisteet / 2));
@@ -31,12 +38,19 @@ public class Hirvio extends Liikutettava {
         this.keho.lisaaRaaja(new Ruumiinosa(RuumiinosanNimi.OIKEAJALKA, "Hirviö", osumaPisteet / 2));
         this.keho.lisaaRaaja(new Ruumiinosa(RuumiinosanNimi.VASENJALKA, "Hirviö", osumaPisteet / 2));
     }
-
+    
+    /**
+     * Hirviö ottaa metodissa vastaan hyökkäyksen gladiaattorilta ja raportoi 
+     * sen tulokset vuororaporttiin.
+     * @param v vuororaportti
+     * @param vahinko vahingon määrä
+     * @param osuma gladiaattorin osumarolli
+     */
     public void puolusta(Vuororaportti v, int vahinko, int osuma) {
-        if(v==null || vahinko < 0 || osuma < 0) {
+        if (v == null || vahinko < 0 || osuma < 0) {
             throw new IllegalArgumentException();
         }
-        
+
         if (osuma > this.puolustus) {
             this.osumapisteet -= vahinko;
             this.keho.otaVahinkoa(v, vahinko);
@@ -52,6 +66,12 @@ public class Hirvio extends Liikutettava {
         return osumapisteet;
     }
 
+    /**
+     * Hirviö suorittaa hyökkäyksen parametrina saamaansa gladiaattoriin.
+     *
+     * @param hahmo gladiaattori
+     * @param v vuoron vuororaportti, johon hyökkäyksen tulos kirjataan
+     */
     public void hyokkaa(Gladiaattori hahmo, Vuororaportti v) {
         v.lisaaTapahtuma(v.viestit.lyo("Hirviö", "gladiaattoria"));
         hahmo.puolusta(v, 1, hyokkays + new Random().nextInt(10));

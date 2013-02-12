@@ -16,6 +16,11 @@ public class NappaimistonKuuntelija implements KeyListener {
         this.ohjaaja = ohjaaja;
     }
 
+    /**
+     * Lukee näppäinkomentoja ja välittää ne KayttoliittymanOhjaajan kautta 
+     * Sovelluslogiikalle.
+     * @param e
+     */
     @Override
     public void keyPressed(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {

@@ -16,6 +16,14 @@ public class Gladiaattori extends Liikutettava {
     private int hyokkays;
     private Keho keho;
 
+    /**
+     * Konstruktori.
+     * @param sijaintiX sijainti areenalla x-akselilla
+     * @param sijaintiY sijainti areenalla y-akselilla
+     * @param areenanLeveys areenan leveys
+     * @param areenanKorkeus areenan korkeus
+     * @param keho gladiaattorin keho
+     */
     public Gladiaattori(int sijaintiX, int sijaintiY, int areenanLeveys, int areenanKorkeus, Keho keho) {
         super(sijaintiX, sijaintiY);
         this.koordinaatit.setRajat(areenanLeveys, areenanKorkeus);
@@ -25,11 +33,23 @@ public class Gladiaattori extends Liikutettava {
         this.hyokkays = 7;
     }
 
+    /**
+     * Gladiaattori suorittaa hyökkäyksen parametrina saamaansa hirviöön.
+     * @param h kohdehirviö
+     * @param v vuoron vuororaportti, johon hyökkäyksen tulos kirjataan
+     */
     public void hyokkaa(Hirvio h, Vuororaportti v) {
         v.lisaaTapahtuma(v.viestit.lyo("Gladiaattori", "hirviötä"));
         h.puolusta(v, 5, hyokkays + new Random().nextInt(10));
     }
 
+    /**
+     * Gladiaattori ottaa metodissa vastaan hyökkäyksen hirviöltä ja raportoi 
+     * sen tulokset vuororaporttiin.
+     * @param v vuororaportti
+     * @param vahinko vahingon määrä
+     * @param osuma hirviön osumarolli
+     */
     public void puolusta(Vuororaportti v, int vahinko, int osuma) {
         if (v == null || vahinko < 0 || osuma < 0) {
             throw new IllegalArgumentException();

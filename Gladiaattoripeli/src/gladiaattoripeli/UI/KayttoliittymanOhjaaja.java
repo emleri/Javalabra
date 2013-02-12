@@ -26,6 +26,9 @@ public class KayttoliittymanOhjaaja {
         this.graafinen = new GraafinenKayttoliittyma(this);
     }
     
+    /**
+     * Metodi valmistelee pelitilanteen ja käynnistää käyttöliittymän.
+     */
     public void aloitaPeli() {
         this.logiikka.luoHirvioita(5);
         
@@ -37,6 +40,7 @@ public class KayttoliittymanOhjaaja {
         this.piirtaja.piirra(logiikka.getAreena());
         
         SwingUtilities.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 graafinen.setVisible(true);
             }
@@ -45,6 +49,12 @@ public class KayttoliittymanOhjaaja {
         
     }
     
+    /**
+     * Metodi välittää NappaimistonKuuntelijalta saadun komennon eteenpäin 
+     * sovelluslogiikan suoritettavaksi ja päivittää näyttökentät.
+     * @param s parametrina eteenpäin välitettävä suunta, johon gladiaattorin 
+     * tulee toimia
+     */
     public void pelaajanLiike(Suunta s) {
         this.raportti = logiikka.pelaaVuoro(s);
         this.piirtaja.piirra(logiikka.getAreena());

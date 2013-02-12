@@ -13,13 +13,26 @@ public class KartanPiirtaja {
 
     private JLabel piirtoalue;
 
+    /**
+     * Konstruktori.
+     */
     public KartanPiirtaja() {
     }
 
+    /**
+     * Tallentaa viitteen uuteen piirtoalueeseen korvaten vanhan.
+     * @param piirtoalue uusi piirtoalue
+     */
     public void setPiirtoalue(JLabel piirtoalue) {
         this.piirtoalue = piirtoalue;
     }
 
+    /**
+     * Piirtää areenalta saadun pelitilanteen piirtoalueelle. Metodi luo ensin 
+     * html-muotoillun String-olion, jonka sitten asettaa piirtoalue-JLabelin 
+     * tekstiksi ja päivittää sen.
+     * @param a viite areenaan parametrina
+     */
     public void piirra(Areena a) {
         StringBuilder kartta = new StringBuilder("");
         kartta.append("<html>");
