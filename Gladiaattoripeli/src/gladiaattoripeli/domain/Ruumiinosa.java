@@ -4,39 +4,30 @@ import gladiaattoripeli.utilities.RuumiinosanNimi;
 import gladiaattoripeli.utilities.Vuororaportti;
 
 /**
- * Luokka edustaa hahmojen yksittäisiä vartalon osia ja pitää kirjaa niiden 
+ * Luokka edustaa hahmojen yksittäisiä vartalon osia ja pitää kirjaa niiden
  * vahingoittumisesta. Ruumiinosat esiintyvät aina Keho-olion osina.
  */
 public class Ruumiinosa {
 
     private RuumiinosanNimi nimi;
-    private String haavoittuminen;
-    private String tuhoutuminen;
+    private String omistajanNimi;
     private int osumapisteet;
     private Boolean kuollut;
 
-    public Ruumiinosa(RuumiinosanNimi nimi, int osumapisteet) {
+    public Ruumiinosa(RuumiinosanNimi nimi, String omistajanNimi, int osumapisteet) {
         this.nimi = nimi;
+        this.omistajanNimi = omistajanNimi;
         this.osumapisteet = osumapisteet;
         this.kuollut = false;
     }
 
     public void otaVahinkoa(Vuororaportti v, int vahinko) {
         this.osumapisteet -= vahinko;
-        String vahinkoraportti = this.nimi + this.haavoittuminen;
+        v.lisaaTapahtuma(v.viestit.onHaavoittunut(this.omistajanNimi + "n " + this.nimi.getNimi()));
         if (this.osumapisteet <= 0) {
             this.kuollut = true;
-            vahinkoraportti += "/n" + this.nimi + " " + this.tuhoutuminen;
+            v.lisaaTapahtuma(v.viestit.onVammautunut(this.omistajanNimi));
         }
-        v.lisaaTapahtuma(vahinkoraportti);
-    }
-
-    public void setHaavoittumisviesti(String s) {
-        this.haavoittuminen = s;
-    }
-
-    public void setKuolinviesti(String s) {
-        this.tuhoutuminen = s;
     }
 
     public Boolean onkoKuollut() {
@@ -47,8 +38,18 @@ public class Ruumiinosa {
         return this.nimi;
     }
 
+    public String getOmistajanNimi() {
+        return omistajanNimi;
+    }
+
+    public int getOsumapisteet() {
+        return osumapisteet;
+    }
+    
+    
+
     @Override
     public String toString() {
-        return this.nimi.getNimi() + ", " + this.osumapisteet + " osumapistettä"; 
+        return this.nimi.getNimi() + ", " + this.osumapisteet + " osumapistettä";
     }
 }

@@ -5,6 +5,8 @@ import gladiaattoripeli.utilities.Sovelluslogiikka;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -34,7 +36,7 @@ public class Kayttoliittyma implements Runnable {
     @Override
     public void run() {
         frame = new JFrame("Gladiaattoripeli");
-        frame.setPreferredSize(new Dimension(800, 600));
+        frame.setPreferredSize(new Dimension(300, 800));
         
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         
@@ -45,17 +47,33 @@ public class Kayttoliittyma implements Runnable {
     }
 
     private void luoKomponentit(Container container) {
-        BorderLayout layout = new BorderLayout();
-        container.setLayout(layout);
+        GridBagLayout bagLayout = new GridBagLayout();
+        GridBagConstraints c = new GridBagConstraints();
+        BorderLayout layout = new BorderLayout(10, 10);
+        container.setLayout(bagLayout);
+        
         
         JLabel kartta = new JLabel();
+        kartta.setMaximumSize(new Dimension(130, 300));
         JLabel raportit = new JLabel();
+        raportit.setMaximumSize(new Dimension(130, 300));
+        JLabel statit = new JLabel();
+        statit.setMaximumSize(new Dimension(40, 300));
+        c.gridx = 1;
         
-        container.add(kartta, BorderLayout.CENTER);
-        container.add(raportit, BorderLayout.SOUTH);
+        c.gridy = 0;
+        container.add(raportit, c);
+        c.gridx = 0;
+        c.gridy = 1;
+        container.add(statit, c);
+        c.gridy = 0;
+        c.anchor = GridBagConstraints.PAGE_START;
+        container.add(kartta, c);
+        
         
         this.piirtaja.setPiirtoalue(kartta);
         this.raportoija.setRaporttikentta(raportit);
+        this.raportoija.setStattikentta(statit);
         
         this.piirtaja.piirra(logiikka.getAreena());
         

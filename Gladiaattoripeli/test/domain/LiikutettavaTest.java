@@ -2,6 +2,7 @@ package domain;
 
 
 import gladiaattoripeli.domain.Gladiaattori;
+import gladiaattoripeli.domain.Keho;
 import gladiaattoripeli.utilities.Koordinaatit;
 import gladiaattoripeli.utilities.Suunta;
 import org.junit.After;
@@ -27,7 +28,7 @@ public class LiikutettavaTest {
 
     @Before
     public void setUp() {
-        kalle = new Gladiaattori(0, 0, 10, 10);
+        kalle = new Gladiaattori(0, 0, 10, 10, new Keho("jee", 1));
     }
 
     @After
@@ -46,4 +47,5 @@ public class LiikutettavaTest {
         assertEquals(0, kalle.getSijaintiX());
         assertEquals(1, kalle.getSijaintiY());
     }
+    
 }

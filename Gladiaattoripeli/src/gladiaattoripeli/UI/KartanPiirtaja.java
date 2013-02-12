@@ -23,9 +23,17 @@ public class KartanPiirtaja {
     public void piirra(Areena a) {
         StringBuilder kartta = new StringBuilder("");
         kartta.append("<html>");
+        
+        // Piirtää ylälaidan seinän
+        for (int i = -1; i <= a.getLeveys(); i++) {
+            kartta.append("#");
+        }
+        kartta.append("<br>#");
+        
+        // Piirtää areenan ja sen olennot
         for (int y = 0; y < a.getKorkeus(); y++) {
             if (y != 0) {
-                kartta.append("<br>");
+                kartta.append("#<br>#");
             }
             for (int x = 0; x < a.getLeveys(); x++) {
                 Koordinaatit ruutu = new Koordinaatit(x, y);
@@ -38,8 +46,15 @@ public class KartanPiirtaja {
                 }
             }
         }
+        kartta.append("#<br>");
+        
+        // Piirtää alalaidan seinän
+        for (int i = -1; i <= a.getLeveys(); i++) {
+            kartta.append("#");
+        }
+        
         kartta.append("</html>");
         this.piirtoalue.setText(kartta.toString());
-        this.piirtoalue.getParent().repaint();
+        this.piirtoalue.repaint();
     }
 }

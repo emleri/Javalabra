@@ -1,5 +1,6 @@
 package gladiaattoripeli.domain;
 
+import gladiaattoripeli.utilities.Hahmogeneraattori;
 import gladiaattoripeli.utilities.Koordinaatit;
 import gladiaattoripeli.utilities.Suunta;
 import gladiaattoripeli.utilities.Vuororaportti;
@@ -13,14 +14,27 @@ public class Areena {
 
     private int leveys;
     private int korkeus;
+    private Hahmogeneraattori hahmogeneraattori;
     private Gladiaattori hahmo;
     private List<Hirvio> hirviot;
 
     public Areena(int leveys, int korkeus) {
-        this.leveys = leveys;
-        this.korkeus = korkeus;
-        this.hahmo = new Gladiaattori(leveys / 2, korkeus / 2, leveys, korkeus);
+        if (leveys > 0) {
+            this.leveys = leveys;
+        } else {
+            this.leveys = 1;
+        }
+        if (korkeus > 0) {
+            this.korkeus = korkeus;
+        } else {
+            this.korkeus = 1;
+        }
+        this.hahmogeneraattori = new Hahmogeneraattori();
         this.hirviot = new ArrayList<Hirvio>();
+    }
+
+    public void luoHahmot() {
+        this.hahmo = hahmogeneraattori.luoGladiaattori(this);
     }
 
     public int getLeveys() {
@@ -42,14 +56,14 @@ public class Areena {
     public void lisaaHirvio(Hirvio h) {
         this.hirviot.add(h);
     }
-    
-    /** 
-     * Metodi komentaa jokaista areenan hirviötä yksi kerrallaan. Mikäli hirviö 
-     * on gladiaattorin viereisissä koordinaateissa, se lyö gladiaattoria. Jos 
-     * seuraavat koordinaatit kohti gladiaattoria ovat vapaana, hirviö liikkuu 
-     * niihin. Muussa tapauksessa hirviö pysyy paikoillaan.
-     * Jokaisen hirviön toiminta kirjataan vuororaporttiin.
-     * 
+
+    /**
+     * Metodi komentaa jokaista areenan hirviötä yksi kerrallaan. Mikäli hirviö
+     * on gladiaattorin viereisissä koordinaateissa, se lyö gladiaattoria. Jos
+     * seuraavat koordinaatit kohti gladiaattoria ovat vapaana, hirviö liikkuu
+     * niihin. Muussa tapauksessa hirviö pysyy paikoillaan. Jokaisen hirviön
+     * toiminta kirjataan vuororaporttiin.
+     *
      * @param v viite kyseisen vuoron vuororaporttiin
      */
     public void liikutaHirvioita(Vuororaportti v) {
@@ -70,12 +84,12 @@ public class Areena {
     }
 
     /**
-     * Metodi ohjaa gladiaattoria suorittamaan toiminnon syötteenä saatuun suuntaan.
-     * Mikäli viereisissä koordinaateissa valittuun suuntaan on hirviö, kutsutaan
-     * gladiaattorin hyökkää-metodia kyseistä hirviötä kohtaan. Mikäli ruutu on 
-     * vapaa, gladiaattori siirtyy siihen.
-     * Toteutettu toiminto kirjataan vuororaporttiin.
-     * 
+     * Metodi ohjaa gladiaattoria suorittamaan toiminnon syötteenä saatuun
+     * suuntaan. Mikäli viereisissä koordinaateissa valittuun suuntaan on
+     * hirviö, kutsutaan gladiaattorin hyökkää-metodia kyseistä hirviötä
+     * kohtaan. Mikäli ruutu on vapaa, gladiaattori siirtyy siihen. Toteutettu
+     * toiminto kirjataan vuororaporttiin.
+     *
      * @param suunta pelaajalta näppäimistösyötteenä saatu toimintasuunta
      * @param v viite kyseisen vuoron vuororaporttiin
      */
@@ -92,8 +106,9 @@ public class Areena {
     }
 
     /**
-     * Metodi tarkistaa, sijaitseeko yksikään hirviöistä syötteenä saaduissa 
+     * Metodi tarkistaa, sijaitseeko yksikään hirviöistä syötteenä saaduissa
      * koordinaateissa.
+     *
      * @param k tarkistettavat koordinaatit
      * @return totuusarvo hirviö/ei hirviötä - true/false
      */
@@ -107,8 +122,9 @@ public class Areena {
     }
 
     /**
-     * Metodi etsii ja palauttaa hirviön syötteenä saaduista koordinaateista. 
+     * Metodi etsii ja palauttaa hirviön syötteenä saaduista koordinaateista.
      * Mikäli koordinaateissa ei ole hirviötä, palautetaan null.
+     *
      * @param k koordinaatit, joista hirviö etsitään
      * @return Hirvio palauttaa hirviön, mikäli sellainen löydetään.
      */
@@ -122,21 +138,24 @@ public class Areena {
     }
 
     /**
-     * Metodi käy läpi kaikki hirviö-olennot ja poistaa kuolleet (0 tai vähemmän 
+     * Metodi käy läpi kaikki hirviö-olennot ja poistaa kuolleet (0 tai vähemmän
      * osumapistettä).
      */
-    public void poistaKuolleet() {
+    public void poistaKuolleet(Vuororaportti v) {
         List<Hirvio> poistettavat = new ArrayList<Hirvio>();
         for (Hirvio h : this.hirviot) {
-            if (h.getOsumaPisteet() < 1) {
+            if (h.getOsumapisteet() < 1) {
                 poistettavat.add(h);
             }
         }
+        
         this.hirviot.removeAll(poistettavat);
     }
 
     /**
-     * Metodi tarkistaa, onko gladiaattori kuollut (0 tai vähemmän osumapistettä).
+     * Metodi tarkistaa, onko gladiaattori kuollut (0 tai vähemmän
+     * osumapistettä).
+     *
      * @return Boolean true/false - kuollut/elossa
      */
     public Boolean onkoHahmoKuollut() {
@@ -148,12 +167,13 @@ public class Areena {
 
     /**
      * Metodi käyttää luokan kahta muuta metodia poistaakseen kuolleet hirviöt
-     * areenalta ja tarkistaakseen gladiaattorin tilan. Mikäli gladiaattori on 
+     * areenalta ja tarkistaakseen gladiaattorin tilan. Mikäli gladiaattori on
      * kuollut, metodi kirjaa vuororaporttiin ilmoituksen pelin loppumisesta.
+     *
      * @param v kyseisen vuoron vuororaportti
      */
     public void paivitaTilanne(Vuororaportti v) {
-        this.poistaKuolleet();
+        this.poistaKuolleet(v);
         if (this.onkoHahmoKuollut()) {
             v.lisaaTapahtuma("Hirviöt lyövät gladiaattorin kuoliaaksi. Peli on ohi.");
             v.lopetaPeli();

@@ -51,7 +51,7 @@ public class SovelluslogiikkaTest {
     @Test
     public void pelaaVuoroTest() {
         Vuororaportti v = this.logiikka.pelaaVuoro(Suunta.ITA);
-        assertEquals(false, v.peliOhi());
+        assertEquals(false, v.onkoPeliOhi());
         assertEquals(11, v.getHahmo().getSijaintiX());
         assertTrue(!v.getTapahtumat().isEmpty());
     }

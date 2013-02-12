@@ -39,3 +39,18 @@ koordinaattien laajentamista: 2h
 
 5.2.
 - Kaavioita, javadokkia...: 2h
+
+7.2.
+- Hahmogeneraattori: 1h
+
+8.2.
+- Refaktorointia, haavoittumista: 1.5h
+
+10.2.
+- Haavoittumistoiminnallisuuden laajentamista: 2h
+
+11.2.
+- Uusi käyttöliittymä, testejä: 5h
+
+12.2.
+- Sekvenssikaavioita, päivitetty luokkakaavio, testejä: 3h

@@ -4,6 +4,7 @@ package domain;
 import gladiaattoripeli.domain.Keho;
 import gladiaattoripeli.domain.Ruumiinosa;
 import gladiaattoripeli.utilities.RuumiinosanNimi;
+import gladiaattoripeli.utilities.Vuororaportti;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -28,10 +29,10 @@ public class KehoTest {
     
     @Before
     public void setUp() {
-        this.keho = new Keho(10);
-        this.osa = new Ruumiinosa(RuumiinosanNimi.OIKEAJALKA, 4);
+        this.keho = new Keho("jee", 10);
+        this.osa = new Ruumiinosa(RuumiinosanNimi.OIKEAJALKA, "jee", 4);
         this.keho.lisaaRaaja(osa);
-        this.osa = new Ruumiinosa(RuumiinosanNimi.VASENKASI, 2);
+        this.osa = new Ruumiinosa(RuumiinosanNimi.VASENKASI, "jee", 2);
         this.keho.lisaaRaaja(osa);
     }
     
@@ -48,5 +49,25 @@ public class KehoTest {
                  this.keho.toString());
      }
      
+     @Test
+     public void konstruktoriNimiTest() {
+         assertEquals("jee", keho.getNimi());
+         assertEquals("jee", keho.getKeskivartalo().getOmistajanNimi());
+         assertEquals("jee", keho.getPaa().getOmistajanNimi());
+         assertEquals("jee", keho.getRaajat().get(0).getOmistajanNimi());
+     }
      
+     @Test
+     public void otaVahinkoaTest() {
+         keho.otaVahinkoa(new Vuororaportti(), 5);
+         
+         int pisteet = 0;
+         for (Ruumiinosa raaja : keho.getRaajat()) {
+             pisteet += raaja.getOsumapisteet();
+         }
+         pisteet += keho.getPaa().getOsumapisteet();
+         pisteet += keho.getKeskivartalo().getOsumapisteet();
+         
+         assertEquals(pisteet, 13);
+     }
 }

@@ -14,21 +14,22 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class AreenaTest {
+
     Areena a;
     Hirvio h;
     Hirvio h2;
-    
+
     public AreenaTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
         a = new Areena(28, 28);
@@ -36,60 +37,73 @@ public class AreenaTest {
         h2 = new Hirvio(0, 0, 5);
         a.lisaaHirvio(h);
         a.lisaaHirvio(h2);
+        a.luoHahmot();
     }
-    
+
     @After
     public void tearDown() {
     }
-    
+
     @Test
     public void areenanKonstruktoriLuoOikeanKokoisenAlueen() {
         assertEquals(28, a.getLeveys());
         assertEquals(28, a.getKorkeus());
     }
-    
+
+    @Test
+    public void areenanKonstruktoriEiHyvaksyNegatiivisiaArvoja() {
+    }
+
     @Test
     public void hirvionLisaysToimii() {
         List<Hirvio> hirviot = a.getHirviot();
         assertEquals(h, hirviot.get(0));
     }
-    
+
     @Test
     public void hahmonHyokkaysHirvioonToimii() {
+        for(int i = 0; i < 100; i++) {
         a.toimiHahmollaSuuntaan(Suunta.POHJOINEN, new Vuororaportti());
-        assertEquals(5, h.getOsumaPisteet());
+        }
+        assertTrue(5 > h.getOsumapisteet());
     }
-    
+
     @Test
     public void hahmonLiikeToimii() {
         a.toimiHahmollaSuuntaan(Suunta.ETELA, new Vuororaportti());
         assertEquals(14, a.getHahmo().getSijainti().getX());
         assertEquals(15, a.getHahmo().getSijainti().getY());
     }
-    
+
     @Test
     public void liikutaHirvioitaToimiiHyokkayksena() {
-        a.liikutaHirvioita(new Vuororaportti());
-        assertEquals(14, a.getHahmo().getOsumapisteet());
+        for (int i = 0; i < 100; i++) {
+            a.liikutaHirvioita(new Vuororaportti());
+        }
+        assertTrue(a.getHahmo().getOsumapisteet()<15);
     }
-    
+
     @Test
     public void liikutaHirvioitaToimiiLiikkeena() {
         a.liikutaHirvioita(new Vuororaportti());
         assertEquals(1, a.getHirviot().get(1).getSijainti().getX());
         assertEquals(1, a.getHirviot().get(1).getSijainti().getY());
     }
-    
+
     @Test
-    public void onkoRuudussaHirvioitaToimii() {
+    public void onkoRuudussaHirvioitaLoytaaHirvion() {
         assertTrue(a.onkoRuudussaHirviota(new Koordinaatit(0, 0)));
-        assertTrue(!a.onkoRuudussaHirviota(new Koordinaatit(4, 4)));
     }
     
     @Test
+    public void onkoRuudussaHirviotaEiLoydaHirviota() {
+        assertTrue(!a.onkoRuudussaHirviota(new Koordinaatit(4, 4)));
+    }
+
+    @Test
     public void haeHirvioRuudustaToimii() {
         Hirvio koeElain = a.haeHirvioRuudusta(new Koordinaatit(0, 0));
-        assertEquals(5, koeElain.getOsumaPisteet());
+        assertEquals(5, koeElain.getOsumapisteet());
         assertEquals(0, koeElain.getSijainti().getX());
         assertEquals(0, koeElain.getSijainti().getY());
     }

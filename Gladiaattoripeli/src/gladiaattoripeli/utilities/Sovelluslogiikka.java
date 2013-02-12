@@ -15,6 +15,7 @@ public class Sovelluslogiikka {
 
     public Sovelluslogiikka() {
         this.areena = new Areena(21, 21);
+        this.areena.luoHahmot();
         this.peliOhi = false;
     }
 
@@ -40,7 +41,7 @@ public class Sovelluslogiikka {
             areena.liikutaHirvioita(v);
             areena.paivitaTilanne(v);
 
-            if (v.peliOhi()) {
+            if (v.onkoPeliOhi()) {
                 this.peliOhi = true;
             }
             return v;

@@ -16,17 +16,33 @@ public class KayttoliittymanOhjaaja {
     private TapahtumanRaportoija raportoija;
     private Vuororaportti raportti;
     private Kayttoliittyma kayttoliittyma;
+    private GraafinenKayttoliittyma graafinen;
 
     public KayttoliittymanOhjaaja() {
         this.logiikka = new Sovelluslogiikka();
         this.piirtaja = new KartanPiirtaja();
         this.raportoija = new TapahtumanRaportoija();
         this.kayttoliittyma = new Kayttoliittyma(logiikka, piirtaja, raportoija, this);
+        this.graafinen = new GraafinenKayttoliittyma(this);
     }
     
     public void aloitaPeli() {
-        this.logiikka.luoHirvioita(100);
-        SwingUtilities.invokeLater(kayttoliittyma);
+        this.logiikka.luoHirvioita(5);
+        
+        this.piirtaja.setPiirtoalue(graafinen.getKartta());
+        this.raportoija.setRaporttikentta(graafinen.getRaporttikentta());
+        this.raportoija.setStattikentta(graafinen.getStattikentta());
+        
+        this.graafinen.getJFrame().addKeyListener(new NappaimistonKuuntelija(this));
+        this.piirtaja.piirra(logiikka.getAreena());
+        
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                graafinen.setVisible(true);
+            }
+        });
+       //invokeLateriin kayttoliittyma 
+        
     }
     
     public void pelaajanLiike(Suunta s) {

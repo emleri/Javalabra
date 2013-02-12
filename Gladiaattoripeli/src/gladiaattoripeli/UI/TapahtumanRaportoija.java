@@ -11,12 +11,17 @@ import javax.swing.JLabel;
 public class TapahtumanRaportoija {
 
     private JLabel raporttiKentta;
+    private JLabel stattiKentta;
 
     public TapahtumanRaportoija() {
     }
 
     public void setRaporttikentta(JLabel raporttiKentta) {
         this.raporttiKentta = raporttiKentta;
+    }
+    
+    public void setStattikentta(JLabel stattiKentta) {
+        this.stattiKentta = stattiKentta;
     }
 
     public void raportoi(Vuororaportti raportti) {
@@ -29,5 +34,12 @@ public class TapahtumanRaportoija {
         raportit.append("</html>");
         raporttiKentta.setText(raportit.toString());
         raporttiKentta.getParent().repaint();
+        
+        this.paivitaStatit(raportti);
+    }
+    
+    public void paivitaStatit(Vuororaportti raportti) {
+        stattiKentta.setText("HP: " + raportti.getHahmo().getOsumapisteet());
+        stattiKentta.getParent().repaint();
     }
 }
