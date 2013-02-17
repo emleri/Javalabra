@@ -3,8 +3,8 @@ package utilities;
 import gladiaattoripeli.domain.Hirvio;
 import gladiaattoripeli.utilities.Koordinaatit;
 import gladiaattoripeli.utilities.Sovelluslogiikka;
-import gladiaattoripeli.utilities.Suunta;
-import gladiaattoripeli.utilities.Vuororaportti;
+import gladiaattoripeli.utilities.Komennot;
+import gladiaattoripeli.utilities.Pelitilanne;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -35,22 +35,10 @@ public class SovelluslogiikkaTest {
     @After
     public void tearDown() {
     }
-
-    @Test
-    public void luoHirvioitaTest() {
-        this.logiikka.luoHirvioita(23);
-        List<Hirvio> hirviot = this.logiikka.getAreena().getHirviot();
-        
-        assertEquals(0, hirviot.get(hirviot.size()-1).getSijaintiX());
-        assertEquals(1, hirviot.get(hirviot.size()-1).getSijaintiY());
-        
-        assertEquals(6, hirviot.get(6).getSijaintiX());
-        assertEquals(0, hirviot.get(6).getSijaintiY());
-    }
     
     @Test
     public void pelaaVuoroTest() {
-        Vuororaportti v = this.logiikka.pelaaVuoro(Suunta.ITA);
+        Pelitilanne v = this.logiikka.pelaaVuoro(Komennot.ITA);
         assertEquals(false, v.onkoPeliOhi());
         assertEquals(11, v.getHahmo().getSijaintiX());
         assertTrue(!v.getTapahtumat().isEmpty());

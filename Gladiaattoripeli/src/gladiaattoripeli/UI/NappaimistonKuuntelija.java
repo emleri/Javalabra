@@ -1,6 +1,6 @@
 package gladiaattoripeli.UI;
 
-import gladiaattoripeli.utilities.Suunta;
+import gladiaattoripeli.utilities.Komennot;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -23,14 +23,21 @@ public class NappaimistonKuuntelija implements KeyListener {
      */
     @Override
     public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            this.ohjaaja.pelaajanLiike(Suunta.LANSI);
-        } else if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            this.ohjaaja.pelaajanLiike(Suunta.ITA);
-        } else if (e.getKeyCode() == KeyEvent.VK_UP) {
-            this.ohjaaja.pelaajanLiike(Suunta.POHJOINEN);
-        } else if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-            this.ohjaaja.pelaajanLiike(Suunta.ETELA);
+        switch(e.getKeyCode()) {
+            case KeyEvent.VK_LEFT: 
+                this.ohjaaja.pelaajanToiminto(Komennot.LANSI);
+                break;
+            case KeyEvent.VK_RIGHT:
+                this.ohjaaja.pelaajanToiminto(Komennot.ITA);
+                break;
+            case KeyEvent.VK_UP:
+                this.ohjaaja.pelaajanToiminto(Komennot.POHJOINEN);
+                break;
+            case KeyEvent.VK_DOWN:
+                this.ohjaaja.pelaajanToiminto(Komennot.ETELA);
+                break;
+            case KeyEvent.VK_PERIOD:
+                this.ohjaaja.pelaajanToiminto(Komennot.ODOTA);
         }
     }
 

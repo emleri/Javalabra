@@ -1,7 +1,10 @@
 package gladiaattoripeli.domain;
 
+import gladiaattoripeli.utilities.Koordinaatit;
 import gladiaattoripeli.utilities.RuumiinosanNimi;
-import gladiaattoripeli.utilities.Vuororaportti;
+import gladiaattoripeli.utilities.Pelitilanne;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -15,6 +18,7 @@ public class Gladiaattori extends Liikutettava {
     private int puolustus;
     private int hyokkays;
     private Keho keho;
+    private List<Hirvio> tapot;
 
     /**
      * Konstruktori.
@@ -31,6 +35,7 @@ public class Gladiaattori extends Liikutettava {
         this.keho = keho;
         this.puolustus = 11;
         this.hyokkays = 7;
+        this.tapot = new ArrayList<Hirvio>();
     }
 
     /**
@@ -38,9 +43,11 @@ public class Gladiaattori extends Liikutettava {
      * @param h kohdehirviö
      * @param v vuoron vuororaportti, johon hyökkäyksen tulos kirjataan
      */
-    public void hyokkaa(Hirvio h, Vuororaportti v) {
+    public void hyokkaa(Hirvio h, Pelitilanne v) {
         v.lisaaTapahtuma(v.viestit.lyo("Gladiaattori", "hirviötä"));
-        h.puolusta(v, 5, hyokkays + new Random().nextInt(10));
+        if (h.puolusta(v, 5, hyokkays + new Random().nextInt(10))) {
+            this.tapot.add(h);
+        }
     }
 
     /**
@@ -50,7 +57,7 @@ public class Gladiaattori extends Liikutettava {
      * @param vahinko vahingon määrä
      * @param osuma hirviön osumarolli
      */
-    public void puolusta(Vuororaportti v, int vahinko, int osuma) {
+    public void puolusta(Pelitilanne v, int vahinko, int osuma) {
         if (v == null || vahinko < 0 || osuma < 0) {
             throw new IllegalArgumentException();
         }
@@ -72,5 +79,15 @@ public class Gladiaattori extends Liikutettava {
 
     public Keho getKeho() {
         return keho;
+    }
+
+    public List<Hirvio> getTapot() {
+        return this.tapot;
+    }
+
+    public Efekti getHyokkaysEfekti(Koordinaatit k) {
+        Efekti e = new Efekti('*');
+        e.lisaaPiirtokohta(k);
+        return e;
     }
 }

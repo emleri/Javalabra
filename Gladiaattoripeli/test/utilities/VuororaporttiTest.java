@@ -1,7 +1,7 @@
 
 package utilities;
 
-import gladiaattoripeli.utilities.Vuororaportti;
+import gladiaattoripeli.utilities.Pelitilanne;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
  * @author Emleri
  */
 public class VuororaporttiTest {
-    private Vuororaportti v;
+    private Pelitilanne v;
     
     public VuororaporttiTest() {
     }
@@ -29,7 +29,7 @@ public class VuororaporttiTest {
     
     @Before
     public void setUp() {
-        v = new Vuororaportti();
+        v = new Pelitilanne();
     }
     
     @After

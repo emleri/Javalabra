@@ -1,7 +1,7 @@
 package gladiaattoripeli.domain;
 
 import gladiaattoripeli.utilities.RuumiinosanNimi;
-import gladiaattoripeli.utilities.Vuororaportti;
+import gladiaattoripeli.utilities.Pelitilanne;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -32,7 +32,7 @@ public class Keho {
         this.raajat.add(r);
     }
 
-    public void otaVahinkoa(Vuororaportti v, int vahinko) {
+    public void otaVahinkoa(Pelitilanne v, int vahinko) {
         int osumakohta = arpoja.nextInt(12);
         if (osumakohta < 2) {
             this.paa.otaVahinkoa(v, vahinko);

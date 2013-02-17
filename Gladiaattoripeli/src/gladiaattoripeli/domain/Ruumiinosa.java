@@ -1,7 +1,7 @@
 package gladiaattoripeli.domain;
 
 import gladiaattoripeli.utilities.RuumiinosanNimi;
-import gladiaattoripeli.utilities.Vuororaportti;
+import gladiaattoripeli.utilities.Pelitilanne;
 
 /**
  * Luokka edustaa hahmojen yksittäisiä vartalon osia ja pitää kirjaa niiden
@@ -21,7 +21,7 @@ public class Ruumiinosa {
         this.kuollut = false;
     }
 
-    public void otaVahinkoa(Vuororaportti v, int vahinko) {
+    public void otaVahinkoa(Pelitilanne v, int vahinko) {
         this.osumapisteet -= vahinko;
         v.lisaaTapahtuma(v.viestit.onHaavoittunut(this.omistajanNimi + "n " + this.nimi.getNimi()));
         if (this.osumapisteet <= 0) {

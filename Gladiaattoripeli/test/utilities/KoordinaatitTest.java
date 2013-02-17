@@ -2,7 +2,7 @@
 package utilities;
 
 import gladiaattoripeli.utilities.Koordinaatit;
-import gladiaattoripeli.utilities.Suunta;
+import gladiaattoripeli.utilities.Komennot;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -83,22 +83,22 @@ public class KoordinaatitTest {
     
     @Test
     public void getViereisetKoordinaatitSuunnassaToimiiYAkselilla() {
-        Koordinaatit viereiset = k.getViereisetKoordinaatitSuunnassa(Suunta.ETELA);
+        Koordinaatit viereiset = k.getViereisetKoordinaatitSuunnassa(Komennot.ETELA);
         assertEquals(5, viereiset.getX());
         assertEquals(6, viereiset.getY());
         
-        viereiset = k.getViereisetKoordinaatitSuunnassa(Suunta.POHJOINEN);
+        viereiset = k.getViereisetKoordinaatitSuunnassa(Komennot.POHJOINEN);
         assertEquals(5, viereiset.getX());
         assertEquals(4, viereiset.getY());
     }
     
     @Test
     public void getViereisetKoordinaatitSuunnassaToimiiXAkselilla() {
-        Koordinaatit viereiset = k.getViereisetKoordinaatitSuunnassa(Suunta.ITA);
+        Koordinaatit viereiset = k.getViereisetKoordinaatitSuunnassa(Komennot.ITA);
         assertEquals(6, viereiset.getX());
         assertEquals(5, viereiset.getY());
         
-        viereiset = k.getViereisetKoordinaatitSuunnassa(Suunta.LANSI);
+        viereiset = k.getViereisetKoordinaatitSuunnassa(Komennot.LANSI);
         assertEquals(4, viereiset.getX());
         assertEquals(5, viereiset.getY());
     }

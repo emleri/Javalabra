@@ -12,21 +12,21 @@ public class Viestigeneraattori {
 
     public Viestigeneraattori() {
     }
-    
+
     public String onHaavoittunut(String kuka) {
         if (kuka == null) {
             throw new IllegalArgumentException();
         }
         return kuka + " on haavoittunut.";
     }
-    
+
     public String onVammautunut(String kuka) {
         if (kuka == null) {
             throw new IllegalArgumentException();
         }
         return kuka + " on vammautunut vakavasti.";
     }
-    
+
     public String onKuollut(String kuka) {
         if (kuka == null) {
             throw new IllegalArgumentException();
@@ -45,6 +45,14 @@ public class Viestigeneraattori {
         if (kuka == null || keta == null) {
             throw new IllegalArgumentException();
         }
-       return kuka + " lyö " + keta + ".";
+        return kuka + " lyö " + keta + ".";
+    }
+
+    public String alkutervehdys() {
+        return "Taistelu alkaa!";
+    }
+
+    public String loppuviesti() {
+        return "Gladiaattori on kuollut. Peli on ohi.";
     }
 }

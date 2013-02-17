@@ -8,7 +8,7 @@ import gladiaattoripeli.domain.Areena;
 import gladiaattoripeli.domain.Gladiaattori;
 import gladiaattoripeli.domain.Hirvio;
 import gladiaattoripeli.utilities.Hahmogeneraattori;
-import gladiaattoripeli.utilities.Vuororaportti;
+import gladiaattoripeli.utilities.Pelitilanne;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -23,7 +23,7 @@ import static org.junit.Assert.*;
 public class HirvioTest {
     private Hahmogeneraattori hg;
     private Hirvio h;
-    private Vuororaportti v;
+    private Pelitilanne v;
     private Gladiaattori g;
 
     public HirvioTest() {
@@ -40,7 +40,7 @@ public class HirvioTest {
     @Before
     public void setUp() {
         h = new Hirvio(5, 5, 5);
-        v = new Vuororaportti();
+        v = new Pelitilanne();
         hg = new Hahmogeneraattori();
         g = hg.luoGladiaattori(new Areena(5, 5));
     }

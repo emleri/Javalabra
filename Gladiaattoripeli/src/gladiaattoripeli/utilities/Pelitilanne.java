@@ -1,5 +1,6 @@
 package gladiaattoripeli.utilities;
 
+import gladiaattoripeli.domain.Efekti;
 import gladiaattoripeli.domain.Gladiaattori;
 import gladiaattoripeli.domain.Hirvio;
 import java.util.ArrayList;
@@ -10,9 +11,10 @@ import java.util.List;
  * käyttöliittymälle. Sisältää myös viestigeneraattori-apuluokan tapahtumien
  * kirjaamista varten.
  */
-public class Vuororaportti {
+public class Pelitilanne {
 
     private List<String> tapahtumat;
+    private List<List<Efekti>> efektit;
     private List<Hirvio> surmatut;
     private List<Hirvio> hirviot;
     private Gladiaattori hahmo;
@@ -24,8 +26,9 @@ public class Vuororaportti {
      * listan, merkitsee oletusarvoisesti pelin olevan käynnissä ja kutsuu 
      * viestigeneraattori-alaluokan konstruktoria.
      */
-    public Vuororaportti() {
+    public Pelitilanne() {
         tapahtumat = new ArrayList<String>();
+        efektit = new ArrayList<List<Efekti>>();
         surmatut = new ArrayList<Hirvio>();
         peliOhi = false;
         this.viestit = new Viestigeneraattori();
@@ -111,5 +114,9 @@ public class Vuororaportti {
      */
     public Boolean onkoPeliOhi() {
         return this.peliOhi;
+    }
+    
+    public void uusiVuoro() {
+        tapahtumat.clear();
     }
 }

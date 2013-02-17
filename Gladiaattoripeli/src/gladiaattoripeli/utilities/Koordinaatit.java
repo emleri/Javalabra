@@ -68,45 +68,45 @@ public class Koordinaatit {
         return new Koordinaatit(this.x + k.getX(), this.y + k.getY());
     }
 
-    public Koordinaatit getViereisetKoordinaatitSuunnassa(Suunta suunta) {
+    public Koordinaatit getViereisetKoordinaatitSuunnassa(Komennot suunta) {
         Koordinaatit viereiset;
 
-        if (suunta == Suunta.ETELA) {
+        if (suunta == Komennot.ETELA) {
             viereiset = new Koordinaatit(0, 1, this.maxX, this.maxY);
             viereiset.lisaaKoordinaatit(this);
             return viereiset;
         }
-        if (suunta == Suunta.POHJOINEN) {
+        if (suunta == Komennot.POHJOINEN) {
             viereiset = new Koordinaatit(0, -1, this.maxX, this.maxY);
             viereiset.lisaaKoordinaatit(this);
             return viereiset;
         }
-        if (suunta == Suunta.LANSI) {
+        if (suunta == Komennot.LANSI) {
             viereiset = new Koordinaatit(-1, 0, this.maxX, this.maxY);
             viereiset.lisaaKoordinaatit(this);
             return viereiset;
         }
-        if (suunta == Suunta.ITA) {
+        if (suunta == Komennot.ITA) {
             viereiset = new Koordinaatit(1, 0, this.maxX, this.maxY);
             viereiset.lisaaKoordinaatit(this);
             return viereiset;
         }
-        if (suunta == Suunta.KOILLINEN) {
+        if (suunta == Komennot.KOILLINEN) {
             viereiset = new Koordinaatit(1, -1, this.maxX, this.maxY);
             viereiset.lisaaKoordinaatit(this);
             return viereiset;
         }
-        if (suunta == Suunta.KAAKKO) {
+        if (suunta == Komennot.KAAKKO) {
             viereiset = new Koordinaatit(1, 1, this.maxX, this.maxY);
             viereiset.lisaaKoordinaatit(this);
             return viereiset;
         }
-        if (suunta == Suunta.LOUNAS) {
+        if (suunta == Komennot.LOUNAS) {
             viereiset = new Koordinaatit(-1, 1, this.maxX, this.maxY);
             viereiset.lisaaKoordinaatit(this);
             return viereiset;
         }
-        if (suunta == Suunta.LUODE) {
+        if (suunta == Komennot.LUODE) {
             viereiset = new Koordinaatit(-1, -1, this.maxX, this.maxY);
             viereiset.lisaaKoordinaatit(this);
             return viereiset;

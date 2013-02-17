@@ -3,8 +3,8 @@ package domain;
 import gladiaattoripeli.domain.Areena;
 import gladiaattoripeli.domain.Hirvio;
 import gladiaattoripeli.utilities.Koordinaatit;
-import gladiaattoripeli.utilities.Suunta;
-import gladiaattoripeli.utilities.Vuororaportti;
+import gladiaattoripeli.utilities.Komennot;
+import gladiaattoripeli.utilities.Pelitilanne;
 import java.util.List;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -63,14 +63,14 @@ public class AreenaTest {
     @Test
     public void hahmonHyokkaysHirvioonToimii() {
         for(int i = 0; i < 100; i++) {
-        a.toimiHahmollaSuuntaan(Suunta.POHJOINEN, new Vuororaportti());
+        a.toimiHahmollaSuuntaan(Komennot.POHJOINEN, new Pelitilanne());
         }
         assertTrue(5 > h.getOsumapisteet());
     }
 
     @Test
     public void hahmonLiikeToimii() {
-        a.toimiHahmollaSuuntaan(Suunta.ETELA, new Vuororaportti());
+        a.toimiHahmollaSuuntaan(Komennot.ETELA, new Pelitilanne());
         assertEquals(14, a.getHahmo().getSijainti().getX());
         assertEquals(15, a.getHahmo().getSijainti().getY());
     }
@@ -78,14 +78,14 @@ public class AreenaTest {
     @Test
     public void liikutaHirvioitaToimiiHyokkayksena() {
         for (int i = 0; i < 100; i++) {
-            a.liikutaHirvioita(new Vuororaportti());
+            a.liikutaHirvioita(new Pelitilanne());
         }
         assertTrue(a.getHahmo().getOsumapisteet()<15);
     }
 
     @Test
     public void liikutaHirvioitaToimiiLiikkeena() {
-        a.liikutaHirvioita(new Vuororaportti());
+        a.liikutaHirvioita(new Pelitilanne());
         assertEquals(1, a.getHirviot().get(1).getSijainti().getX());
         assertEquals(1, a.getHirviot().get(1).getSijainti().getY());
     }

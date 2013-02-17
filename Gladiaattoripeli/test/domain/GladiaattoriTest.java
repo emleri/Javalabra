@@ -8,7 +8,7 @@ import gladiaattoripeli.domain.Areena;
 import gladiaattoripeli.domain.Gladiaattori;
 import gladiaattoripeli.domain.Hirvio;
 import gladiaattoripeli.utilities.Hahmogeneraattori;
-import gladiaattoripeli.utilities.Vuororaportti;
+import gladiaattoripeli.utilities.Pelitilanne;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -26,7 +26,7 @@ public class GladiaattoriTest {
     private Gladiaattori g;
     private Hirvio h;
     private Hahmogeneraattori hg;
-    private Vuororaportti v;
+    private Pelitilanne v;
     
     public GladiaattoriTest() {
     }
@@ -45,7 +45,7 @@ public class GladiaattoriTest {
         hg = new Hahmogeneraattori();
         g = hg.luoGladiaattori(a);
         h = new Hirvio(3, 3, 3);
-        v = new Vuororaportti();
+        v = new Pelitilanne();
     }
     
     @After

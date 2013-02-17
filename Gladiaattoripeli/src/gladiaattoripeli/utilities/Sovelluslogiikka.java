@@ -1,56 +1,61 @@
 package gladiaattoripeli.utilities;
 
 import gladiaattoripeli.domain.Areena;
-import gladiaattoripeli.domain.Hirvio;
+import java.util.List;
 
 /**
- * Sovelluslogiikka ohjaa ohjelman perustoimintoja: pelin aloittamista, 
- * lopettamista ja vuorojen pelaamista. Luokka on keskeinen, kokoava osa 
+ * Sovelluslogiikka ohjaa ohjelman perustoimintoja: pelin aloittamista,
+ * lopettamista ja vuorojen pelaamista. Luokka on keskeinen, kokoava osa
  * pelimekaniikalle ja linkki käyttöliittymään.
  */
 public class Sovelluslogiikka {
 
     private Areena areena;
     private Boolean peliOhi;
+    private HighScorenKasittelija pisteyttaja;
+    private Pelitilanne tilanne;
 
     public Sovelluslogiikka() {
-        this.areena = new Areena(21, 21);
+        this.tilanne = new Pelitilanne();
+        this.areena = new Areena(21, 21, tilanne);
         this.areena.luoHahmot();
-        this.peliOhi = false;
+        this.areena.luoHirvioita(10);
+        tilanne.setHahmo(this.areena.getHahmo());
+        tilanne.setHirviot(this.areena.getHirviot());
+        this.pisteyttaja = new HighScorenKasittelija();
     }
 
-    public void luoHirvioita(int maara) {
-        for (int i = 0; i < maara; i++) {
-            if (i < areena.getLeveys()) {
-                this.areena.lisaaHirvio(new Hirvio(i, 0, 5));
-            } else if (i < areena.getKorkeus() + areena.getLeveys()) {
-                this.areena.lisaaHirvio(new Hirvio(0, i - areena.getLeveys(), 5));
-            } else {
-                this.areena.lisaaHirvio(new Hirvio(0, 0, 5));
-            }
+    public void pelaaVuoro(Komennot s) {
+        tilanne.uusiVuoro();
+        this.areena.tyhjennaEfektit();
+        
+        if (!this.tilanne.onkoPeliOhi()) {
+            areena.toimiHahmollaSuuntaan(s);
+            areena.paivitaTilanne();
+            areena.liikutaHirvioita();
+            areena.paivitaTilanne();
         }
     }
     
-    public Vuororaportti pelaaVuoro(Suunta s) {
-        Vuororaportti v = new Vuororaportti();
-        v.setHahmo(this.areena.getHahmo());
-        v.setHirviot(this.areena.getHirviot());
-        if (!this.peliOhi) {
-            areena.toimiHahmollaSuuntaan(s, v);
-            areena.paivitaTilanne(v);
-            areena.liikutaHirvioita(v);
-            areena.paivitaTilanne(v);
-
-            if (v.onkoPeliOhi()) {
-                this.peliOhi = true;
-            }
-            return v;
-        } else {
-            v.lopetaPeli();
-            return v;
+    public void pelaaHirvioidenVuoro() {
+        tilanne.uusiVuoro();
+        this.areena.tyhjennaEfektit();
+        
+        if (!this.tilanne.onkoPeliOhi()) {
+            areena.liikutaHirvioita();
+            areena.paivitaTilanne();
         }
     }
+    
+    public List<String> tallennaHighScore(String nimi) {
+        this.pisteyttaja.lisaaHighScore(this.areena.getHahmo().getTapot().size() + " pistettä, " + nimi);
+        return this.pisteyttaja.getHighScore();
+    }
 
+    public Pelitilanne getPelitilanne() {
+        return this.tilanne;
+    }    
+    
     public Areena getAreena() {
         return this.areena;
     }

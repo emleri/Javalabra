@@ -69,7 +69,7 @@ public class GraafinenKayttoliittyma extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
 
         stattiKentta.setForeground(new java.awt.Color(204, 204, 204));
-        stattiKentta.setText("jLabel1");
+        stattiKentta.setText("HP: 15");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -89,7 +89,6 @@ public class GraafinenKayttoliittyma extends javax.swing.JFrame {
 
         raporttiKentta.setForeground(new java.awt.Color(204, 204, 204));
         raporttiKentta.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        raporttiKentta.setText("jLabel1");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -191,6 +190,10 @@ public class GraafinenKayttoliittyma extends javax.swing.JFrame {
     
     public JFrame getJFrame() {
         return this;
+    }
+    
+    public JLabel getEfektikentta() {
+        return this.efektit;
     }
 
 }

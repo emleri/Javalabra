@@ -1,7 +1,7 @@
 package gladiaattoripeli.domain;
 
 import gladiaattoripeli.utilities.Koordinaatit;
-import gladiaattoripeli.utilities.Suunta;
+import gladiaattoripeli.utilities.Komennot;
 
 /**
  * Abstrakti luokka, joka kuvaa koordinaatistossa sijaitsevaa objektia. 
@@ -27,7 +27,7 @@ public abstract class Liikutettava {
         return this.koordinaatit.getY();
     }
     
-    public void liikuSuuntaan(Suunta suunta) {
+    public void liikuSuuntaan(Komennot suunta) {
         this.koordinaatit = this.koordinaatit.getViereisetKoordinaatitSuunnassa(suunta);
     }
     

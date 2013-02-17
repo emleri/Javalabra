@@ -4,7 +4,7 @@ package domain;
 import gladiaattoripeli.domain.Keho;
 import gladiaattoripeli.domain.Ruumiinosa;
 import gladiaattoripeli.utilities.RuumiinosanNimi;
-import gladiaattoripeli.utilities.Vuororaportti;
+import gladiaattoripeli.utilities.Pelitilanne;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -59,7 +59,7 @@ public class KehoTest {
      
      @Test
      public void otaVahinkoaTest() {
-         keho.otaVahinkoa(new Vuororaportti(), 5);
+         keho.otaVahinkoa(new Pelitilanne(), 5);
          
          int pisteet = 0;
          for (Ruumiinosa raaja : keho.getRaajat()) {
