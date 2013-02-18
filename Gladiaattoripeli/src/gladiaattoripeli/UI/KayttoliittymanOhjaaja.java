@@ -2,6 +2,7 @@ package gladiaattoripeli.UI;
 
 import gladiaattoripeli.utilities.Komennot;
 import gladiaattoripeli.utilities.Pelitilanne;
+import gladiaattoripeli.utilities.Pisteet;
 import gladiaattoripeli.utilities.Sovelluslogiikka;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -88,7 +89,7 @@ public class KayttoliittymanOhjaaja {
                 null,
                 null,
                 "nimi");
-        List<String> pisteet = this.logiikka.tallennaHighScore(nimi);
+        List<Pisteet> pisteet = this.logiikka.tallennaHighScore(nimi);
         this.raportoija.tulostaPisteet(pisteet);
     }
 }

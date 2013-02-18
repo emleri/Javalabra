@@ -1,0 +1,12 @@
+Teht‰v‰‰:
+- Korjaa kaksi pelinloppuviesti‰!
+- <more> -toiminto pitkiin raportteihin
+- Uuden pelin aloittaminen sulkematta ohjelmaa (Ti)
+- Testaa kattavammin (Ma-Pe)
+- Refaktoroi ja siisti (Ma-Pe)
+- P‰ivit‰ kaavioita ja dokumentaatiota (Ma-Pe)
+(- kursori) (lopuksi, jos ehtii)
+
+
+Testeist‰ valmiita:
+- Koordinaattien testit

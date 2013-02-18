@@ -1,5 +1,7 @@
 package gladiaattoripeli.utilities;
 
+import java.util.Random;
+
 /**
  * Kapseloitu (x, y)-koordinaatti ja siihen liittyviä apumetodeja.
  */
@@ -7,26 +9,12 @@ public class Koordinaatit {
 
     private int x;
     private int y;
-    private int maxX;
-    private int maxY;
+    private Random arpoja;
 
     public Koordinaatit(int x, int y) {
         this.x = x;
         this.y = y;
-        this.maxX = 999;
-        this.maxY = 999;
-    }
-
-    public Koordinaatit(int x, int y, int maxX, int maxY) {
-        this.x = x;
-        this.y = y;
-        this.maxX = maxX;
-        this.maxY = maxY;
-    }
-
-    public void setRajat(int leveys, int korkeus) {
-        this.maxX = leveys;
-        this.maxY = korkeus;
+        this.arpoja = new Random();
     }
 
     public int getX() {
@@ -38,83 +26,96 @@ public class Koordinaatit {
     }
 
     public void setX(int x) {
-        if (x < this.maxX) {
             this.x = x;
-        } else {
-            this.x = maxX-1;
-        }
-        if (x < 0) {
-            this.x = 0;
-        }
     }
 
     public void setY(int y) {
-        if (y < this.maxY) {
             this.y = y;
-        } else {
-            this.y = maxY-1;
-        }
-        if (y < 0) {
-            this.y = 0;
-        }
     }
 
+    /**
+     * Lisaa parametrina saatujen koordinaattien x- ja y-arvot nykyisiin arvoihin.
+     * @param k lisattavat koordinaatit
+     */
     public void lisaaKoordinaatit(Koordinaatit k) {
         this.setX(this.x + k.getX());
         this.setY(this.y + k.getY());
     }
 
+    /**
+     * Laskee yhteen kahdet koordinaatit.
+     * @param k
+     * @return
+     */
     public Koordinaatit koordinaattienSumma(Koordinaatit k) {
         return new Koordinaatit(this.x + k.getX(), this.y + k.getY());
     }
 
+    /**
+     * Palauttaa parametrina saadusta suunnasta viereisen ruudun koordinaatit 
+     * itsestään nähden.
+     * @param suunta suunta, josta viereinen ruutu haetaan
+     * @return viereisen ruudun koordinaatit
+     */
     public Koordinaatit getViereisetKoordinaatitSuunnassa(Komennot suunta) {
-        Koordinaatit viereiset;
-
         if (suunta == Komennot.ETELA) {
-            viereiset = new Koordinaatit(0, 1, this.maxX, this.maxY);
-            viereiset.lisaaKoordinaatit(this);
-            return viereiset;
+            return getViereisetApu(0, 1);
         }
         if (suunta == Komennot.POHJOINEN) {
-            viereiset = new Koordinaatit(0, -1, this.maxX, this.maxY);
-            viereiset.lisaaKoordinaatit(this);
-            return viereiset;
+            return getViereisetApu(0, -1);
         }
         if (suunta == Komennot.LANSI) {
-            viereiset = new Koordinaatit(-1, 0, this.maxX, this.maxY);
-            viereiset.lisaaKoordinaatit(this);
-            return viereiset;
+            return getViereisetApu(-1, 0);
         }
         if (suunta == Komennot.ITA) {
-            viereiset = new Koordinaatit(1, 0, this.maxX, this.maxY);
-            viereiset.lisaaKoordinaatit(this);
-            return viereiset;
+            return getViereisetApu(1, 0);
         }
         if (suunta == Komennot.KOILLINEN) {
-            viereiset = new Koordinaatit(1, -1, this.maxX, this.maxY);
-            viereiset.lisaaKoordinaatit(this);
-            return viereiset;
+            return getViereisetApu(1, -1);
         }
         if (suunta == Komennot.KAAKKO) {
-            viereiset = new Koordinaatit(1, 1, this.maxX, this.maxY);
-            viereiset.lisaaKoordinaatit(this);
-            return viereiset;
+            return getViereisetApu(1, 1);
         }
         if (suunta == Komennot.LOUNAS) {
-            viereiset = new Koordinaatit(-1, 1, this.maxX, this.maxY);
-            viereiset.lisaaKoordinaatit(this);
-            return viereiset;
+            return getViereisetApu(-1, 1);
         }
         if (suunta == Komennot.LUODE) {
-            viereiset = new Koordinaatit(-1, -1, this.maxX, this.maxY);
-            viereiset.lisaaKoordinaatit(this);
-            return viereiset;
+            return getViereisetApu(-1, -1);
         }
-
-        return null;
+        throw new IllegalArgumentException("Parametrina saatu komento ei ole suunta!");
+    }
+    
+    private Koordinaatit getViereisetApu(int x, int y) {
+        Koordinaatit viereiset = new Koordinaatit(x, y);
+        viereiset.lisaaKoordinaatit(this);
+        return viereiset;
     }
 
+    /**
+     * Palauttaa satunnaisen pääilmansuunnissa viereisen ruudun koordinaatit.
+     * @return satunnainen viereinen ruutu
+     */
+    public Koordinaatit getSatunnainenRuutuVieressa() {
+        int a = arpoja.nextInt(2);
+        int b = arpoja.nextInt(2);
+        Koordinaatit k;
+
+        if (a == 0) {
+            k = (b == 0) ? new Koordinaatit(this.x + 1, this.y) : new Koordinaatit(this.x, this.y + 1);
+        } else {
+            k = (b == 0) ? new Koordinaatit(this.x - 1, this.y) : new Koordinaatit(this.x, this.y - 1);
+        }
+
+        return k;
+    }
+
+    /**
+     * Metodi etsii sen itsestään nähden viereisen ruudun, joka on lähimpänä 
+     * parametrina saatua kohdetta. Mikäli kohderuutu on nykyinen ruutu, 
+     * palautetaan omat koordinaatit.
+     * @param k kohdekoordinaatit
+     * @return sopivan viereisen ruudun koordinaatit
+     */
     public Koordinaatit getViereinenRuutuKohtiKoordinaatteja(Koordinaatit k) {
         Koordinaatit viereinen = new Koordinaatit(0, 0);
 
@@ -138,6 +139,9 @@ public class Koordinaatit {
     }
 
     public boolean onVieressa(Koordinaatit k) {
+        if (k.equals(this)) {
+            return false;
+        }
         if (k.getX() > this.x + 1 || k.getX() < this.x - 1) {
             return false;
         } else if (k.getY() > this.y + 1 || k.getY() < this.y - 1) {

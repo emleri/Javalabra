@@ -1,10 +1,13 @@
 package domain;
 
 
+import gladiaattoripeli.domain.Areena;
 import gladiaattoripeli.domain.Gladiaattori;
 import gladiaattoripeli.domain.Keho;
+import gladiaattoripeli.utilities.Hahmogeneraattori;
 import gladiaattoripeli.utilities.Koordinaatit;
 import gladiaattoripeli.utilities.Komennot;
+import gladiaattoripeli.utilities.Pelitilanne;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -13,7 +16,8 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 public class LiikutettavaTest {
-    Gladiaattori kalle;
+    Gladiaattori g;
+    Hahmogeneraattori hg;
 
     public LiikutettavaTest() {
     }
@@ -28,7 +32,8 @@ public class LiikutettavaTest {
 
     @Before
     public void setUp() {
-        kalle = new Gladiaattori(0, 0, 10, 10, new Keho("jee", 1));
+        hg = new Hahmogeneraattori();
+        g = hg.luoGladiaattori(new Areena(10, 10, new Pelitilanne()));
     }
 
     @After
@@ -37,15 +42,14 @@ public class LiikutettavaTest {
     
     @Test
     public void konstruktoriAsettaaSijainninOikein() {
-        assertEquals(0, kalle.getSijaintiX());
-        assertEquals(0, kalle.getSijaintiY());
-    }
-
-    @Test
-    public void liikuSuuntaanToimii() {
-        kalle.liikuSuuntaan(Komennot.ETELA);
-        assertEquals(0, kalle.getSijaintiX());
-        assertEquals(1, kalle.getSijaintiY());
+        assertEquals(5, g.getSijainti().getX());
+        assertEquals(5, g.getSijainti().getX());
     }
     
+    @Test
+    public void siirryTest() {
+        g.siirry(new Koordinaatit(5, 5));
+        assertEquals(g.getSijainti().getX(), 5);
+        assertEquals(g.getSijainti().getY(), 5);
+    }
 }

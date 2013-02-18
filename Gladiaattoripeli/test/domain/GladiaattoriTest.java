@@ -11,10 +11,10 @@ import gladiaattoripeli.utilities.Hahmogeneraattori;
 import gladiaattoripeli.utilities.Pelitilanne;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -23,10 +23,10 @@ import static org.junit.Assert.*;
 public class GladiaattoriTest {
 
     private Areena a;
+    private Pelitilanne t;
     private Gladiaattori g;
     private Hirvio h;
     private Hahmogeneraattori hg;
-    private Pelitilanne v;
     
     public GladiaattoriTest() {
     }
@@ -41,11 +41,13 @@ public class GladiaattoriTest {
     
     @Before
     public void setUp() {
-        a = new Areena(10, 10);
+        t = new Pelitilanne();
+        a = new Areena(10, 10, t);
+        t.setHahmo(a.getHahmo());
+        t.setHirviot(a.getHirviot());
         hg = new Hahmogeneraattori();
         g = hg.luoGladiaattori(a);
-        h = new Hirvio(3, 3, 3);
-        v = new Pelitilanne();
+        h = hg.luoHirvio();
     }
     
     @After
@@ -58,26 +60,26 @@ public class GladiaattoriTest {
     @Test
     public void hyokkaaToimii() {
         for (int i = 0; i < 100; i++) {
-            g.hyokkaa(h, v);
+            g.hyokkaa(h, t);
         }
-        assertEquals(v.getTapahtumat().get(0), "Gladiaattori lyö hirviötä.");
+        assertEquals(t.getTapahtumat().get(0), "Gladiaattori lyö hirviötä.");
         assertTrue(h.getOsumapisteet() < 3);
     }
     
     @Test
     public void puolustaKunOsuu() {
-        g.puolusta(v, 5, 20);
+        g.puolusta(t, 5, 20);
         assertTrue(g.getOsumapisteet() == 10);
     }
     
     @Test
     public void puolustaKunHuti() {
-        g.puolusta(v, 5, 1); 
+        g.puolusta(t, 5, 1); 
         assertTrue(g.getOsumapisteet() == 15);
     }
     
     @Test(expected=IllegalArgumentException.class)
     public void puolustaVirheellisillaParametreilla() {
-        g.puolusta(v, -5, 15);
+        g.puolusta(t, -5, 15);
     }
 }

@@ -10,7 +10,16 @@ public enum RuumiinosanNimi {
     OIKEAKASI ("oikea käsi"),
     OIKEAJALKA ("oikea jalka"),
     VASENKASI ("vasen käsi"),
-    VASENJALKA ("vasen jalka");
+    VASENJALKA ("vasen jalka"),
+    OIKEASIIPI ("oikea siipi"),
+    VASENSIIPI ("vasen siipi"),
+    HANTA ("häntä");
+    
+    private static int size = 9;
+
+    public static int getSize() {
+        return size;
+    }
     
     private String nimi;
     
@@ -21,6 +30,4 @@ public enum RuumiinosanNimi {
     public String getNimi() {
         return nimi;
     }
-    
-    
 }

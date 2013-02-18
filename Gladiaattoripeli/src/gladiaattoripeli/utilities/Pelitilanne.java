@@ -116,6 +116,10 @@ public class Pelitilanne {
         return this.peliOhi;
     }
     
+    /**
+     * Metodi tyhjentää tapahtumahistorian. Kutsutaan vuorojen alussa, jotta 
+     * edellisten vuorojen tapahtumat eivät tulostu uudelleen.
+     */
     public void uusiVuoro() {
         tapahtumat.clear();
     }

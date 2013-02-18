@@ -2,6 +2,7 @@ package domain;
 
 import gladiaattoripeli.domain.Areena;
 import gladiaattoripeli.domain.Hirvio;
+import gladiaattoripeli.utilities.Hahmogeneraattori;
 import gladiaattoripeli.utilities.Koordinaatit;
 import gladiaattoripeli.utilities.Komennot;
 import gladiaattoripeli.utilities.Pelitilanne;
@@ -16,8 +17,11 @@ import static org.junit.Assert.*;
 public class AreenaTest {
 
     Areena a;
+    Pelitilanne t;
     Hirvio h;
     Hirvio h2;
+    Hahmogeneraattori hg;
+    int hirvioidenOsumapisteet;
 
     public AreenaTest() {
     }
@@ -32,12 +36,19 @@ public class AreenaTest {
 
     @Before
     public void setUp() {
-        a = new Areena(28, 28);
-        h = new Hirvio(14, 13, 10);
-        h2 = new Hirvio(0, 0, 5);
+        t = new Pelitilanne();
+        a = new Areena(28, 28, t);
+        t.setHahmo(a.getHahmo());
+        t.setHirviot(a.getHirviot());
+        hg = new Hahmogeneraattori();
+        h = hg.luoHirvio();
+        h.siirry(new Koordinaatit(14, 13));
+        h2 = hg.luoHirvio();
+        h2.siirry(new Koordinaatit(0, 0));
         a.lisaaHirvio(h);
         a.lisaaHirvio(h2);
         a.luoHahmot();
+        this.hirvioidenOsumapisteet = this.laskeHirvioidenOsumapisteet(a.getHirviot());
     }
 
     @After
@@ -62,15 +73,18 @@ public class AreenaTest {
 
     @Test
     public void hahmonHyokkaysHirvioonToimii() {
-        for(int i = 0; i < 100; i++) {
-        a.toimiHahmollaSuuntaan(Komennot.POHJOINEN, new Pelitilanne());
+        for(int i = 0; i < 50; i++) {
+            this.a.toimiHahmollaSuuntaan(Komennot.POHJOINEN);
         }
-        assertTrue(5 > h.getOsumapisteet());
+        for(int j = 0; j < 50; j++) {
+            this.a.toimiHahmollaSuuntaan(Komennot.LANSI);
+        }
+        assertTrue(this.hirvioidenOsumapisteet > this.laskeHirvioidenOsumapisteet(this.a.getHirviot()));
     }
 
     @Test
     public void hahmonLiikeToimii() {
-        a.toimiHahmollaSuuntaan(Komennot.ETELA, new Pelitilanne());
+        a.toimiHahmollaSuuntaan(Komennot.ETELA);
         assertEquals(14, a.getHahmo().getSijainti().getX());
         assertEquals(15, a.getHahmo().getSijainti().getY());
     }
@@ -78,14 +92,14 @@ public class AreenaTest {
     @Test
     public void liikutaHirvioitaToimiiHyokkayksena() {
         for (int i = 0; i < 100; i++) {
-            a.liikutaHirvioita(new Pelitilanne());
+            a.liikutaHirvioita();
         }
-        assertTrue(a.getHahmo().getOsumapisteet()<15);
+        assertTrue(a.getHahmo().getOsumapisteet() < 15);
     }
 
     @Test
     public void liikutaHirvioitaToimiiLiikkeena() {
-        a.liikutaHirvioita(new Pelitilanne());
+        a.liikutaHirvioita();
         assertEquals(1, a.getHirviot().get(1).getSijainti().getX());
         assertEquals(1, a.getHirviot().get(1).getSijainti().getY());
     }
@@ -94,7 +108,7 @@ public class AreenaTest {
     public void onkoRuudussaHirvioitaLoytaaHirvion() {
         assertTrue(a.onkoRuudussaHirviota(new Koordinaatit(0, 0)));
     }
-    
+
     @Test
     public void onkoRuudussaHirviotaEiLoydaHirviota() {
         assertTrue(!a.onkoRuudussaHirviota(new Koordinaatit(4, 4)));
@@ -102,9 +116,17 @@ public class AreenaTest {
 
     @Test
     public void haeHirvioRuudustaToimii() {
-        Hirvio koeElain = a.haeHirvioRuudusta(new Koordinaatit(0, 0));
+        Hirvio koeElain = a.getHirvioRuudusta(new Koordinaatit(0, 0));
         assertEquals(5, koeElain.getOsumapisteet());
         assertEquals(0, koeElain.getSijainti().getX());
         assertEquals(0, koeElain.getSijainti().getY());
+    }
+    
+    public int laskeHirvioidenOsumapisteet(List<Hirvio> hirviot) {
+        int x = 0;
+        for (Hirvio hirmu : hirviot) {
+            x += hirmu.getOsumapisteet();
+        }
+        return x;
     }
 }

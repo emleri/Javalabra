@@ -9,6 +9,7 @@ import gladiaattoripeli.domain.Gladiaattori;
 import gladiaattoripeli.domain.Keho;
 import gladiaattoripeli.domain.Ruumiinosa;
 import gladiaattoripeli.utilities.Hahmogeneraattori;
+import gladiaattoripeli.utilities.Pelitilanne;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -47,7 +48,7 @@ public class HahmogeneraattoriTest {
     //
     @Test
     public void ihmiskehoToimii() {
-        Gladiaattori g = hg.luoGladiaattori(new Areena(15, 15));
+        Gladiaattori g = hg.luoGladiaattori(new Areena(15, 15, new Pelitilanne()));
         for (Ruumiinosa o : g.getKeho().getRaajat()) {
             assertTrue(tarkistaRuumiinosa(o));
         }
@@ -57,7 +58,7 @@ public class HahmogeneraattoriTest {
     
     @Test(expected=IllegalArgumentException.class)
     public void ihmiskehoEiToimiVirheellisillaParameterilla() throws Exception {
-        //toteuta, kunhan hirviöiden luonti siirretty generaattorille
+        hg.luoKustomoituHirvio(null, -5);
     }
     
     public Boolean tarkistaRuumiinosa(Ruumiinosa o) {

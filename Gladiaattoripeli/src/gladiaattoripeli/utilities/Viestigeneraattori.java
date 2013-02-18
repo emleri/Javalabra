@@ -47,6 +47,27 @@ public class Viestigeneraattori {
         }
         return kuka + " lyö " + keta + ".";
     }
+    
+    public String nouseeIlmaan(String kuka) {
+        if (kuka == null) {
+            throw new IllegalArgumentException();
+        }
+        return kuka + " levittää siipensä ja nousee lentoon.";
+    }
+    
+    public String eiKykeneNousemaanIlmaan(String kuka) {
+        if (kuka == null) {
+            throw new IllegalArgumentException();
+        }
+        return kuka + " on haavoittanut siipensä eikä kykene nousemaan ilmaan.";
+    }
+    
+    public String syokseeTulta(String kuka) {
+        if (kuka == null) {
+            throw new IllegalArgumentException();
+        }
+        return kuka + " syöksee leimuavia liekkejä.";
+    }
 
     public String alkutervehdys() {
         return "Taistelu alkaa!";

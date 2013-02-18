@@ -1,7 +1,6 @@
 package gladiaattoripeli.domain;
 
 import gladiaattoripeli.utilities.Koordinaatit;
-import gladiaattoripeli.utilities.RuumiinosanNimi;
 import gladiaattoripeli.utilities.Pelitilanne;
 import java.util.Random;
 
@@ -14,6 +13,7 @@ public class Hirvio extends Liikutettava {
 
     private int osumapisteet;
     private Keho keho;
+    private Ase ase;
     private String nimi;
     private int hyokkays;
     private int puolustus;
@@ -23,46 +23,64 @@ public class Hirvio extends Liikutettava {
      * JavaD päivitetään sitten.
      * @param sijaintiX
      * @param sijaintiY
-     * @param osumaPisteet
+     * @param osumapisteet
      */
-    public Hirvio(int sijaintiX, int sijaintiY, int osumaPisteet) {
-        super(sijaintiX, sijaintiY);
-        this.osumapisteet = osumaPisteet;
+    public Hirvio(int osumapisteet, Keho keho) {
+        super(new Koordinaatit(0, 0));
+        this.osumapisteet = osumapisteet;
+        this.keho = keho;
         this.hyokkays = 5;
         this.puolustus = 12;
         this.nimi = "Hirviö";
+    }
 
-        // Siirrä hahmogeneraattoriin...
-        this.keho = new Keho("Hirviö", osumaPisteet);
-        this.keho.lisaaRaaja(new Ruumiinosa(RuumiinosanNimi.OIKEAKASI, "Hirviö", osumaPisteet / 2));
-        this.keho.lisaaRaaja(new Ruumiinosa(RuumiinosanNimi.VASENKASI, "Hirviö", osumaPisteet / 2));
-        this.keho.lisaaRaaja(new Ruumiinosa(RuumiinosanNimi.OIKEAJALKA, "Hirviö", osumaPisteet / 2));
-        this.keho.lisaaRaaja(new Ruumiinosa(RuumiinosanNimi.VASENJALKA, "Hirviö", osumaPisteet / 2));
+    public void setAse(Ase ase) {
+        this.ase = ase;
     }
     
     /**
      * Hirviö ottaa metodissa vastaan hyökkäyksen gladiaattorilta ja raportoi 
      * sen tulokset vuororaporttiin.
-     * @param v vuororaportti
+     * @param tilanne vuororaportti
      * @param vahinko vahingon määrä
-     * @param osuma gladiaattorin osumarolli
+     * @param hyokkaysarvo gladiaattorin osumarolli
      */
-    public boolean puolusta(Pelitilanne v, int vahinko, int osuma) {
-        if (v == null || vahinko < 0 || osuma < 0) {
+    public boolean puolusta(Pelitilanne tilanne, int vahinko, int hyokkaysarvo) {
+        if (tilanne == null || vahinko < 0 || hyokkaysarvo < 0) {
             throw new IllegalArgumentException();
         }
 
-        if (osuma > this.puolustus) {
+        if (hyokkaysarvo > this.puolustus) {
             this.osumapisteet -= vahinko;
-            this.keho.otaVahinkoa(v, vahinko);
+            this.keho.otaVahinkoa(tilanne, vahinko);
             if (this.osumapisteet < 1) {
-                v.lisaaTapahtuma(v.viestit.onKuollut(this.nimi));
+                tilanne.lisaaTapahtuma(tilanne.viestit.onKuollut(this.nimi));
                 return true;
             }
         } else {
-            v.lisaaTapahtuma(v.viestit.vaistaa(this.nimi));
+            tilanne.lisaaTapahtuma(tilanne.viestit.vaistaa(this.nimi));
         }
         return false;
+    }
+    
+    public void liiku(Gladiaattori gladiaattori, Pelitilanne tilanne, Areena areena) {
+            if (this.koordinaatit.onVieressa(gladiaattori.getSijainti())) {
+                areena.lisaaEfekti(this.getHyokkaysefekti(gladiaattori.getSijainti()));
+                this.hyokkaa(gladiaattori, tilanne);
+            } else {
+                Koordinaatit kohderuutu = this.koordinaatit.getViereinenRuutuKohtiKoordinaatteja(gladiaattori.getSijainti());
+                if (!areena.onkoRuudussaHirviota(kohderuutu) && !areena.onkoRuudussaEstetta(kohderuutu)) {
+                    this.siirry(kohderuutu);
+                } else {
+                    while (true) {
+                        kohderuutu = this.getSijainti().getSatunnainenRuutuVieressa();
+                        if (!areena.onkoRuudussaHirviota(kohderuutu) && !areena.onkoRuudussaEstetta(kohderuutu)) {
+                            this.siirry(kohderuutu);
+                            break;
+                        }
+                    }
+                }
+            }
     }
 
     public int getOsumapisteet() {
@@ -73,11 +91,11 @@ public class Hirvio extends Liikutettava {
      * Hirviö suorittaa hyökkäyksen parametrina saamaansa gladiaattoriin.
      *
      * @param hahmo gladiaattori
-     * @param v vuoron vuororaportti, johon hyökkäyksen tulos kirjataan
+     * @param tilanne vuoron vuororaportti, johon hyökkäyksen tulos kirjataan
      */
-    public void hyokkaa(Gladiaattori hahmo, Pelitilanne v) {
-        v.lisaaTapahtuma(v.viestit.lyo("Hirviö", "gladiaattoria"));
-        hahmo.puolusta(v, 1, hyokkays + new Random().nextInt(10));
+    public void hyokkaa(Gladiaattori hahmo, Pelitilanne tilanne) {
+        tilanne.lisaaTapahtuma(tilanne.viestit.lyo("Hirviö", "gladiaattoria"));
+        hahmo.puolusta(tilanne, this.ase.getVahinko(), hyokkays + new Random().nextInt(10));
     }
 
     @Override
@@ -85,10 +103,19 @@ public class Hirvio extends Liikutettava {
         return this.nimi + ", " + this.osumapisteet + " osumapistettä";
     }
 
-    Efekti getHyokkaysefekti(Koordinaatit k) {
-        Efekti e = new Efekti('*');
-        e.lisaaPiirtokohta(k);
-        
-        return e;
+    public Efekti getHyokkaysefekti(Koordinaatit k) {
+        return this.ase.getHyokkaysefekti(k);
+    }
+
+    protected Keho getKeho() {
+        return this.keho;
+    }
+
+    public void setNimi(String nimi) {
+        this.nimi = nimi;
+    }
+    
+    public String getNimi() {
+        return this.nimi;
     }
 }

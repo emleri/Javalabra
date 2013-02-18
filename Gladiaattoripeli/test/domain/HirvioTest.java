@@ -11,10 +11,10 @@ import gladiaattoripeli.utilities.Hahmogeneraattori;
 import gladiaattoripeli.utilities.Pelitilanne;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -23,7 +23,7 @@ import static org.junit.Assert.*;
 public class HirvioTest {
     private Hahmogeneraattori hg;
     private Hirvio h;
-    private Pelitilanne v;
+    private Pelitilanne t;
     private Gladiaattori g;
 
     public HirvioTest() {
@@ -39,10 +39,10 @@ public class HirvioTest {
 
     @Before
     public void setUp() {
-        h = new Hirvio(5, 5, 5);
-        v = new Pelitilanne();
         hg = new Hahmogeneraattori();
-        g = hg.luoGladiaattori(new Areena(5, 5));
+        h = hg.luoHirvio();
+        t = new Pelitilanne();
+        g = hg.luoGladiaattori(new Areena(5, 5, t));
     }
 
     @After
@@ -51,27 +51,28 @@ public class HirvioTest {
 
     @Test
     public void puolustaOsuma() {
-        h.puolusta(v, 2, 100);
-        assertTrue(h.getOsumapisteet() == 3);
+        int x = h.getOsumapisteet();
+        h.puolusta(t, 2, 100);
+        assertTrue(h.getOsumapisteet() == x - 2);
     }
     
     @Test
     public void puolustaHuti() {
-        h.puolusta(v, 2, 0);
+        h.puolusta(t, 2, 0);
         assertTrue(h.getOsumapisteet() == 5);
     }
     
     @Test(expected=IllegalArgumentException.class)
     public void puolustaVirheellisillaParametreilla() {
-        h.puolusta(v, -5, 15);
+        h.puolusta(t, -5, 15);
     }
     
     @Test
     public void hyokkaaToimii() {
         for (int i = 0; i < 100; i++) {
-            h.hyokkaa(g, v);
+            h.hyokkaa(g, t);
         }
-        assertEquals(v.getTapahtumat().get(0), "Hirviö lyö gladiaattoria.");
+        assertEquals(t.getTapahtumat().get(0), "Hirviö lyö gladiaattoria.");
         assertTrue(g.getOsumapisteet() < 15);
     }
 }

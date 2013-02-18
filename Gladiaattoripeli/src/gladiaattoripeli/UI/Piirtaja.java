@@ -6,6 +6,7 @@ package gladiaattoripeli.UI;
 
 import gladiaattoripeli.domain.Areena;
 import gladiaattoripeli.domain.Efekti;
+import gladiaattoripeli.domain.Lohikaarme;
 import gladiaattoripeli.utilities.Koordinaatit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,7 +31,7 @@ public class Piirtaja implements ActionListener {
         this.areena = areena;
         this.piirraEfektit = true;
     }
-    
+
     public void haeEfektit() {
         this.efektit = areena.getEfektit();
     }
@@ -61,9 +62,15 @@ public class Piirtaja implements ActionListener {
                 if (piirraEfektit && voikoPiirtaaEfekteja(ruutu)) {
                     kartta.append(efektit);
                 } else if (areena.onkoRuudussaHirviota(ruutu)) {
-                    kartta.append('h');
+                    if (areena.getHirvioRuudusta(ruutu).getClass().equals(Lohikaarme.class)) {
+                        kartta.append("<font color=ff3300>D</font>");
+                    } else {
+                        kartta.append("<font color=00ff00>h</font>");
+                    }
                 } else if (areena.getHahmo().getSijainti().equals(ruutu)) {
-                    kartta.append('@');
+                    kartta.append("<font color=0000ff>@</font>");
+                } else if (areena.onkoRuudussaEstetta(ruutu)) {
+                    kartta.append('#');
                 } else {
                     kartta.append('_');
                 }
@@ -89,9 +96,9 @@ public class Piirtaja implements ActionListener {
             efektit = efektit.getSeuraava();
         }
     }
-    
+
     private Boolean voikoPiirtaaEfekteja(Koordinaatit k) {
-        if(this.efektit == null) {
+        if (this.efektit == null) {
             return false;
         } else if (this.efektit.piirretaanko(k)) {
             return true;

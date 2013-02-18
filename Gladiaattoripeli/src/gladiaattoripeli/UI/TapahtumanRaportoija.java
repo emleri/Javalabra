@@ -2,6 +2,7 @@ package gladiaattoripeli.UI;
 
 import gladiaattoripeli.domain.Hirvio;
 import gladiaattoripeli.utilities.Pelitilanne;
+import gladiaattoripeli.utilities.Pisteet;
 import java.util.List;
 import javax.swing.JLabel;
 
@@ -45,8 +46,8 @@ public class TapahtumanRaportoija {
         this.paivitaStatit(raportti);
     }
     
-    public void paivitaStatit(Pelitilanne raportti) {
-        stattiKentta.setText("HP: " + raportti.getHahmo().getOsumapisteet());
+    public void paivitaStatit(Pelitilanne tilanne) {
+        stattiKentta.setText("HP: " + tilanne.getHahmo().getOsumapisteet());
         stattiKentta.getParent().repaint();
     }
     
@@ -66,7 +67,7 @@ public class TapahtumanRaportoija {
 //        }
     }
 
-    public void tulostaPisteet(List<String> pisteet) {
+    public void tulostaPisteet(List<Pisteet> pisteet) {
         StringBuilder teksti = new StringBuilder("");
         teksti.append("<html>");
         
