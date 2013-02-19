@@ -72,7 +72,7 @@ public class Piirtaja implements ActionListener {
                 } else if (areena.onkoRuudussaEstetta(ruutu)) {
                     kartta.append('#');
                 } else {
-                    kartta.append('_');
+                    kartta.append('.');
                 }
             }
         }

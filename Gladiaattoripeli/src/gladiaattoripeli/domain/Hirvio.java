@@ -9,7 +9,7 @@ import java.util.Random;
  * sijainti- ja hyökkäysmekanismit. Perii Liikutettava-luokalta
  * sijaintiominaisuutensa ja sisältää Keho-olion vahingon kirjanpitäjänä.
  */
-public class Hirvio extends Liikutettava {
+public class Hirvio extends Hahmo {
 
     private int osumapisteet;
     private Keho keho;
@@ -30,7 +30,7 @@ public class Hirvio extends Liikutettava {
         this.osumapisteet = osumapisteet;
         this.keho = keho;
         this.hyokkays = 7;
-        this.puolustus = 14;
+        this.puolustus = 13;
         this.nimi = "Hirviö";
     }
 
@@ -45,6 +45,7 @@ public class Hirvio extends Liikutettava {
      * @param vahinko vahingon määrä
      * @param hyokkaysarvo gladiaattorin osumarolli
      */
+    @Override
     public boolean puolusta(Pelitilanne tilanne, int vahinko, int hyokkaysarvo) {
         if (tilanne == null || vahinko < 0 || hyokkaysarvo < 0) {
             throw new IllegalArgumentException();
@@ -93,7 +94,8 @@ public class Hirvio extends Liikutettava {
      * @param hahmo gladiaattori
      * @param tilanne vuoron vuororaportti, johon hyökkäyksen tulos kirjataan
      */
-    public void hyokkaa(Gladiaattori hahmo, Pelitilanne tilanne) {
+    @Override
+    public void hyokkaa(Hahmo hahmo, Pelitilanne tilanne) {
         tilanne.lisaaTapahtuma(tilanne.viestit.lyo("Hirviö", "gladiaattoria"));
         hahmo.puolusta(tilanne, this.ase.getVahinko(), hyokkays + new Random().nextInt(10));
     }

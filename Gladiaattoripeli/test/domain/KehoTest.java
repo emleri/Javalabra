@@ -3,14 +3,14 @@ package domain;
 
 import gladiaattoripeli.domain.Keho;
 import gladiaattoripeli.domain.Ruumiinosa;
-import gladiaattoripeli.utilities.RuumiinosanNimi;
 import gladiaattoripeli.utilities.Pelitilanne;
+import gladiaattoripeli.utilities.RuumiinosanNimi;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 public class KehoTest {
     public Keho keho;
@@ -54,7 +54,7 @@ public class KehoTest {
          assertEquals("jee", keho.getNimi());
          assertEquals("jee", keho.getKeskivartalo().getOmistajanNimi());
          assertEquals("jee", keho.getPaa().getOmistajanNimi());
-         assertEquals("jee", keho.getRaajat().get(0).getOmistajanNimi());
+         assertEquals("jee", keho.getRaajat().get(RuumiinosanNimi.OIKEAJALKA).getOmistajanNimi());
      }
      
      @Test
@@ -62,7 +62,7 @@ public class KehoTest {
          keho.otaVahinkoa(new Pelitilanne(), 5);
          
          int pisteet = 0;
-         for (Ruumiinosa raaja : keho.getRaajat()) {
+         for (Ruumiinosa raaja : keho.getRaajat().values()) {
              pisteet += raaja.getOsumapisteet();
          }
          pisteet += keho.getPaa().getOsumapisteet();

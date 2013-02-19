@@ -6,16 +6,15 @@ package utilities;
 
 import gladiaattoripeli.domain.Areena;
 import gladiaattoripeli.domain.Gladiaattori;
-import gladiaattoripeli.domain.Keho;
 import gladiaattoripeli.domain.Ruumiinosa;
 import gladiaattoripeli.utilities.Hahmogeneraattori;
 import gladiaattoripeli.utilities.Pelitilanne;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -49,7 +48,7 @@ public class HahmogeneraattoriTest {
     @Test
     public void ihmiskehoToimii() {
         Gladiaattori g = hg.luoGladiaattori(new Areena(15, 15, new Pelitilanne()));
-        for (Ruumiinosa o : g.getKeho().getRaajat()) {
+        for (Ruumiinosa o : g.getKeho().getRaajat().values()) {
             assertTrue(tarkistaRuumiinosa(o));
         }
         assertTrue(tarkistaRuumiinosa(g.getKeho().getKeskivartalo()));

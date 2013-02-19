@@ -17,7 +17,7 @@ public class Areena {
     private int korkeus;
     private int aaltoNro;
     private Hahmogeneraattori hahmogeneraattori;
-    private Gladiaattori hahmo;
+    private Gladiaattori gladiaattori;
     private List<Hirvio> hirviot;
     private List<Koordinaatit> esteet;
     private Efekti efektit;
@@ -50,7 +50,7 @@ public class Areena {
      * Luo pelin alussa tarvittavat hahmot: gladiaattorin ja 5 hirviötä.
      */
     public void luoHahmot() {
-        this.hahmo = hahmogeneraattori.luoGladiaattori(this);
+        this.gladiaattori = hahmogeneraattori.luoGladiaattori(this);
         this.luoHirvioita(3);
     }
 
@@ -80,7 +80,7 @@ public class Areena {
     }
 
     public Gladiaattori getHahmo() {
-        return hahmo;
+        return gladiaattori;
     }
 
     public List<Hirvio> getHirviot() {
@@ -202,7 +202,7 @@ public class Areena {
      */
     public void liikutaHirvioita() {
         for (Hirvio h : this.hirviot) {
-            h.liiku(hahmo, tilanne, this);
+            h.liiku(gladiaattori, tilanne, this);
         }
     }
 
@@ -217,15 +217,15 @@ public class Areena {
      * @param v viite kyseisen vuoron vuororaporttiin
      */
     public void toimiHahmollaSuuntaan(Komennot suunta) {
-        Koordinaatit kohderuutu = this.hahmo.getSijainti().getViereisetKoordinaatitSuunnassa(suunta);
+        Koordinaatit kohderuutu = this.gladiaattori.getSijainti().getViereisetKoordinaatitSuunnassa(suunta);
         this.tarkistaKoordinaatit(kohderuutu);
 
         if (this.onkoRuudussaHirviota(kohderuutu)) {
             Hirvio h = this.getHirvioRuudusta(kohderuutu);
-            this.lisaaEfekti(this.hahmo.getHyokkaysEfekti(kohderuutu));
-            hahmo.hyokkaa(h, tilanne);
+            this.lisaaEfekti(this.gladiaattori.getHyokkaysEfekti(kohderuutu));
+            gladiaattori.hyokkaa(h, tilanne);
         } else if (!this.onkoRuudussaEstetta(kohderuutu)) {
-            hahmo.siirry(kohderuutu);
+            gladiaattori.siirry(kohderuutu);
             tilanne.lisaaTapahtuma("Gladiaattori liikkuu.");
         } else {
             tilanne.lisaaTapahtuma("Gladiaattori törmää seinään.");
@@ -308,7 +308,7 @@ public class Areena {
      * @return Boolean true/false - kuollut/elossa
      */
     private Boolean onkoHahmoKuollut() {
-        if (this.hahmo.getOsumapisteet() < 1) {
+        if (this.gladiaattori.getOsumapisteet() < 1) {
             return true;
         }
         return false;

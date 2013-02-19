@@ -5,7 +5,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 /**
- * Luokka lukee näppäinkomentoja ja välittää ne käyttöliittymän ohjaajan kautta 
+ * Luokka lukee näppäinkomentoja ja välittää ne käyttöliittymän ohjaajan kautta
  * sovelluslogiikalle.
  */
 public class NappaimistonKuuntelija implements KeyListener {
@@ -17,26 +17,49 @@ public class NappaimistonKuuntelija implements KeyListener {
     }
 
     /**
-     * Lukee näppäinkomentoja ja välittää ne KayttoliittymanOhjaajan kautta 
+     * Lukee näppäinkomentoja ja välittää ne KayttoliittymanOhjaajan kautta
      * Sovelluslogiikalle.
+     *
      * @param e
      */
     @Override
     public void keyPressed(KeyEvent e) {
         // kokeilua
-        switch(e.getKeyCode()) {
-            case KeyEvent.VK_LEFT: 
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_LEFT:
+                this.ohjaaja.pelaajanToiminto(Komennot.LANSI);
+                break;
+            case KeyEvent.VK_NUMPAD4:
                 this.ohjaaja.pelaajanToiminto(Komennot.LANSI);
                 break;
             case KeyEvent.VK_RIGHT:
                 this.ohjaaja.pelaajanToiminto(Komennot.ITA);
                 break;
+            case KeyEvent.VK_NUMPAD6:
+                this.ohjaaja.pelaajanToiminto(Komennot.ITA);
             case KeyEvent.VK_UP:
+                this.ohjaaja.pelaajanToiminto(Komennot.POHJOINEN);
+                break;
+            case KeyEvent.VK_NUMPAD8:
                 this.ohjaaja.pelaajanToiminto(Komennot.POHJOINEN);
                 break;
             case KeyEvent.VK_DOWN:
                 this.ohjaaja.pelaajanToiminto(Komennot.ETELA);
                 break;
+            case KeyEvent.VK_NUMPAD2:
+                this.ohjaaja.pelaajanToiminto(Komennot.ETELA);
+                break;
+            case KeyEvent.VK_NUMPAD1:
+                this.ohjaaja.pelaajanToiminto(Komennot.LOUNAS);
+                break;
+            case KeyEvent.VK_NUMPAD3:
+                this.ohjaaja.pelaajanToiminto(Komennot.KAAKKO);
+                break;
+            case KeyEvent.VK_NUMPAD7:
+                this.ohjaaja.pelaajanToiminto(Komennot.LUODE);
+                break;
+            case KeyEvent.VK_NUMPAD9:
+                this.ohjaaja.pelaajanToiminto(Komennot.KOILLINEN);
             case KeyEvent.VK_PERIOD:
                 this.ohjaaja.pelaajanToiminto(Komennot.ODOTA);
                 break;
@@ -51,7 +74,6 @@ public class NappaimistonKuuntelija implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent ke) {
-        
     }
 
     @Override

@@ -1,4 +1,5 @@
 Tehtävää:
+- High scoren voi syöttää monta kertaa, korjaa!
 - Korjaa kaksi pelinloppuviestiä!
 - <more> -toiminto pitkiin raportteihin
 - Uuden pelin aloittaminen sulkematta ohjelmaa (Ti)

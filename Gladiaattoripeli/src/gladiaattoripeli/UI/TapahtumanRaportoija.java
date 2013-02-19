@@ -1,6 +1,6 @@
 package gladiaattoripeli.UI;
 
-import gladiaattoripeli.domain.Hirvio;
+import gladiaattoripeli.domain.Hahmo;
 import gladiaattoripeli.utilities.Pelitilanne;
 import gladiaattoripeli.utilities.Pisteet;
 import java.util.List;
@@ -56,13 +56,13 @@ public class TapahtumanRaportoija {
     }
     
     public void tapot(Pelitilanne v, StringBuilder raportti) {
-        List<Hirvio> tapot = v.getHahmo().getTapot();
+        List<Hahmo> tapot = v.getHahmo().getTapot();
         
         raportti.append("<br><br>Ennen kuolemaansa gladiaattori surmasi ");
         raportti.append(tapot.size());
         raportti.append(" hirviötä.");
         
-//        for (Hirvio h : tapot) {
+//        for (Hahmo h : tapot) {
 //            raportti.append("<br>- ").append(h.toString());
 //        }
     }

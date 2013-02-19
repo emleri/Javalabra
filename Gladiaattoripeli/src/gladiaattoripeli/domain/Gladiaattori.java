@@ -11,14 +11,14 @@ import java.util.Random;
  * ja hyökkäysmekanismit. Perii Liikutettava-luokalta sijaintiominaisuutensa ja
  * sisältää Keho-olion vahingon kirjanpitäjänä.
  */
-public class Gladiaattori extends Liikutettava {
+public class Gladiaattori extends Hahmo {
 
     private int osumapisteet; // Gladiaattorin osumapisteet.
     private int puolustusArvo; // Gladiaattorin väistötodennäköisyysmuuttuja taistelussa.
     private int hyokkaysArvo; // Gladiaattorin osumistodennäköisyysmuuttuja taistelussa.
     private Ase ase; // Viite gladiaattorin aseeseen.
     private Keho keho; // Viite gladiaattorin kehoon, joka pitää kirjaa vammoista.
-    private List<Hirvio> tapot; // Lista surmatuista hirviöistä, ei vielä toiminnallisuutta.
+    private List<Hahmo> tapot; // Lista surmatuista hirviöistä, ei vielä toiminnallisuutta.
 
     /**
      * Konstruktori.
@@ -35,7 +35,7 @@ public class Gladiaattori extends Liikutettava {
         this.keho = keho;
         this.puolustusArvo = 10;
         this.hyokkaysArvo = 10;
-        this.tapot = new ArrayList<Hirvio>();
+        this.tapot = new ArrayList<Hahmo>();
     }
 
     /**
@@ -44,7 +44,8 @@ public class Gladiaattori extends Liikutettava {
      * @param h kohdehirviö
      * @param tilanne vuoron vuororaportti, johon hyökkäyksen tulos kirjataan
      */
-    public void hyokkaa(Hirvio h, Pelitilanne tilanne) {
+    @Override
+    public void hyokkaa(Hahmo h, Pelitilanne tilanne) {
         tilanne.lisaaTapahtuma(tilanne.viestit.lyo("Gladiaattori", "hirviötä"));
         if (h.puolusta(tilanne, this.ase.getVahinko(), hyokkaysArvo + new Random().nextInt(10))) {
             this.tapot.add(h);
@@ -59,7 +60,8 @@ public class Gladiaattori extends Liikutettava {
      * @param vahinko vahingon määrä
      * @param osuma hirviön osumarolli
      */
-    public void puolusta(Pelitilanne v, int vahinko, int osuma) {
+    @Override
+    public boolean puolusta(Pelitilanne v, int vahinko, int osuma) {
         if (v == null || vahinko < 0 || osuma < 0) {
             throw new IllegalArgumentException();
         }
@@ -70,8 +72,10 @@ public class Gladiaattori extends Liikutettava {
             if (this.osumapisteet < 1) {
                 v.lisaaTapahtuma(v.viestit.onKuollut("Gladiaattori"));
             }
+            return true;
         } else {
             v.lisaaTapahtuma(v.viestit.vaistaa("Gladiaattori"));
+            return false;
         }
     }
 
@@ -83,7 +87,7 @@ public class Gladiaattori extends Liikutettava {
         return keho;
     }
 
-    public List<Hirvio> getTapot() {
+    public List<Hahmo> getTapot() {
         return this.tapot;
     }
 
