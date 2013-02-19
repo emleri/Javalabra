@@ -22,6 +22,7 @@ public class Gladiaattori extends Liikutettava {
 
     /**
      * Konstruktori.
+     *
      * @param sijaintiX sijainti areenalla x-akselilla
      * @param sijaintiY sijainti areenalla y-akselilla
      * @param areenanLeveys areenan leveys
@@ -32,13 +33,14 @@ public class Gladiaattori extends Liikutettava {
         super(k);
         this.osumapisteet = 100;
         this.keho = keho;
-        this.puolustusArvo = 11;
+        this.puolustusArvo = 10;
         this.hyokkaysArvo = 10;
         this.tapot = new ArrayList<Hirvio>();
     }
 
     /**
      * Gladiaattori suorittaa hyökkäyksen parametrina saamaansa hirviöön.
+     *
      * @param h kohdehirviö
      * @param tilanne vuoron vuororaportti, johon hyökkäyksen tulos kirjataan
      */
@@ -50,8 +52,9 @@ public class Gladiaattori extends Liikutettava {
     }
 
     /**
-     * Gladiaattori ottaa metodissa vastaan hyökkäyksen hirviöltä ja raportoi 
+     * Gladiaattori ottaa metodissa vastaan hyökkäyksen hirviöltä ja raportoi
      * sen tulokset vuororaporttiin.
+     *
      * @param v vuororaportti
      * @param vahinko vahingon määrä
      * @param osuma hirviön osumarolli
@@ -90,5 +93,24 @@ public class Gladiaattori extends Liikutettava {
 
     public void setAse(Ase ase) {
         this.ase = ase;
+    }
+
+    public int getHyokkaysarvo() {
+        return this.hyokkaysArvo;
+    }
+
+    public int getPuolustusarvo() {
+        return this.puolustusArvo;
+    }
+
+    public void muutaHyokkaysarvoa(int muutos) {
+        if (this.hyokkaysArvo + muutos < 5) {
+            muutaHyokkaysarvoa(muutos + 1);
+        } else if (this.puolustusArvo - muutos < 5) {
+            muutaHyokkaysarvoa(muutos - 1);
+        } else {
+            this.hyokkaysArvo += muutos;
+            this.puolustusArvo -= muutos;
+        }
     }
 }

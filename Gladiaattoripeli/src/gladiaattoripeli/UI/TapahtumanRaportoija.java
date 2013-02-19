@@ -47,7 +47,7 @@ public class TapahtumanRaportoija {
     }
     
     public void paivitaStatit(Pelitilanne tilanne) {
-        stattiKentta.setText("HP: " + tilanne.getHahmo().getOsumapisteet());
+        stattiKentta.setText("HP: " + tilanne.getHahmo().getOsumapisteet() +"   " + "Hyökkäys: " + tilanne.getHahmo().getHyokkaysarvo() + "   " + "Puolustus: " + tilanne.getHahmo().getPuolustusarvo());
         stattiKentta.getParent().repaint();
     }
     

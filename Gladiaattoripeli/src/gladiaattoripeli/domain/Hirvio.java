@@ -29,8 +29,8 @@ public class Hirvio extends Liikutettava {
         super(new Koordinaatit(0, 0));
         this.osumapisteet = osumapisteet;
         this.keho = keho;
-        this.hyokkays = 5;
-        this.puolustus = 12;
+        this.hyokkays = 7;
+        this.puolustus = 14;
         this.nimi = "Hirviö";
     }
 

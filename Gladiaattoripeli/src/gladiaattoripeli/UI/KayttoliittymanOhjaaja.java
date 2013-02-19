@@ -69,6 +69,9 @@ public class KayttoliittymanOhjaaja {
             } else if (k.equals(Komennot.ODOTA)) {
                 logiikka.pelaaHirvioidenVuoro();
                 this.paivita();
+            } else {
+                logiikka.annaPelaajalleKomento(k);
+                this.raportoija.paivitaStatit(tilanne);
             }
         }
     }

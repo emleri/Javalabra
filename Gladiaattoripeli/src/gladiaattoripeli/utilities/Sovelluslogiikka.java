@@ -42,6 +42,14 @@ public class Sovelluslogiikka {
             areena.seuraavaAalto();
         }
     }
+    
+    public void annaPelaajalleKomento(Komennot k) {
+        if (k.equals(Komennot.HYOKKAAVAMMIN)) {
+            this.areena.getHahmo().muutaHyokkaysarvoa(+1);
+        } else if (k.equals(Komennot.PUOLUSTAVAMMIN)) {
+            this.areena.getHahmo().muutaHyokkaysarvoa(-1);
+        }
+    }
 
     /**
      * Metodi suorittaa peliä vuoron verran eteenpäin hypäten pelaajan toiminnon

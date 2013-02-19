@@ -6,7 +6,8 @@ Teht‰v‰‰:
 - Refaktoroi ja siisti (Ma-Pe)
 - P‰ivit‰ kaavioita ja dokumentaatiota (Ma-Pe)
 (- kursori) (lopuksi, jos ehtii)
-
+(-haavoittumisen vaikutukset)
+(-suoja tulelta pylv‰‰n takana)
 
 Testeist‰ valmiita:
 - Koordinaattien testit

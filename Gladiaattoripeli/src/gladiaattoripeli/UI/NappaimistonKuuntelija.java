@@ -23,6 +23,7 @@ public class NappaimistonKuuntelija implements KeyListener {
      */
     @Override
     public void keyPressed(KeyEvent e) {
+        // kokeilua
         switch(e.getKeyCode()) {
             case KeyEvent.VK_LEFT: 
                 this.ohjaaja.pelaajanToiminto(Komennot.LANSI);
@@ -38,11 +39,19 @@ public class NappaimistonKuuntelija implements KeyListener {
                 break;
             case KeyEvent.VK_PERIOD:
                 this.ohjaaja.pelaajanToiminto(Komennot.ODOTA);
+                break;
+            case KeyEvent.VK_PLUS:
+                this.ohjaaja.pelaajanToiminto(Komennot.HYOKKAAVAMMIN);
+                break;
+            case KeyEvent.VK_MINUS:
+                this.ohjaaja.pelaajanToiminto(Komennot.PUOLUSTAVAMMIN);
+                break;
         }
     }
 
     @Override
     public void keyTyped(KeyEvent ke) {
+        
     }
 
     @Override
