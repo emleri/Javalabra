@@ -16,7 +16,7 @@ public class Hirvio extends Hahmo {
     private Ase ase;
     private String nimi;
     private int hyokkays;
-    private int puolustus;
+    private int puolustusarvo;
 
     /**
      * Konstruktori. Osa toteutuksesta siirtyy pian hahmogeneraattorin vastuulle,
@@ -30,7 +30,7 @@ public class Hirvio extends Hahmo {
         this.osumapisteet = osumapisteet;
         this.keho = keho;
         this.hyokkays = 7;
-        this.puolustus = 13;
+        this.puolustusarvo = 13;
         this.nimi = "Hirviö";
     }
 
@@ -51,7 +51,7 @@ public class Hirvio extends Hahmo {
             throw new IllegalArgumentException();
         }
 
-        if (hyokkaysarvo > this.puolustus) {
+        if (hyokkaysarvo > this.puolustusarvo) {
             this.osumapisteet -= vahinko;
             this.keho.otaVahinkoa(tilanne, vahinko);
             if (this.osumapisteet < 1) {
@@ -73,10 +73,15 @@ public class Hirvio extends Hahmo {
                 if (!areena.onkoRuudussaHirviota(kohderuutu) && !areena.onkoRuudussaEstetta(kohderuutu)) {
                     this.siirry(kohderuutu);
                 } else {
+                    int varmistus = 0;
                     while (true) {
                         kohderuutu = this.getSijainti().getSatunnainenRuutuVieressa();
                         if (!areena.onkoRuudussaHirviota(kohderuutu) && !areena.onkoRuudussaEstetta(kohderuutu)) {
                             this.siirry(kohderuutu);
+                            break;
+                        }
+                        varmistus++;
+                        if (varmistus > 50) {
                             break;
                         }
                     }
@@ -119,5 +124,9 @@ public class Hirvio extends Hahmo {
     
     public String getNimi() {
         return this.nimi;
+    }
+
+    public int getPuolustusarvo() {
+        return this.puolustusarvo;
     }
 }

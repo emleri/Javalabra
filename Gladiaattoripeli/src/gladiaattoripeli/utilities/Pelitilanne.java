@@ -1,6 +1,5 @@
 package gladiaattoripeli.utilities;
 
-import gladiaattoripeli.domain.Efekti;
 import gladiaattoripeli.domain.Gladiaattori;
 import gladiaattoripeli.domain.Hirvio;
 import java.util.ArrayList;
@@ -13,29 +12,30 @@ import java.util.List;
  */
 public class Pelitilanne {
 
-    private List<String> tapahtumat;
-    private List<List<Efekti>> efektit;
-    private List<Hirvio> surmatut;
-    private List<Hirvio> hirviot;
-    private Gladiaattori hahmo;
+    private List<String> tapahtumat; // vuoron tapahtumaraportit
+    private Gladiaattori gladiaattori; // viite Areenan gladiaattoriin
     private Boolean peliOhi;
     public Viestigeneraattori viestit;
 
     /**
-     * Luokan konstruktori. Luo tyhjän tapahtumalokin ja surmattujen hirviöiden 
-     * listan, merkitsee oletusarvoisesti pelin olevan käynnissä ja kutsuu 
+     * Luokan konstruktori. Luo tyhjän tapahtumalokin ja surmattujen hirviöiden
+     * listan, merkitsee oletusarvoisesti pelin olevan käynnissä ja kutsuu
      * viestigeneraattori-alaluokan konstruktoria.
      */
     public Pelitilanne() {
         tapahtumat = new ArrayList<String>();
-        efektit = new ArrayList<List<Efekti>>();
-        surmatut = new ArrayList<Hirvio>();
         peliOhi = false;
         this.viestit = new Viestigeneraattori();
     }
 
+    public void alustaTilanne() {
+        this.uusiVuoro();
+        this.peliOhi = false;
+    }
+
     /**
-     * Palauttaa vuororaportin tapahtumalokin
+     * Palauttaa tapahtumalokin
+     *
      * @return tapahtumaloki
      */
     public List<String> getTapahtumat() {
@@ -43,66 +43,34 @@ public class Pelitilanne {
     }
 
     /**
-     * Lisää vuororaportin tapahtumalokiin uuden tapahtuman.
-     * 
+     * Lisää tapahtumalokiin uuden tapahtuman.
+     *
      * @param tapahtuma lisättävä tapahtuma parametrina
      */
     public void lisaaTapahtuma(String tapahtuma) {
         this.tapahtumat.add(tapahtuma);
     }
-
     /**
-     * Lisää voitettuja vihollisia listalle, jolla vuororaportti pitää niistä 
-     * kirjaa.
-     * @param surmatut parametrina annetaan lista uusista surmatuista hirviöistä
-     */
-    public void lisaaSurmattuja(List<Hirvio> surmatut) {
-        this.surmatut.addAll(surmatut);
-    }
-
-    /**
-     * Getteri surmattujen hirviöiden listalle.
-     * @return surmatut hirviöt
-     */
-    public List<Hirvio> getSurmatut() {
-        return surmatut;
-    }
-
-    /**
-     * Getteri vuororaportin kuljettamalle viitteelle areenan hirviölistaan.
-     * @return hirviölista
-     */
-    public List<Hirvio> getHirviot() {
-        return this.hirviot;
-    }
-
-    /**
-     * Setteri, jolla areena tallentaa viitteen hirviöihinsä viestiraporttiin.
-     * @param hirviot tallennettavat hirviöt
-     */
-    public void setHirviot(List<Hirvio> hirviot) {
-        this.hirviot = hirviot;
-    }
-
-    /**
-     * Areena asettaa tällä metodilla vuororaporttiin viitteen, jolla 
-     * käyttöliittymä pääsee raportin kautta käsiksi gladiaattorin tietoihin.
+     * Areena asettaa tällä metodilla pelitilanteeseen viitteen, jolla
+     * käyttöliittymä pääsee gladiaattorin tietoihin.
+     *
      * @param hahmo
      */
-    public void setHahmo(Gladiaattori hahmo) {
-        this.hahmo = hahmo;
+    public void setGladiaattori(Gladiaattori hahmo) {
+        this.gladiaattori = hahmo;
     }
 
     /**
      * Palauttaa viitteen areenan gladiaattori-olentoon.
+     *
      * @return areenan gladiaattori
      */
-    public Gladiaattori getHahmo() {
-        return hahmo;
+    public Gladiaattori getGladiaattori() {
+        return gladiaattori;
     }
 
     /**
-     * Metodi merkitsee vuororaporttiin pelin loppuneen.
+     * Metodi merkitsee tilanteeseen pelin loppuneen.
      */
     public void lopetaPeli() {
         this.peliOhi = true;
@@ -110,14 +78,15 @@ public class Pelitilanne {
 
     /**
      * Metodi tarkistaa, onko peli ohi.
+     *
      * @return true/false - peli ohi/peli jatkuu
      */
     public Boolean onkoPeliOhi() {
         return this.peliOhi;
     }
-    
+
     /**
-     * Metodi tyhjentää tapahtumahistorian. Kutsutaan vuorojen alussa, jotta 
+     * Metodi tyhjentää tapahtumahistorian. Kutsutaan vuorojen alussa, jotta
      * edellisten vuorojen tapahtumat eivät tulostu uudelleen.
      */
     public void uusiVuoro() {

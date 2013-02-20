@@ -56,25 +56,25 @@ public class Gladiaattori extends Hahmo {
      * Gladiaattori ottaa metodissa vastaan hyökkäyksen hirviöltä ja raportoi
      * sen tulokset vuororaporttiin.
      *
-     * @param v vuororaportti
+     * @param tilanne vuororaportti
      * @param vahinko vahingon määrä
      * @param osuma hirviön osumarolli
      */
     @Override
-    public boolean puolusta(Pelitilanne v, int vahinko, int osuma) {
-        if (v == null || vahinko < 0 || osuma < 0) {
+    public boolean puolusta(Pelitilanne tilanne, int vahinko, int osuma) {
+        if (tilanne == null || vahinko < 0 || osuma < 0) {
             throw new IllegalArgumentException();
         }
 
         if (osuma > this.puolustusArvo) {
             this.osumapisteet -= vahinko;
-            this.keho.otaVahinkoa(v, vahinko);
+            this.keho.otaVahinkoa(tilanne, vahinko);
             if (this.osumapisteet < 1) {
-                v.lisaaTapahtuma(v.viestit.onKuollut("Gladiaattori"));
+                tilanne.lisaaTapahtuma(tilanne.viestit.onKuollut("Gladiaattori"));
             }
             return true;
         } else {
-            v.lisaaTapahtuma(v.viestit.vaistaa("Gladiaattori"));
+            tilanne.lisaaTapahtuma(tilanne.viestit.vaistaa("Gladiaattori"));
             return false;
         }
     }

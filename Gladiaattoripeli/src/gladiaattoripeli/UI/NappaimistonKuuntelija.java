@@ -24,50 +24,62 @@ public class NappaimistonKuuntelija implements KeyListener {
      */
     @Override
     public void keyPressed(KeyEvent e) {
-        // kokeilua
         switch (e.getKeyCode()) {
             case KeyEvent.VK_LEFT:
-                this.ohjaaja.pelaajanToiminto(Komennot.LANSI);
+                this.ohjaaja.suoritaToiminto(Komennot.LANSI);
                 break;
             case KeyEvent.VK_NUMPAD4:
-                this.ohjaaja.pelaajanToiminto(Komennot.LANSI);
+                this.ohjaaja.suoritaToiminto(Komennot.LANSI);
                 break;
             case KeyEvent.VK_RIGHT:
-                this.ohjaaja.pelaajanToiminto(Komennot.ITA);
+                this.ohjaaja.suoritaToiminto(Komennot.ITA);
                 break;
             case KeyEvent.VK_NUMPAD6:
-                this.ohjaaja.pelaajanToiminto(Komennot.ITA);
+                this.ohjaaja.suoritaToiminto(Komennot.ITA);
+                break;
             case KeyEvent.VK_UP:
-                this.ohjaaja.pelaajanToiminto(Komennot.POHJOINEN);
+                this.ohjaaja.suoritaToiminto(Komennot.POHJOINEN);
                 break;
             case KeyEvent.VK_NUMPAD8:
-                this.ohjaaja.pelaajanToiminto(Komennot.POHJOINEN);
+                this.ohjaaja.suoritaToiminto(Komennot.POHJOINEN);
                 break;
             case KeyEvent.VK_DOWN:
-                this.ohjaaja.pelaajanToiminto(Komennot.ETELA);
+                this.ohjaaja.suoritaToiminto(Komennot.ETELA);
                 break;
             case KeyEvent.VK_NUMPAD2:
-                this.ohjaaja.pelaajanToiminto(Komennot.ETELA);
+                this.ohjaaja.suoritaToiminto(Komennot.ETELA);
                 break;
             case KeyEvent.VK_NUMPAD1:
-                this.ohjaaja.pelaajanToiminto(Komennot.LOUNAS);
+                this.ohjaaja.suoritaToiminto(Komennot.LOUNAS);
                 break;
             case KeyEvent.VK_NUMPAD3:
-                this.ohjaaja.pelaajanToiminto(Komennot.KAAKKO);
+                this.ohjaaja.suoritaToiminto(Komennot.KAAKKO);
                 break;
             case KeyEvent.VK_NUMPAD7:
-                this.ohjaaja.pelaajanToiminto(Komennot.LUODE);
+                this.ohjaaja.suoritaToiminto(Komennot.LUODE);
                 break;
             case KeyEvent.VK_NUMPAD9:
-                this.ohjaaja.pelaajanToiminto(Komennot.KOILLINEN);
+                this.ohjaaja.suoritaToiminto(Komennot.KOILLINEN);
             case KeyEvent.VK_PERIOD:
-                this.ohjaaja.pelaajanToiminto(Komennot.ODOTA);
+                this.ohjaaja.suoritaToiminto(Komennot.ODOTA);
+                break;
+            case KeyEvent.VK_NUMPAD5:
+                this.ohjaaja.suoritaToiminto(Komennot.ODOTA);
                 break;
             case KeyEvent.VK_PLUS:
-                this.ohjaaja.pelaajanToiminto(Komennot.HYOKKAAVAMMIN);
+                this.ohjaaja.suoritaToiminto(Komennot.HYOKKAAVAMMIN);
+                break;
+            case KeyEvent.VK_ADD:
+                this.ohjaaja.suoritaToiminto(Komennot.HYOKKAAVAMMIN);
+                break;
+            case KeyEvent.VK_SUBTRACT:
+                this.ohjaaja.suoritaToiminto(Komennot.PUOLUSTAVAMMIN);
                 break;
             case KeyEvent.VK_MINUS:
-                this.ohjaaja.pelaajanToiminto(Komennot.PUOLUSTAVAMMIN);
+                this.ohjaaja.suoritaToiminto(Komennot.PUOLUSTAVAMMIN);
+                break;
+            case KeyEvent.VK_ENTER:
+                this.ohjaaja.suoritaToiminto(Komennot.HYVAKSY);
                 break;
         }
     }

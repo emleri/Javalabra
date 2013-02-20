@@ -19,8 +19,8 @@ public class Ase {
     private Random arpoja;
     
     // Vahinkofunktion muuttujat
-    private int a;
-    private int b; 
+    private int a; // Satunnaislukujen määrä, ei koskaan negatiivinen
+    private int b; // Vakio, mikä vain kokonaisluku
 
     public Ase() {
         this.arpoja = new Random();
@@ -28,6 +28,9 @@ public class Ase {
 
     public Ase( int a, int b) {
         this();
+        if(a < 0) {
+            throw new IllegalArgumentException("Aseen kerroinmuuttuja ei saa olla negatiivinen.");
+        }
         this.a = a;
         this.b = b;
     }
@@ -41,11 +44,15 @@ public class Ase {
     }
 
     /**
-     * Palauttaa satunnaisluvun, aseen tekemän vahingon, vahinkofunktionsa avulla.
+     * Palauttaa aseen tekemän vahingon vahinkofunktionsa avulla.
      * @return
      */
     public int getVahinko() {
-        return a * (this.arpoja.nextInt(5) + 1) + b;
+        int vahinko = 0;
+        for(int i = 0; i < a; i++) {
+            vahinko += (this.arpoja.nextInt(6) + 1);
+        }
+        return vahinko + b;
     }
     
     public Efekti getHyokkaysefekti(Koordinaatit k) {

@@ -18,16 +18,17 @@ public class Sovelluslogiikka {
         this.tilanne = new Pelitilanne();
         this.areena = new Areena(23, 21, tilanne);
         this.areena.alustaPeli();
-        tilanne.setHahmo(this.areena.getHahmo());
-        tilanne.setHirviot(this.areena.getHirviot());
+        tilanne.setGladiaattori(this.areena.getGladiaattori());
+//        tilanne.setHirviot(this.areena.getHirviot());
         this.pisteyttaja = new HighScorenKasittelija();
     }
 
     /**
-     * Metodi suorittaa peliä vuoron verran eteenpäin. Ensin alustetaan tilanne 
-     * vuoron alkua vastaavaksi ja tarkistetaan, että peli on yhä käynnissä, 
-     * sitten toimitaan ensin hahmolla, päivitetään pelitila, toimitaan 
+     * Metodi suorittaa peliä vuoron verran eteenpäin. Ensin alustetaan tilanne
+     * vuoron alkua vastaavaksi ja tarkistetaan, että peli on yhä käynnissä,
+     * sitten toimitaan ensin hahmolla, päivitetään pelitila, toimitaan
      * hirviöillä ja päivitetään jälleen pelitila vuoron loppua vastaavaksi.
+     *
      * @param s pelaajan komento gladiaattorille
      */
     public void pelaaVuoro(Komennot s) {
@@ -42,12 +43,12 @@ public class Sovelluslogiikka {
             areena.seuraavaAalto();
         }
     }
-    
+
     public void annaPelaajalleKomento(Komennot k) {
         if (k.equals(Komennot.HYOKKAAVAMMIN)) {
-            this.areena.getHahmo().muutaHyokkaysarvoa(+1);
+            this.areena.getGladiaattori().muutaHyokkaysarvoa(+1);
         } else if (k.equals(Komennot.PUOLUSTAVAMMIN)) {
-            this.areena.getHahmo().muutaHyokkaysarvoa(-1);
+            this.areena.getGladiaattori().muutaHyokkaysarvoa(-1);
         }
     }
 
@@ -67,14 +68,17 @@ public class Sovelluslogiikka {
     }
 
     /**
-     * Välittää pelaajan nimen HighScorenKasittelijalle, joka tallentaa sen 
-     * pistetilastoon. Palauttaa sitten pistetilaston käyttöliittymän 
+     * Välittää pelaajan nimen HighScorenKasittelijalle, joka tallentaa sen
+     * pistetilastoon. Palauttaa sitten pistetilaston käyttöliittymän
      * tulostettavaksi.
+     *
      * @param nimi pelaajan nimi
      * @return pistetilasto
      */
     public List<Pisteet> tallennaHighScore(String nimi) {
-        this.pisteyttaja.lisaaHighScore(new Pisteet(this.areena.getHahmo().getTapot().size(), nimi));
+        if (nimi != null) {
+            this.pisteyttaja.lisaaHighScore(new Pisteet(this.areena.getGladiaattori().getTapot().size(), nimi));
+        }
         return this.pisteyttaja.getHighScore();
     }
 
@@ -84,5 +88,12 @@ public class Sovelluslogiikka {
 
     public Areena getAreena() {
         return this.areena;
+    }
+
+    public void uusiPeli() {
+        this.areena.alustaPeli();
+        this.tilanne.alustaTilanne();
+//        this.tilanne.setHirviot(areena.getHirviot());
+        this.tilanne.setGladiaattori(areena.getGladiaattori());
     }
 }

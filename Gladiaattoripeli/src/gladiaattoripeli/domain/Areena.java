@@ -24,6 +24,13 @@ public class Areena {
     private Random arpoja;
     private Pelitilanne tilanne;
 
+    /**
+     * Konstruktori
+     *
+     * @param leveys areenan leveys
+     * @param korkeus areenan korkeus
+     * @param tilanne viite Pelitilanne-olioon
+     */
     public Areena(int leveys, int korkeus, Pelitilanne tilanne) {
         this.leveys = (leveys > 0) ? leveys : 1;
         this.korkeus = (korkeus > 0) ? korkeus : 1;
@@ -38,10 +45,15 @@ public class Areena {
     }
 
     /**
-     * Metodi suorittaa pelin aloittamiseen tarvittavat valmistelut: luo
-     * gladiaattorin, hirviöt ja esteet.
+     * Metodi suorittaa pelin aloittamiseen tarvittavat valmistelut: pyyhkii muistin
+     * mahdollisesta edellisestä pelistä, luo gladiaattorin, hirviöt ja esteet.
      */
     public void alustaPeli() {
+        this.aaltoNro = 0;
+        this.efektit = null;
+        this.gladiaattori = null;
+        this.hirviot = new ArrayList<Hirvio>();
+        this.esteet = new ArrayList<Koordinaatit>();
         this.luoHahmot();
         this.luoEsteet();
     }
@@ -54,21 +66,27 @@ public class Areena {
         this.luoHirvioita(3);
     }
 
+    /**
+     * Metodi luo joukon esteitä areenalle, sijainnit suhteessa areenan
+     * mittoihin.
+     */
     public void luoEsteet() {
-        int a = (int) Math.floor(0.25 * this.leveys);
-        int b = (int) Math.round(0.75 * this.leveys);
-        int c = (int) Math.round(0.25 * this.korkeus);
-        int d = (int) Math.floor(0.75 * this.korkeus);
-        int e = this.leveys / 2;
-        int f = this.korkeus / 2;
-        this.esteet.add(new Koordinaatit(a, c));
-        this.esteet.add(new Koordinaatit(a, d));
-        this.esteet.add(new Koordinaatit(b, c));
-        this.esteet.add(new Koordinaatit(b, d));
-        this.esteet.add(new Koordinaatit(a, f));
-        this.esteet.add(new Koordinaatit(b, f));
-        this.esteet.add(new Koordinaatit(e, c));
-        this.esteet.add(new Koordinaatit(e, d));
+        if (this.leveys > 6 && this.korkeus > 6) {
+            int a = (int) Math.floor(0.25 * this.leveys);
+            int b = (int) Math.round(0.75 * this.leveys);
+            int c = (int) Math.round(0.25 * this.korkeus);
+            int d = (int) Math.floor(0.75 * this.korkeus);
+            int e = this.leveys / 2;
+            int f = this.korkeus / 2;
+            this.esteet.add(new Koordinaatit(a, c));
+            this.esteet.add(new Koordinaatit(a, d));
+            this.esteet.add(new Koordinaatit(b, c));
+            this.esteet.add(new Koordinaatit(b, d));
+            this.esteet.add(new Koordinaatit(a, f));
+            this.esteet.add(new Koordinaatit(b, f));
+            this.esteet.add(new Koordinaatit(e, c));
+            this.esteet.add(new Koordinaatit(e, d));
+        }
     }
 
     public int getLeveys() {
@@ -79,7 +97,7 @@ public class Areena {
         return korkeus;
     }
 
-    public Gladiaattori getHahmo() {
+    public Gladiaattori getGladiaattori() {
         return gladiaattori;
     }
 
@@ -94,7 +112,7 @@ public class Areena {
      */
     private void luoHirvioita(int maara) {
         if (maara > this.leveys * 2 + this.korkeus * 2 - 4) {
-            throw new IllegalArgumentException("Liian monta hirviötä.");
+            maara = this.leveys * 2 + this.korkeus * 2 - 4;
         }
 
         Koordinaatit k;
@@ -110,7 +128,7 @@ public class Areena {
 
     /**
      * Luo uuden 'aallon' hirviöitä, mikäli edellinen aalto on kuollut. Jokainen
-     * aalto on aina edellistä suurempi. Kolmannen aallon jälkeen taisteluun 
+     * aalto on aina edellistä suurempi. Kolmannen aallon jälkeen taisteluun
      * liittyy myös lohikäärme.
      */
     public void seuraavaAalto() {
@@ -218,7 +236,6 @@ public class Areena {
      */
     public void toimiHahmollaSuuntaan(Komennot suunta) {
         Koordinaatit kohderuutu = this.gladiaattori.getSijainti().getViereisetKoordinaatitSuunnassa(suunta);
-        this.tarkistaKoordinaatit(kohderuutu);
 
         if (this.onkoRuudussaHirviota(kohderuutu)) {
             Hirvio h = this.getHirvioRuudusta(kohderuutu);
@@ -248,11 +265,20 @@ public class Areena {
         return false;
     }
 
+    /**
+     * Tarkistaa, onko parametreina saaduissa koordinaateissa estettä.
+     *
+     * @param k tarkastettavat koordinaatit
+     * @return boolean true/false on/ei ole estettä
+     */
     public boolean onkoRuudussaEstetta(Koordinaatit k) {
         for (Koordinaatit t : this.esteet) {
             if (t.equals(k)) {
                 return true;
             }
+        }
+        if (this.tarkistaKoordinaatit(k)) {
+            return true;
         }
         return false;
     }
@@ -281,7 +307,6 @@ public class Areena {
     public void paivitaTilanne() {
         this.poistaKuolleet();
         if (this.onkoHahmoKuollut()) {
-            tilanne.lisaaTapahtuma("Hirviöt lyövät gladiaattorin kuoliaaksi. Peli on ohi.");
             tilanne.lopetaPeli();
         }
     }
@@ -344,18 +369,31 @@ public class Areena {
      * ja muokkaa ne sopiviksi, mikäli ei.
      *
      * @param k tarkistettavat koordinaatit
+     * @return boolean muutettiin/ei muutettu koordinaatteja
      */
-    public void tarkistaKoordinaatit(Koordinaatit k) {
+    public boolean tarkistaKoordinaatit(Koordinaatit k) {
+        boolean b = false;
+
         if (k.getX() >= this.leveys) {
             k.setX(this.leveys - 1);
+            b = true;
         } else if (k.getX() < 0) {
             k.setX(0);
+            b = true;
         }
 
         if (k.getY() >= this.korkeus) {
             k.setY(leveys - 1);
+            b = true;
         } else if (k.getY() < 0) {
             k.setY(0);
+            b = true;
         }
+
+        return b;
+    }
+
+    public List<Koordinaatit> getEsteet() {
+        return this.esteet;
     }
 }

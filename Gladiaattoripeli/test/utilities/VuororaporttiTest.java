@@ -39,7 +39,6 @@ public class VuororaporttiTest {
     @Test
     public void konstruktoriToimii() {
         assertTrue(v.getTapahtumat() != null);
-        assertTrue(v.getSurmatut() != null);
         assertTrue(!v.onkoPeliOhi());
         assertTrue(v.viestit != null);
     }

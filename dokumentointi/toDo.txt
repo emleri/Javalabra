@@ -12,3 +12,7 @@ Tehtävää:
 
 Testeistä valmiita:
 - Koordinaattien testit
+- Areenan testit
+- Gladiaattorin testit
+- Hirviön testit
+- Aseen testit

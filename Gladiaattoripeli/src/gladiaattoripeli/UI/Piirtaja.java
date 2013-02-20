@@ -67,7 +67,7 @@ public class Piirtaja implements ActionListener {
                     } else {
                         kartta.append("<font color=00ff00>h</font>");
                     }
-                } else if (areena.getHahmo().getSijainti().equals(ruutu)) {
+                } else if (areena.getGladiaattori().getSijainti().equals(ruutu)) {
                     kartta.append("<font color=0000ff>@</font>");
                 } else if (areena.onkoRuudussaEstetta(ruutu)) {
                     kartta.append('#');

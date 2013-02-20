@@ -1,0 +1,76 @@
+################
+#....h......i..#
+#.#h....D....#.#
+#....@....hh...#
+#.#......g...#.#
+#...o..........#
+################
+
+================
+Gladiaattoripeli
+================
+
+Gladiaattoripeli on roguelike-areenapeli, jossa pelaaja ohjaa taistelijahahmoa
+jonka tavoitteena on surmata mahdollisimman paljon hirviöitä ennen kuolemaansa.
+Mitä enemmän tappoja, sitä enemmän pisteitä pelaaja saa pelin päätyttyä
+gladiaattorin lopulta kuollessa.
+
+Komennot
+========
+
+Huom! Muista Num Lock, mikäli haluat käyttää numpadia.
+
+Liiku pohjoiseen: 	[numpad 8], [nuoli ylös]
+Liiku etelään: 		[numpad 2], [nuoli alas]
+Liiku itään: 		[numpad 6], [nuoli oikealle]
+Liiku länteen:		[numpad 4], [nuoli vasemmalle]
+Liiku koilliseen:	[numpad 9]
+Liiku kaakkoon:		[numpad 3]
+Liiku lounaseen:	[numpad 1]
+Liiku luoteeseen:	[numpad 7]
+Pysy paikallaan:	[numpad 5], [.]
+Nosta hyökkäysarvoa:	[+]
+Nosta puolustusarvoa:	[-]
+
+Säännöt
+=======
+
+Askeleet:
+- Gladiaattori voi liikkua areenalla yhden askeleen kerrallaan. Jokaista hänen 
+  ottamaansa askelta kohden myös hirviöt ottavat askeleen tai suorittavat erikois-
+  toiminnon (esim. lohikäärmeen tuli, lentoon nousu ja laskeutuminen).
+- Jos askeleen kohteena olevassa ruudussa on hirviö, gladiaattori liikkumisen 
+  sijaan lyö sitä. Mikäli hirviö yrittäisi astua gladiaattorin
+  ruutuun, se hyökkää sen sijaan gladiaattorin kimppuun.
+- Askel seinää tai pylvästä päin ei tee mitään, mutta antaa toiselle 
+  osapuolelle mahdollisuuden liikkua.
+- Askeleita otetaan [nuoli] ja [numpad]-näppäimillä.
+
+Hyökkäykset:
+- Kun hahmo (gladiaattori tai hirviö) lyö toista hahmoa, pelimekaniikka arpoo 
+  lopputuloksen riippuen hahmojen ominaisuuksista.
+	1. Peli arpoo luvun väliltä 0-9, lisää siihen hyökkäävän hahmon 
+	   hyökkäysarvon. Mikäli tulos ylittää puolustavan hahmon puolustus-
+	   arvon, hyökkäys osuu.
+	2. Peli arpoo vahinkoarvon, joka riippuu hahmon käyttämästä aseesta.
+	3. Peli arpoo satunnaisen ruumiinosan puolustajalta
+	4. Puolustava hahmo ja arvottu ruumiinosa menettävät vahinkoarvon verran
+	   osumapisteitä.
+- Mikäli hahmon osumapistearvo putoaa nollaan tai sen alle, hahmo kuolee. Mikäli
+  raajan osumapistearvo putoaa nollaan tai alle, se haavoittuu vakavasti.*
+- Area Of Effect -hyökkäykset tekevät hyökkäyksen jokaista alueella olevaa hahmoa 
+  kohtaan poislukien hyökkäyksen suorittaja itse. Lohikäärmeen liekit ovat 
+  toistaiseksi ainoa AOE-hyökkäys pelissä.
+
+Taktiikka:
+- Gladiaattori voi taistella eri taktiikoilla ja vaikuttaa siten hyökkäys- ja 
+  puolustusarvoihinsa. Nostamalla hyökkäysarvoa hahmo hyökkää aggressiivisemmin, 
+  mutta myös hirviöt osuvat häneen todennäköisemmin. Nostamalla puolustusarvoa
+  taas gladiaattoriin osuminen vaikeutuu, mutta myöskään hahmon hyökkäykset eivät 
+  ole yhtä tarkkoja.
+- Taktiikkaa voi säätää [+] ja [-]-näppäimillä.
+
+
+* (Raajojen vahingoittumisen vaikutuksia ei ole pääasiassa vielä implementoitu 
+  peliin. Lohikäärmeen siivet ovat tällä hetkellä ainoa ruumiinosa, jonka 
+  haavoittumisella on mitään peliteknistä vaikutusta.)

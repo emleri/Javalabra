@@ -15,57 +15,73 @@ import java.util.Random;
  */
 public class Lohikaarme extends Hirvio {
 
-    private int lentolaskuri;
+    private int toimintolaskuri;
     private boolean ilmassa;
     private Random arpoja;
 
+    /**
+     * Lohikäärmeen konstruktori. Käyttää hirviön konstruktoria, laajentaen sen 
+     * pohjalta omat toiminnallisuutensa.
+     * @param osumapisteet lohikäärmeen osumapiste-arvo
+     * @param keho viite lohikäärmeelle annettavaan keho-olioon
+     */
     public Lohikaarme(int osumapisteet, Keho keho) {
         super(osumapisteet, keho);
-        this.lentolaskuri = 0;
+        this.toimintolaskuri = 0;
         this.arpoja = new Random();
     }
 
+    /**
+     * Hirviön liiku-metodin korvaava versio, joka ohjaa lohikäärmettä toteuttamaan
+     * ennaltamäärätyssä järjestyksessä joukkoa erilaisia toimintoja. 
+     * Toimintolaskurin arvo määrää, mitä metodi tekee, ja metodi kasvattaa sitä 
+     * yhden askeleen joka suorituskerrallaan.
+     * 
+     * @param gladiaattori viite gladiaattoriin
+     * @param tilanne viite pelitilanteeseen
+     * @param areena viite areenaan
+     */
     @Override
     public void liiku(Gladiaattori gladiaattori, Pelitilanne tilanne, Areena areena) {
-        switch (lentolaskuri) {
+        switch (toimintolaskuri) {
             case 0:
                 this.syokseTulta(gladiaattori, tilanne, areena);
-                this.lentolaskuri++;
+                this.toimintolaskuri++;
                 break;
             case 1:
                 super.liiku(gladiaattori, tilanne, areena);
-                this.lentolaskuri++;
+                this.toimintolaskuri++;
                 break;
             case 2:
                 super.liiku(gladiaattori, tilanne, areena);
-                this.lentolaskuri++;
+                this.toimintolaskuri++;
                 break;
             case 3:
                 super.liiku(gladiaattori, tilanne, areena);
-                this.lentolaskuri++;
+                this.toimintolaskuri++;
                 break;
             case 4:
                 this.syokseTulta(gladiaattori, tilanne, areena);
-                this.lentolaskuri++;
+                this.toimintolaskuri++;
                 break;
             case 5:
                 super.liiku(gladiaattori, tilanne, areena);
-                this.lentolaskuri++;
+                this.toimintolaskuri++;
                 break;
             case 6:
                 super.liiku(gladiaattori, tilanne, areena);
-                this.lentolaskuri++;
+                this.toimintolaskuri++;
                 break;
             case 7:
                 this.nouseIlmaan(gladiaattori, tilanne, areena);
-                this.lentolaskuri++;
+                this.toimintolaskuri++;
                 break;
             case 8:
-                this.lentolaskuri++;
+                this.toimintolaskuri++;
                 break;
             case 9:
                 this.laskeudu(gladiaattori, tilanne, areena);
-                this.lentolaskuri = 0;
+                this.toimintolaskuri = 0;
                 break;
         }
     }
@@ -75,7 +91,7 @@ public class Lohikaarme extends Hirvio {
         Koordinaatit liekkeja;
         Hirvio h;
         Efekti e;
-        
+
         tilanne.lisaaTapahtuma(tilanne.viestit.syokseeTulta(super.getNimi()));
         gladiaattori.puolusta(tilanne, 20, 15);
         e = this.getTuliefekti(k);
@@ -87,7 +103,9 @@ public class Lohikaarme extends Hirvio {
 
                 if (areena.onkoRuudussaHirviota(liekkeja)) {
                     h = areena.getHirvioRuudusta(liekkeja);
-                    h.puolusta(tilanne, 50, 15);
+                    if (!h.equals(this)) {
+                        h.puolusta(tilanne, 50, 15);
+                    }
                 }
             }
         }
@@ -129,6 +147,10 @@ public class Lohikaarme extends Hirvio {
         this.siirry(k);
     }
 
+    /**
+     * Kertoo, onko lohikäärme ilmassa vai laskeutunut.
+     * @return boolean true/false ilmassa/maassa
+     */
     public boolean isIlmassa() {
         return ilmassa;
     }

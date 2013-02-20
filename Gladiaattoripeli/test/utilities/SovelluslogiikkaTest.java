@@ -36,7 +36,7 @@ public class SovelluslogiikkaTest {
     public void pelaaVuoroTest() {
         this.logiikka.pelaaVuoro(Komennot.ITA);
         assertEquals(false, logiikka.getPelitilanne().onkoPeliOhi());
-        assertEquals(11, logiikka.getPelitilanne().getHahmo().getSijainti().getX());
+        assertEquals(11, logiikka.getPelitilanne().getGladiaattori().getSijainti().getX());
         assertTrue(!logiikka.getPelitilanne().getTapahtumat().isEmpty());
     }
 }
