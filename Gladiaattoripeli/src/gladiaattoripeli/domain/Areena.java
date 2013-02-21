@@ -219,6 +219,7 @@ public class Areena {
      * @param v viite kyseisen vuoron vuororaporttiin
      */
     public void liikutaHirvioita() {
+        tilanne.lisaaTapahtuma("Hirviöt liikkuvat.");
         for (Hirvio h : this.hirviot) {
             h.liiku(gladiaattori, tilanne, this);
         }

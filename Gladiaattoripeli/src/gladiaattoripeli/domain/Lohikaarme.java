@@ -114,17 +114,19 @@ public class Lohikaarme extends Hirvio {
     }
 
     private Efekti getTuliefekti(Koordinaatit k) {
+        if(k == null) {
+            throw new IllegalArgumentException();
+        }
         Efekti e = new Efekti('§');
         e.lisaaSeuraavaFrame(new Efekti('§'));
-        e.lisaaPiirtokohta(k);
         e.getSeuraava().lisaaPiirtokohta(k);
         return e;
     }
 
     private void nouseIlmaan(Gladiaattori gladiaattori, Pelitilanne tilanne, Areena areena) {
         Keho k = super.getKeho();
-        if (!k.getRaaja(RuumiinosanNimi.OIKEASIIPI).onkoKuollut()
-                && !k.getRaaja(RuumiinosanNimi.VASENSIIPI).onkoKuollut()) {
+        if (!k.getRaaja(RuumiinosanNimi.OIKEASIIPI).isKuollut()
+                && !k.getRaaja(RuumiinosanNimi.VASENSIIPI).isKuollut()) {
             this.ilmassa = true;
             this.siirry(new Koordinaatit(areena.getLeveys() + 1, areena.getKorkeus() + 1));
             tilanne.lisaaTapahtuma(tilanne.viestit.nouseeIlmaan(super.getNimi()));

@@ -15,11 +15,11 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-public class LiikutettavaTest {
+public class HahmoTest {
     Gladiaattori g;
     Hahmogeneraattori hg;
 
-    public LiikutettavaTest() {
+    public HahmoTest() {
     }
 
     @BeforeClass

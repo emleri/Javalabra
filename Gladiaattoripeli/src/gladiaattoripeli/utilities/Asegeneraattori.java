@@ -23,7 +23,7 @@ public class Asegeneraattori {
         return new Ase(1, 1);
     }
 
-    Ase getKynnet() {
+    public Ase getKynnet() {
         return new Ase(2, 4);
     }
 }

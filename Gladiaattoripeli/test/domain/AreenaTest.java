@@ -221,7 +221,7 @@ public class AreenaTest {
             a.liikutaHirvioita();
         }
         a.paivitaTilanne();
-        assertTrue(t.onkoPeliOhi());
+        assertTrue(t.isPeliOhi());
         assertTrue(a.getHirviot().size() < 5);
     }
     

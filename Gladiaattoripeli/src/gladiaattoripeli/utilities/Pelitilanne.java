@@ -81,7 +81,7 @@ public class Pelitilanne {
      *
      * @return true/false - peli ohi/peli jatkuu
      */
-    public Boolean onkoPeliOhi() {
+    public Boolean isPeliOhi() {
         return this.peliOhi;
     }
 

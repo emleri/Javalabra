@@ -2,9 +2,9 @@
 25:Norris
 22:Jake
 22:42
+22:Sir
 21:Finn
 21:R2D2
 21:Einari
+21:Herpderpmies
 20:Dolan
-20:Tulppu
-19:5/5

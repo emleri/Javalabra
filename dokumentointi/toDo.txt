@@ -1,8 +1,7 @@
 Tehtävää:
-- High scoren voi syöttää monta kertaa, korjaa!
-- Korjaa kaksi pelinloppuviestiä!
-- <more> -toiminto pitkiin raportteihin
-- Uuden pelin aloittaminen sulkematta ohjelmaa (Ti)
+- BUGI: gladiaattorin kuolinviesti moninkertaisena!
+- Siirrä vastuita hirviöltä/gladiaattorilta hahmolle
+	- muuta lohikaarme käyttämään hahmoa, ei hirviötä/gladiaattoria
 - Testaa kattavammin (Ma-Pe)
 - Refaktoroi ja siisti (Ma-Pe)
 - Päivitä kaavioita ja dokumentaatiota (Ma-Pe)
@@ -16,3 +15,4 @@ Testeistä valmiita:
 - Gladiaattorin testit
 - Hirviön testit
 - Aseen testit
+- Hahmon testit

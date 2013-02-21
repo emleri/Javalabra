@@ -54,3 +54,22 @@ koordinaattien laajentamista: 2h
 
 12.2.
 - Sekvenssikaavioita, päivitetty luokkakaavio, testejä: 3h
+
+15.2.
+- Graafiset animaatioefektit: 1.5h
+
+17.2.
+- Efektien työstämistä: 1h
+
+18.2.
+- Lohikäärme, refaktorointia: ~2h
+
+19.2.
+- Muutettavat statit, numpad-liike, testausta: ~2.5h
+
+20.2.
+- Testejä, refaktorointia, buginmetsästystä, uuden pelin aloittaminen, 
+vahinkoviestien värikoodit: 3h
+
+21.2.
+- Testit valmiiksi, dokumentaation hiomista: ~2h

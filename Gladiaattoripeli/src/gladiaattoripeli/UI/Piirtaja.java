@@ -23,7 +23,7 @@ public class Piirtaja implements ActionListener {
     private JLabel piirtoalue;
     private Areena areena;
     private Efekti efektit;
-    Boolean piirraEfektit;
+    private Boolean piirraEfektit;
 
     public Piirtaja(Timer ajastin, JLabel piirtoalue, Areena areena) {
         this.ajastin = ajastin;

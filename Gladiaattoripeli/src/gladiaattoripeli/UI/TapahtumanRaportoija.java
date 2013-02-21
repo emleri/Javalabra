@@ -39,19 +39,19 @@ public class TapahtumanRaportoija {
             poistettavat.add(tapahtumat.get(i));
             raportit.append("<br>");
             riveja++;
-            if (riveja > 11 && i < tapahtumat.size() - 1) {
+            if (riveja > 9 && i < tapahtumat.size() - 1) {
                 break;
             }
         }
 
         tapahtumat.removeAll(poistettavat);
 
-        if (tilanne.onkoPeliOhi() && riveja < 8) {
+        if (tilanne.isPeliOhi()) {
             raportit.append(tilanne.viestit.loppuviesti());
             this.tapot(tilanne.getGladiaattori(), raportit);
         }
 
-        if (riveja > 11) {
+        if (riveja > 9) {
             raportit.append("<br>[Lisää...]");
             lisaaTekstia = true;
         }

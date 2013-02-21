@@ -41,6 +41,9 @@ public class Efekti {
     }
     
     public void lisaaSeuraavaFrame(Efekti e) {
+        if(e == null) {
+            throw new IllegalArgumentException();
+        }
         this.seuraava = e;
     }
     

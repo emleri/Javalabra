@@ -86,8 +86,7 @@ public class Viestigeneraattori {
     }
 
     public String loppuviesti() {
-        return "<br>Peli on ohi.<br><br>Paina mitä vain näppäintä "
-                + "päästäksesi eteenpäin.";
+        return "<br>Peli on ohi. [Enter]";
     }
     
     public boolean onGladiaattori(String s) {

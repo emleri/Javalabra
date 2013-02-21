@@ -35,7 +35,7 @@ public class Sovelluslogiikka {
         tilanne.uusiVuoro();
         this.areena.tyhjennaEfektit();
 
-        if (!this.tilanne.onkoPeliOhi()) {
+        if (!this.tilanne.isPeliOhi()) {
             areena.toimiHahmollaSuuntaan(s);
             areena.paivitaTilanne();
             areena.liikutaHirvioita();
@@ -60,7 +60,7 @@ public class Sovelluslogiikka {
         tilanne.uusiVuoro();
         this.areena.tyhjennaEfektit();
 
-        if (!this.tilanne.onkoPeliOhi()) {
+        if (!this.tilanne.isPeliOhi()) {
             areena.liikutaHirvioita();
             areena.paivitaTilanne();
             areena.seuraavaAalto();
@@ -93,7 +93,6 @@ public class Sovelluslogiikka {
     public void uusiPeli() {
         this.areena.alustaPeli();
         this.tilanne.alustaTilanne();
-//        this.tilanne.setHirviot(areena.getHirviot());
         this.tilanne.setGladiaattori(areena.getGladiaattori());
     }
 }

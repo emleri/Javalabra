@@ -7,10 +7,10 @@ package utilities;
 import gladiaattoripeli.utilities.Viestigeneraattori;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -41,7 +41,7 @@ public class ViestigeneraattoriTest {
     
     @Test
     public void onHaavoittunutToimii() {
-        assertEquals("Pöljä on haavoittunut.", vg.onHaavoittunut("Pöljä"));
+        assertTrue(vg.onHaavoittunut("Pöljä").contains("Pöljä on haavoittunut."));
     }
     
     @Test(expected=IllegalArgumentException.class)
@@ -51,7 +51,7 @@ public class ViestigeneraattoriTest {
     
     @Test
     public void onVammautunutToimii() {
-        assertEquals("Pöljä on vammautunut vakavasti.", vg.onVammautunut("Pöljä"));
+        assertTrue(vg.onVammautunut("Pöljä").contains("Pöljä on vammautunut vakavasti."));
     }
     
     @Test(expected=IllegalArgumentException.class)
@@ -61,7 +61,7 @@ public class ViestigeneraattoriTest {
     
     @Test
     public void onKuollutToimii() {
-        assertEquals("Pöljä kaatuu kuolleena maahan.", vg.onKuollut("Pöljä"));
+        assertTrue(vg.onKuollut("Pöljä").contains("Pöljä kaatuu kuolleena maahan."));
     }
     
     @Test(expected=IllegalArgumentException.class)
@@ -71,7 +71,7 @@ public class ViestigeneraattoriTest {
     
     @Test
     public void vaistaaToimii() {
-        assertEquals("Pöljä väistää hyökkäyksen.", vg.vaistaa("Pöljä"));
+        assertTrue(vg.vaistaa("Pöljä").contains("Pöljä väistää hyökkäyksen."));
     }
     
     @Test(expected=IllegalArgumentException.class)
@@ -81,7 +81,7 @@ public class ViestigeneraattoriTest {
     
     @Test
     public void lyoToimii() {
-        assertEquals("Pöljä lyö Pelleä.", vg.lyo("Pöljä", "Pelleä"));
+        assertTrue(vg.lyo("Pöljä", "Pelleä").contains("Pöljä lyö Pelleä."));
     }
     
     @Test(expected=IllegalArgumentException.class)

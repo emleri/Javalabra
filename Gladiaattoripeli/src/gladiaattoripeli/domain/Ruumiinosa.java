@@ -21,16 +21,21 @@ public class Ruumiinosa {
         this.kuollut = false;
     }
 
-    public void otaVahinkoa(Pelitilanne v, int vahinko) {
+    public void otaVahinkoa(Pelitilanne tilanne, int vahinko) {
         this.osumapisteet -= vahinko;
-        v.lisaaTapahtuma(v.viestit.onHaavoittunut(this.omistajanNimi + "n " + this.nimi.getNimi()));
+        String vahinkoteksti = 
+                (this.omistajanNimi.charAt(this.omistajanNimi.length()-1) == 'e') 
+                ? this.omistajanNimi + "e" 
+                : this.omistajanNimi;
+        vahinkoteksti += "n " + this.nimi.getNimi();
+        tilanne.lisaaTapahtuma(tilanne.viestit.onHaavoittunut(vahinkoteksti));
         if (this.osumapisteet <= 0) {
             this.kuollut = true;
-            v.lisaaTapahtuma(v.viestit.onVammautunut(this.omistajanNimi));
+            tilanne.lisaaTapahtuma(tilanne.viestit.onVammautunut(this.omistajanNimi));
         }
     }
 
-    public Boolean onkoKuollut() {
+    public Boolean isKuollut() {
         return this.kuollut;
     }
 

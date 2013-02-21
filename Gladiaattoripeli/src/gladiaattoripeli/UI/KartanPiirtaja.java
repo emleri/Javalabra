@@ -1,9 +1,6 @@
 package gladiaattoripeli.UI;
 
 import gladiaattoripeli.domain.Areena;
-import gladiaattoripeli.domain.Efekti;
-import gladiaattoripeli.utilities.Koordinaatit;
-import java.awt.event.ActionListener;
 import javax.swing.JLabel;
 import javax.swing.Timer;
 

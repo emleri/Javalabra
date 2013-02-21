@@ -104,13 +104,12 @@ public class HirvioTest {
 
     @Test
     public void liikuKunGladiaattorinVieressa() {
-        Areena a = new Areena(10, 10, t);
+        Areena a = new Areena(25, 25, t);
         h.siirry(new Koordinaatit(0, 0));
         a.lisaaHirvio(h);
         a.luoHahmot();
         int x = g.getOsumapisteet();
-        h.siirry(new Koordinaatit(15, 14));
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 200; i++) {
             h.liiku(g, t, a);
         }
         assertTrue(g.getOsumapisteet() < x);
@@ -148,7 +147,6 @@ public class HirvioTest {
         a.luoHahmot();
 
         h.liiku(g, t, a);
-        System.out.println(h.getSijainti().getX() + " x ja y " + h.getSijainti().getY());
         assertTrue(h.getSijainti().getX() == 0 && h.getSijainti().getY() == 0);
     }
 }
