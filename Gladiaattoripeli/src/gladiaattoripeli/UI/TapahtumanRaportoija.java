@@ -132,7 +132,7 @@ public class TapahtumanRaportoija {
         }
 
         if (loppupisteet) {
-            teksti.append("<br>Aloita uusi peli painamalla [jotain pelinäppäintä]");
+            teksti.append("<br>Aloita uusi peli painamalla [Enter]");
         }
 
         teksti.append("</html>");

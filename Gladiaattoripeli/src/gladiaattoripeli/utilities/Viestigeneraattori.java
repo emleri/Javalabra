@@ -148,7 +148,7 @@ public class Viestigeneraattori {
      * @return viesti
      */
     public String loppuviesti() {
-        return "<br>Peli on ohi. [Enter]";
+        return "<br>Peli on ohi. [Paina jotain pelinäppäintä]";
     }
 
     /**
