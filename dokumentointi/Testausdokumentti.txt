@@ -1,0 +1,74 @@
+===================================
+Gladiaattoripelin testausdokumentti
+===================================
+
+Pääosin ohjelma on kattavasti testattu JUnit-automaattitesteillä.
+
+Osa toiminnoista (pääasiassa tekoälyyn ja hyökkäysten osumiseen/
+haavoittumiseen liittyvät) perustuu kuitenkin niin vahvasti satunnais-
+elementteihin, että niiden testaaminen automaattisesti olisi ollut
+hyvin hankalaa. Näiden osalta päädyin testaamaan toimintaa lähinnä 
+käsin.
+
+
+Käsin testaus
+=============
+
+Pelin toimintaa on testattu käytännön kokeilla yli 200 pelikertaa.
+Näissä testeissä on paitsi pelattu normaalisti, myös pyritty etsimällä
+etsimään rajatapauksia ja mahdollisia virhetilanteita.
+
+Käsin testatessa löytyneitä bugeja:
+- Useita virheellisiä tapahtumaraportteja (pääasiassa vääriä hahmonnimiä)
+- Lohikäärmeen tuli ei vahingoittanut hirviöitä hahmon alapuolella
+- moninkertaistuneita kuolema- ja loppuilmoituksia hahmon kuollessa 
+useampaan hyökkäykseen/lohikäärmeen tuleen ja hyökkäyksiin yhtä aikaa
+- virhe numpad-liikkeiden käsittelyssä
+
+Kaikki yllämainitut bugit on korjattu.
+
+Lisäksi ilmeni, että toisinaan viestikentän täyttyessä ja [lisää]-tagin 
+ilmestyessä seuraavalla
+tekstisivulla ei kuitenkaan ole tekstiä.
+Uskon löytäneeni ratkaisun tähän (TapahtumanRaportoija asetti 
+'lisaaTekstia = true' rivillä 70, vaikka for-loop ei olisi aiemmin katkennut 
+kesken, jos rivien määrä oli tasan 10), mutta en ehtinyt enää testata riit-
+tävästi lisää, että voisin olla varma että bugi on poissa korjaukseni 
+ansiosta.
+
+
+Mystinen grafiikkabugi
+======================
+
+KartanPiirtaja- ja Piirtaja-luokkiin liittyy outo bugi, jonka jäljille
+en onnistunut projektin aikana pääsemään. Tämä bugi on kierretty lopullisessa
+versiossa tyhmällä viritelmällä kutsumalla piirra()-metodia joka instanssissa
+kahdesti, mikä aiheuttaa grafiikoiden välähtelyä väärällä tavalla* mutta saa 
+pelin toimimaan pääasiassa oikein.
+
+Bugin kuvaus:
+1. Pelilogiikka suorittaa vuoron, joka toimii normaalisti. Kaikki muuttujien
+	arvot ja oliot ovat ok, pelitilanne on suoritettu loppuun saakka eikä 
+	muutenkaan pelin puolella ole ongelmaa.
+2. KayttoliittymanOhjaaja antaa KartanPiirtajalle käskyn piirtää pelitilanne.
+	KartanPiirtaja käynnistää Swing Timerin, joka alkaa kutsua toistuvasti
+	Piirtaja-luokan ActionPerformed-metodia. AP-metodi alkaa piirtämään
+	Areenalta saamaansa pelitilannetta aloittaen efektiketjun ensimmäisestä
+	efektistä.
+3...X. Piirtajan pitäisi joka kellon pulssilla piirtää pelitilanne senhetkisen
+	efektin mukaan, jonka jälkeen edetä ketjussa seuraavaan efektiin ja 
+	odottaa seuraavaa pulssia. Yksi pulssi siis piirtäisi yhden 'ruudun' 
+	efektejä, kunnes efektiketju olisi käyty läpi ja Piirtaja piirtäisi
+	efektittömän ruudun jonka jälkeen pysäyttäisi itse kellonsa.
+
+Kohta 3...X ei kuitenkaan toimi. Ensimmäisellä vuorolla efektejä ei piirretä 
+lainkaan. Toisella vuorolla piirretään ensimmäisen vuoron efektit, kolmannella
+toisen jne. 
+Kyse ei siis ole, että itse efektit Areenassa olisivat myöhässä, vaan ongelma 
+syntyy jossain käyttöliittymän sisäpuolella. Epäilen, että syynä saattaa olla
+jokin JLabel.repaint()-metodiin tai Swing Timeriin liittyvä ominaisuus, jota
+en tunne, mutta en joka tapauksessa onnistunut löytämään tähän ongelmaan
+ratkaisua.
+
+*jokaisen piirretyn efektin pitäisi näkyä tasan puoli sekuntia,
+ei pienenpieniä välähdyksiä jollaisiksi ne lyhenevät pelin edetessä

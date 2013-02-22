@@ -53,6 +53,7 @@ public class TapahtumanRaportoija {
             raportit.append("<br>");
             riveja++;
             if (riveja > 9 && i < tapahtumat.size() - 1) {
+                lisaaTekstia = true;
                 break;
             }
         }
@@ -64,9 +65,8 @@ public class TapahtumanRaportoija {
             this.tapot(tilanne.getGladiaattori(), raportit);
         }
 
-        if (riveja > 9) {
+        if (lisaaTekstia) {
             raportit.append("<br>[Lisää...]");
-            lisaaTekstia = true;
         }
 
         raportit.append("</html>");
@@ -130,7 +130,7 @@ public class TapahtumanRaportoija {
         }
 
         if (loppupisteet) {
-            teksti.append("<br>Aloita uusi peli painamalla [Enter]");
+            teksti.append("<br>Aloita uusi peli painamalla [jotain pelinäppäintä]");
         }
 
         teksti.append("</html>");

@@ -107,7 +107,7 @@ public class Piirtaja implements ActionListener {
         // Tarkistuksia
         if (!piirraEfektit) {
             ajastin.stop();
-            piirraEfektit = true;
+            piirraEfektit = true; // Valmiiksi seuraavaa vuoroa varten
         } else {
             efektit = efektit.getSeuraava();
         }

@@ -99,6 +99,7 @@ public class KayttoliittymanOhjaaja {
      * Päivittää näyttökentät.
      */
     public void paivita() {
+        // Kaksoispiirtäjäkutsu kiertämään bugia, lue testiraportti
         this.piirtaja.piirra(logiikka.getAreena());
         this.piirtaja.piirra(logiikka.getAreena());
         boolean jatkuu = this.raportoija.raportoi(this.tilanne);

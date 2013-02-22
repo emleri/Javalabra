@@ -3,17 +3,15 @@ package domain;
 
 import gladiaattoripeli.domain.Areena;
 import gladiaattoripeli.domain.Gladiaattori;
-import gladiaattoripeli.domain.Keho;
-import gladiaattoripeli.utilities.Hahmogeneraattori;
 import gladiaattoripeli.domain.Koordinaatit;
-import gladiaattoripeli.utilities.Komennot;
+import gladiaattoripeli.utilities.Hahmogeneraattori;
 import gladiaattoripeli.utilities.Pelitilanne;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 public class HahmoTest {
     Gladiaattori g;
