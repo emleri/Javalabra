@@ -58,16 +58,55 @@ public class Piirtaja implements ActionListener {
             this.piirraEfektit = false;
         }
 
-        StringBuilder kartta = new StringBuilder("");
-        kartta.append("<html>");
+        StringBuilder kartta = new StringBuilder("<html>");
+        this.piirraSeina(kartta);
+        this.piirraAreena(kartta);
+        this.piirraSeina(kartta);
+        kartta.append("</html>");
 
-        // Piirtää ylälaidan seinän
+        this.piirtoalue.setText(kartta.toString());
+        this.piirtoalue.repaint();
+
+        if (!piirraEfektit) {
+            ajastin.stop();
+            piirraEfektit = true; // Valmiiksi seuraavaa vuoroa varten
+        } else {
+            efektit = efektit.getSeuraava();
+        }
+    }
+
+    /**
+     * Tarkistaa, onko kyseisiin koordinaatteihin piirrettäviä efektejä.
+     *
+     * @param k koordinaatit
+     * @return on/ei
+     */
+    private Boolean voikoPiirtaaEfekteja(Koordinaatit k) {
+        if (this.efektit == null) {
+            return false;
+        } else if (this.efektit.piirretaanko(k)) {
+            return true;
+        }
+        return false;
+    }
+
+    private void piirraSeina(StringBuilder kartta) {
         for (int i = -1; i <= areena.getLeveys(); i++) {
             kartta.append("#");
         }
-        kartta.append("<br>#");
+    }
 
-        // Piirtää areenan ja sen olennot
+    /**
+     * Kirjoittaa areenan pelialue-osion ja sivuseinät StringBuilderiin. Käy
+     * läpi areenan koordinaatteja rivi kerrallaan (0,0):sta lähtien tarkistaen
+     * aina, mitä kyseisiin koordinaatteihin piirretään. Mikäli ruudussa on sekä
+     * efekti että objekti, piirretään efekti, mikäli vain objekti tai efekti,
+     * piirretään se. Tyhjät koordinaatit piirretään lattiaksi ('.').
+     *
+     * @param kartta
+     */
+    private void piirraAreena(StringBuilder kartta) {
+        kartta.append("<br>#");
         for (int y = 0; y < areena.getKorkeus(); y++) {
             if (y != 0) {
                 kartta.append("#<br>#");
@@ -92,39 +131,6 @@ public class Piirtaja implements ActionListener {
                 }
             }
         }
-
         kartta.append("#<br>");
-
-        // Piirtää alalaidan seinän
-        for (int i = -1; i <= areena.getLeveys(); i++) {
-            kartta.append("#");
-        }
-
-        kartta.append("</html>");
-        this.piirtoalue.setText(kartta.toString());
-        this.piirtoalue.repaint();
-
-        // Tarkistuksia
-        if (!piirraEfektit) {
-            ajastin.stop();
-            piirraEfektit = true; // Valmiiksi seuraavaa vuoroa varten
-        } else {
-            efektit = efektit.getSeuraava();
-        }
-    }
-
-    /**
-     * Tarkistaa, onko kyseisiin koordinaatteihin piirrettäviä efektejä.
-     *
-     * @param k koordinaatit
-     * @return on/ei
-     */
-    private Boolean voikoPiirtaaEfekteja(Koordinaatit k) {
-        if (this.efektit == null) {
-            return false;
-        } else if (this.efektit.piirretaanko(k)) {
-            return true;
-        }
-        return false;
     }
 }

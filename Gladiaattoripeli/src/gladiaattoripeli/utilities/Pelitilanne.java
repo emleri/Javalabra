@@ -14,7 +14,11 @@ public class Pelitilanne {
     private List<String> tapahtumat; // vuoron tapahtumaraportit
     private Gladiaattori gladiaattori; // viite Areenan gladiaattoriin
     private Boolean peliOhi; // kertoo, jatkuuko peli
-    public Viestigeneraattori viestit; // apuväline peliviestien luomiseen
+    /**
+     * Apuluokka tapahtumaviestien luomiseen. Tarjoaa joukon valmiita viestejä,
+     * joihin syötetään vain parametreina viestien toimija(t).
+     */
+    public Viestigeneraattori viestit;
 
     /**
      * Luokan konstruktori. Luo tyhjän tapahtumalokin ja surmattujen hirviöiden
@@ -52,6 +56,7 @@ public class Pelitilanne {
     public void lisaaTapahtuma(String tapahtuma) {
         this.tapahtumat.add(tapahtuma);
     }
+
     /**
      * Areena asettaa tällä metodilla pelitilanteeseen viitteen, jolla
      * käyttöliittymä pääsee gladiaattorin tietoihin.

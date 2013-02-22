@@ -9,15 +9,16 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * Tiedostontallentaja/lukija, joka käsittelee pelin pisteitä. Pisteiden 
- * tallentamisessa tekstiksi käytetään ':'-jakomerkkiä joka merkitsee nimen ja 
- * pisteiden välisen rajan. Yhdet pisteet tallennetaan aina yhdelle tiedoston 
+ * Tiedostontallentaja/lukija, joka käsittelee pelin pisteitä. Pisteiden
+ * tallentamisessa tekstiksi käytetään ':'-jakomerkkiä joka merkitsee nimen ja
+ * pisteiden välisen rajan. Yhdet pisteet tallennetaan aina yhdelle tiedoston
  * riville, jolloin niiden lukeminen Scanner.nextLine()-metodilla on helppoa.
- * 
- * Pistetiedosto ei koskaan sisällä kuin kymmenen parhaan pelaajan nimet. Joka 
+ *
+ * Pistetiedosto ei koskaan sisällä kuin kymmenen parhaan pelaajan nimet. Joka
  * tallennuskerralla top 10 ulkopuolelle jäävät nimet pyyhitään pois.
  */
 public class HighScorenKasittelija {
+
     private File highScore; // Pistetiedosto polussa /highScore.txt
     private Scanner lukija; // tiedostonlukija
     private FileWriter kirjoittaja; // tiedostonkirjoittaja
@@ -30,9 +31,10 @@ public class HighScorenKasittelija {
     }
 
     /**
-     * Lisää pistetiedostoon uudet pisteet. Purkaa tekstitiedoston listaksi, lisää 
-     * listaan pisteet, järjestää listan ja kirjoittaa sen kymmenen parasta nimeä
-     * lopuksi takaisin tiedostoon.
+     * Lisää pistetiedostoon uudet pisteet. Purkaa tekstitiedoston listaksi,
+     * lisää listaan pisteet, järjestää listan ja kirjoittaa sen kymmenen
+     * parasta nimeä lopuksi takaisin tiedostoon.
+     *
      * @param pisteet lisättävät pisteet
      */
     public void lisaaHighScore(Pisteet pisteet) {
@@ -52,30 +54,29 @@ public class HighScorenKasittelija {
             }
             this.kirjoittaja.close();
         } catch (Exception e) {
-            System.out.println("Tiedostoon kirjoittaminen epäonnistui.");
         }
     }
 
     /**
      * Lukee tiedoston listaksi pisteitä ja palauttaa sen.
-     * @return
+     *
+     * @return pistelista
      */
     public List<Pisteet> getHighScore() {
-        try {
-            this.lukija = new Scanner(this.highScore);
-        } catch (FileNotFoundException ex) {
-        }
-
         List<Pisteet> highScoreLista = new ArrayList<Pisteet>();
 
-        while (this.lukija.hasNextLine()) {
-            String s = lukija.nextLine();
-            if (s.contains(":")) {
-                String[] s2 = s.split(":");
-                highScoreLista.add(new Pisteet(Integer.parseInt(s2[0]), s2[1]));
+        try {
+            this.lukija = new Scanner(this.highScore);
+            while (this.lukija.hasNextLine()) {
+                String s = lukija.nextLine();
+                if (s.contains(":")) {
+                    String[] s2 = s.split(":");
+                    highScoreLista.add(new Pisteet(Integer.parseInt(s2[0]), s2[1]));
+                }
             }
+            this.lukija.close();
+        } catch (FileNotFoundException e) {
         }
-        this.lukija.close();
 
         return highScoreLista;
     }

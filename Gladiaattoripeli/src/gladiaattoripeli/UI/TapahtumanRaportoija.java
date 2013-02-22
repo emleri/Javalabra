@@ -47,6 +47,7 @@ public class TapahtumanRaportoija {
         List<String> tapahtumat = tilanne.getTapahtumat();
         List<String> poistettavat = new ArrayList<String>();
         StringBuilder raportit = new StringBuilder("<html>");
+
         for (int i = 0; i < tapahtumat.size(); i++) {
             raportit.append(tapahtumat.get(i));
             poistettavat.add(tapahtumat.get(i));
@@ -68,8 +69,8 @@ public class TapahtumanRaportoija {
         if (lisaaTekstia) {
             raportit.append("<br>[Lisää...]");
         }
-
         raportit.append("</html>");
+
         raporttiKentta.setText(raportit.toString());
         raporttiKentta.repaint();
 
@@ -95,6 +96,7 @@ public class TapahtumanRaportoija {
      */
     public void alkutervehdys(Pelitilanne tilanne) {
         raporttiKentta.setText(tilanne.viestit.alkutervehdys());
+        raporttiKentta.repaint();
     }
 
     /**

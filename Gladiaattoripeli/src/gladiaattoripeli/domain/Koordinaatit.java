@@ -14,6 +14,7 @@ public class Koordinaatit {
 
     /**
      * Koordinaattien konstruktori.
+     *
      * @param x x-sijainti
      * @param y y-sijainti
      */
@@ -32,15 +33,17 @@ public class Koordinaatit {
     }
 
     public void setX(int x) {
-            this.x = x;
+        this.x = x;
     }
 
     public void setY(int y) {
-            this.y = y;
+        this.y = y;
     }
 
     /**
-     * Lisaa parametrina saatujen koordinaattien x- ja y-arvot nykyisiin arvoihin.
+     * Lisaa parametrina saatujen koordinaattien x- ja y-arvot nykyisiin
+     * arvoihin.
+     *
      * @param k lisattavat koordinaatit
      */
     public void lisaaKoordinaatit(Koordinaatit k) {
@@ -50,6 +53,7 @@ public class Koordinaatit {
 
     /**
      * Laskee yhteen kahdet koordinaatit ja palauttaa ne uusina koordinaatteina.
+     *
      * @param k summan toinen puoli
      * @return uudet koordinaatit, jotka ovat kahden muun summa
      */
@@ -58,8 +62,9 @@ public class Koordinaatit {
     }
 
     /**
-     * Palauttaa parametrina saadusta suunnasta itsestään nähden viereisen ruudun 
-     * koordinaatit.
+     * Palauttaa parametrina saadusta suunnasta itsestään nähden viereisen
+     * ruudun koordinaatit.
+     *
      * @param suunta suunta, josta viereinen ruutu haetaan
      * @return viereisen ruudun koordinaatit
      */
@@ -90,9 +95,11 @@ public class Koordinaatit {
         }
         throw new IllegalArgumentException("Parametrina saatu komento ei ole suunta!");
     }
-    
+
     /**
-     * Apumetodi viereisten koordinaattien hakemiselle vähentämään toistuvia koodirivejä.
+     * Apumetodi viereisten koordinaattien hakemiselle vähentämään toistuvia
+     * koodirivejä.
+     *
      * @param x
      * @param y
      * @return uudet koordinaatit: nykyiset + x, y
@@ -105,6 +112,7 @@ public class Koordinaatit {
 
     /**
      * Palauttaa satunnaisen pääilmansuunnissa viereisen ruudun koordinaatit.
+     *
      * @return satunnainen viereinen ruutu
      */
     public Koordinaatit getSatunnainenRuutuVieressa() {
@@ -122,9 +130,10 @@ public class Koordinaatit {
     }
 
     /**
-     * Metodi etsii sen itsestään nähden viereisen ruudun, joka on lähimpänä 
-     * parametrina saatua kohdetta. Mikäli kohderuutu on nykyinen ruutu, 
+     * Metodi etsii sen itsestään nähden viereisen ruudun, joka on lähimpänä
+     * parametrina saatua kohdetta. Mikäli kohderuutu on nykyinen ruutu,
      * palautetaan omat koordinaatit.
+     *
      * @param k kohdekoordinaatit
      * @return sopivan viereisen ruudun koordinaatit
      */
@@ -152,6 +161,7 @@ public class Koordinaatit {
 
     /**
      * Tarkistaa, ovatko parametrina saadut koordinaatit viereisessä ruudussa.
+     *
      * @param k tarkistettavat koordinaatit
      * @return boolean true/false k/e
      */

@@ -75,4 +75,5 @@ vahinkoviestien v‰rikoodit: 3h
 - Testit valmiiksi, dokumentaation hiomista: ~2h
 
 22.2.
-- Laaja refaktorointi: Gladiaattorin ja Hirviˆn yhteiset toiminnallisuudet -> Hahmo. Dokumentointia, JavaDoc valmiiksi, uusi ja v‰rik‰s luokkakaavio, kaikkea pient‰ korjailua. ~8h
+- Laaja refaktorointi: Gladiaattorin ja Hirviˆn yhteiset toiminnallisuudet -> Hahmo. Dokumentointia, JavaDoc valmiiksi, uusi ja v‰rik‰s luokkakaavio, kaikkea pient‰ korjailua. Yritys s‰‰t‰‰ coberturan kanssa, tuloksetonta
+grafiikkabugin mets‰styst‰... ~12h

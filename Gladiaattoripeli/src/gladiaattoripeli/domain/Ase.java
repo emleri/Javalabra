@@ -1,4 +1,3 @@
-
 package gladiaattoripeli.domain;
 
 import java.util.Random;
@@ -12,14 +11,14 @@ public class Ase {
 
     private String nimi; // Ei käytössä toistaiseksi.
     private Random arpoja; // Satunnaislukugeneraattori
-    
     // Vahinkofunktion muuttujat
     private int a; // Satunnaislukujen määrä, ei koskaan negatiivinen
     private int b; // Vakio, mikä vain kokonaisluku
 
     /**
-     * Aseen konstruktori. Luo uuden aseen parametreina saaduilla vahinkofunktio-
-     * muuttujilla.
+     * Aseen konstruktori. Luo uuden aseen parametreina saaduilla
+     * vahinkofunktio- muuttujilla.
+     *
      * @param a muuttuja a
      * @param b muuttuja b
      */
@@ -63,8 +62,9 @@ public class Ase {
     }
 
     /**
-     * Palauttaa aseen hyökkäysefektin kohdistettuna parametrina saatuihin 
+     * Palauttaa aseen hyökkäysefektin kohdistettuna parametrina saatuihin
      * koordinaatteihin. Tällä hetkellä kaikkien aseiden efekti on vielä sama.
+     *
      * @param k kohdekoordinaatit
      * @return aseen efekti
      */

@@ -1,9 +1,8 @@
-
 package gladiaattoripeli.utilities;
 
 /**
- * Muotoilee peliviestejä tulostukseen sopivaan muotoon. Kokoaa nimiä ja toiminto-
- * viestejä yhteen, lisää HTML-väritageja.
+ * Muotoilee peliviestejä tulostukseen sopivaan muotoon. Kokoaa nimiä ja
+ * toiminto- viestejä yhteen, lisää HTML-väritageja.
  */
 public class Viestigeneraattori {
 
@@ -14,8 +13,9 @@ public class Viestigeneraattori {
     }
 
     /**
-     * Viesti: "'kuka' on haavoittunut."
-     * Väri: Oranssi, mikäli pelaaja on haavoittunut, vihreä mikäli hirviö.
+     * Viesti: "'kuka' on haavoittunut." Väri: Oranssi, mikäli pelaaja on
+     * haavoittunut, vihreä mikäli hirviö.
+     *
      * @param kuka
      * @return viesti
      */
@@ -30,8 +30,9 @@ public class Viestigeneraattori {
     }
 
     /**
-     * Viesti: "'kuka' on vammautunut vakavasti."
-     * Väri: Punainen, mikäli pelaaja on haavoittunut, vihreä mikäli hirviö.
+     * Viesti: "'kuka' on vammautunut vakavasti." Väri: Punainen, mikäli pelaaja
+     * on haavoittunut, vihreä mikäli hirviö.
+     *
      * @param kuka
      * @return viesti
      */
@@ -46,8 +47,9 @@ public class Viestigeneraattori {
     }
 
     /**
-     * Viesti: "'kuka' kaatuu kuolleena maahan."
-     * Väri: Punainen, mikäli pelaaja on kuollut, vaaleanvihreä mikäli hirviö.
+     * Viesti: "'kuka' kaatuu kuolleena maahan." Väri: Punainen, mikäli pelaaja
+     * on kuollut, vaaleanvihreä mikäli hirviö.
+     *
      * @param kuka
      * @return viesti
      */
@@ -55,15 +57,16 @@ public class Viestigeneraattori {
         if (kuka == null) {
             throw new IllegalArgumentException();
         }
-        if(this.onGladiaattori(kuka)) {
+        if (this.onGladiaattori(kuka)) {
             return "<font color=c11b17>" + kuka + " kaatuu kuolleena maahan.</font>";
         }
         return "<font color=57e964>" + kuka + " kaatuu kuolleena maahan.</font>";
     }
 
     /**
-     * Viesti: "'kuka' väistää hyökkäyksen."
-     * Väri: Vaaleansininen, mikäli pelaaja väistää, oranssi mikäli hirviö.
+     * Viesti: "'kuka' väistää hyökkäyksen." Väri: Vaaleansininen, mikäli
+     * pelaaja väistää, oranssi mikäli hirviö.
+     *
      * @param kuka
      * @return
      */
@@ -71,7 +74,7 @@ public class Viestigeneraattori {
         if (kuka == null) {
             throw new IllegalArgumentException();
         }
-        if(this.onGladiaattori(kuka)) {
+        if (this.onGladiaattori(kuka)) {
             return "<font color=00ffff>" + kuka + " väistää hyökkäyksen.</font>";
         }
         return "<font color=fbb117>" + kuka + " väistää hyökkäyksen.</font>";
@@ -79,6 +82,7 @@ public class Viestigeneraattori {
 
     /**
      * Viesti: "'kuka' lyö 'keta'."
+     *
      * @param kuka
      * @param keta
      * @return viesti
@@ -92,6 +96,7 @@ public class Viestigeneraattori {
 
     /**
      * Viesti: "'kuka' levittää siipensä ja nousee lentoon."
+     *
      * @param kuka
      * @return viesti
      */
@@ -104,6 +109,7 @@ public class Viestigeneraattori {
 
     /**
      * Viesti: "'kuka' on haavoittanut siipensä eikä kykene nousemaan ilmaan."
+     *
      * @param kuka
      * @return viesti
      */
@@ -116,6 +122,7 @@ public class Viestigeneraattori {
 
     /**
      * Viesti: "'kuka' syöksee leimuavia liekkejä."
+     *
      * @param kuka
      * @return viesti
      */
@@ -128,6 +135,7 @@ public class Viestigeneraattori {
 
     /**
      * Viesti: "Taistelu alkaa!"
+     *
      * @return viesti
      */
     public String alkutervehdys() {
@@ -136,14 +144,46 @@ public class Viestigeneraattori {
 
     /**
      * Viesti: rivinvaihto + "Peli on ohi [Enter]"
+     *
      * @return viesti
      */
     public String loppuviesti() {
         return "<br>Peli on ohi. [Enter]";
     }
-    
+
     /**
-     * Tarkistaa, sisältääkö parametrina saatu toimijan nimi 'gladiaattori'-sanan.
+     * Viesti: "Lisää hirviöitä ryntää areenalle!"
+     *
+     * @return viesti
+     */
+    public String lisaaHirvioita() {
+        return "Lisää hirviöitä ryntää areenalle!";
+    }
+
+    /**
+     * Viesti: "'kuka' liikkuu."
+     *
+     * @param kuka
+     * @return viesti
+     */
+    public String liikkuu(String kuka) {
+        return kuka + " liikkuu.";
+    }
+
+    /**
+     * Viesti: "'kuka' törmää seinään!"
+     *
+     * @param kuka
+     * @return viesti
+     */
+    public String tormaa(String kuka) {
+        return kuka + " törmää seinään!";
+    }
+
+    /**
+     * Tarkistaa, sisältääkö parametrina saatu toimijan nimi
+     * 'gladiaattori'-sanan.
+     *
      * @param s tarkistettava merkkijono
      * @return boolean kyllä/ei
      */

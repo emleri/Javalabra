@@ -15,6 +15,7 @@ public class Ruumiinosa {
 
     /**
      * Luo uuden ruumiinosan.
+     *
      * @param nimi ruumiinosan nimi
      * @param omistajanNimi ruumiinosan omistajan nimi
      * @param osumapisteet ruumiinosan osumapisteet
@@ -30,14 +31,15 @@ public class Ruumiinosa {
      * Vähentää ruumiinosan osumapisteitä parametrina saadun vahingon verran ja
      * kirjaa vahingoittumisen pelitilanteeseen. Mikäli raaja kuoli, kirjaa myös
      * tiedon siitä ja muuttaa kuollut-muuttujan tilan vastaamaan todellisuutta.
+     *
      * @param tilanne pelitilanne, johon tapahtumat kirjataan
      * @param vahinko vahingon määrä
      */
     public void otaVahinkoa(Pelitilanne tilanne, int vahinko) {
         this.osumapisteet -= vahinko;
-        String vahinkoteksti = 
-                (this.omistajanNimi.charAt(this.omistajanNimi.length()-1) == 'e') 
-                ? this.omistajanNimi + "e" 
+        String vahinkoteksti =
+                (this.omistajanNimi.charAt(this.omistajanNimi.length() - 1) == 'e')
+                ? this.omistajanNimi + "e"
                 : this.omistajanNimi;
         vahinkoteksti += "n " + this.nimi.getNimi();
         tilanne.lisaaTapahtuma(tilanne.viestit.onHaavoittunut(vahinkoteksti));

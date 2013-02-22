@@ -12,6 +12,12 @@ public class NappaimistonKuuntelija implements KeyListener {
 
     private KayttoliittymanOhjaaja ohjaaja; // Viite käyttöliittymän ohjaajaan
 
+    /**
+     * Konstruktori. Saa parametrina käyttöliittymän ohjaajan, jolle näppäin-
+     * komennot välitetään.
+     *
+     * @param ohjaaja
+     */
     public NappaimistonKuuntelija(KayttoliittymanOhjaaja ohjaaja) {
         this.ohjaaja = ohjaaja;
     }

@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 
 /**
  * Ohjelman graafinen käyttöliittymä.
+ *
  * @author Emleri
  */
 public class GraafinenKayttoliittyma extends javax.swing.JFrame {
@@ -127,7 +128,6 @@ public class GraafinenKayttoliittyma extends javax.swing.JFrame {
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_formKeyPressed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel efektit;
     private javax.swing.JLayeredPane jLayeredPane1;
@@ -141,25 +141,24 @@ public class GraafinenKayttoliittyma extends javax.swing.JFrame {
     public JLabel getKartta() {
         return this.kartta;
     }
-    
+
     public JLabel getRaporttikentta() {
         return this.raporttiKentta;
     }
-    
+
     public JLabel getStattikentta() {
         return this.stattiKentta;
     }
-    
+
     public JPanel getJPanel() {
         return jPanel1;
     }
-    
+
     public JFrame getJFrame() {
         return this;
     }
-    
+
     public JLabel getEfektikentta() {
         return this.efektit;
     }
-
 }

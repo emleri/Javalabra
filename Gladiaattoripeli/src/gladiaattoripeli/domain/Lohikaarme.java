@@ -8,6 +8,7 @@ import gladiaattoripeli.utilities.Pelitilanne;
 
 /**
  * Lohikäärme-hahmo. Lentävä, tulta syöksevä hirviö.
+ *
  * @author Emleri
  */
 public class Lohikaarme extends Hirvio {
@@ -21,6 +22,7 @@ public class Lohikaarme extends Hirvio {
      *
      * @param osumapisteet lohikäärmeen osumapiste-arvo
      * @param keho viite lohikäärmeelle annettavaan keho-olioon
+     * @param ase viite lohikäärmeelle annettavaan aseeseen
      */
     public Lohikaarme(int osumapisteet, Keho keho, Ase ase) {
         super(osumapisteet, keho, ase);
@@ -102,7 +104,7 @@ public class Lohikaarme extends Hirvio {
      * @param areena viite areenaan, jolta saadaan hirviöt joihin hyökkäys osuu
      */
     private void syokseTulta(Gladiaattori gladiaattori, Pelitilanne tilanne, Areena areena) {
-        if(!gladiaattori.isElossa()) {
+        if (!gladiaattori.isElossa()) {
             return;
         }
         Koordinaatit k = gladiaattori.getSijainti();

@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Luokka hallinnoi hirviöiden, gladiaattorin ja efektien sijaintia ja niiden 
+ * Luokka hallinnoi hirviöiden, gladiaattorin ja efektien sijaintia ja niiden
  * muutoksia.
  */
 public class Areena {
@@ -25,8 +25,8 @@ public class Areena {
     private Pelitilanne tilanne; // Viite pelitilanne-olioon
 
     /**
-     * Konstruktori. Luo pelialueen ja hahmogeneraattorin, alustaa tallennustilan
-     * peliobjekteille.
+     * Konstruktori. Luo pelialueen ja hahmogeneraattorin, alustaa
+     * tallennustilan peliobjekteille.
      *
      * @param leveys areenan leveys
      * @param korkeus areenan korkeus
@@ -46,8 +46,9 @@ public class Areena {
     }
 
     /**
-     * Metodi suorittaa pelin aloittamiseen tarvittavat valmistelut: pyyhkii muistin
-     * mahdollisesta edellisestä pelistä, luo gladiaattorin, hirviöt ja esteet.
+     * Metodi suorittaa pelin aloittamiseen tarvittavat valmistelut: pyyhkii
+     * muistin mahdollisesta edellisestä pelistä, luo gladiaattorin, hirviöt ja
+     * esteet.
      */
     public void alustaPeli() {
         this.aaltoNro = 0;
@@ -134,7 +135,7 @@ public class Areena {
      */
     public void seuraavaAalto() {
         if (this.eiHirvioita()) {
-            this.tilanne.lisaaTapahtuma("Lisää hirviöitä ryntää areenalle!");
+            this.tilanne.lisaaTapahtuma(this.tilanne.viestit.lisaaHirvioita());
             this.luoHirvioita(3 + 2 * this.aaltoNro);
             this.aaltoNro++;
 
@@ -212,8 +213,6 @@ public class Areena {
 
     /**
      * Metodi kutsuu jokaisen hirviön liiku-metodia.
-     *
-     * @param v viite pelitilanteeseen, jota hirviöt tarvitsevat liikkeeseensä
      */
     public void liikutaHirvioita() {
         tilanne.lisaaTapahtuma("Hirviöt liikkuvat.");
@@ -227,10 +226,9 @@ public class Areena {
      * suuntaan. Mikäli viereisissä koordinaateissa valittuun suuntaan on
      * hirviö, kutsutaan gladiaattorin hyökkää-metodia kyseistä hirviötä
      * kohtaan. Mikäli ruutu on vapaa, gladiaattori siirtyy siihen. Toteutettu
-     * toiminto kirjataan vuororaporttiin.
+     * toiminto kirjataan pelitilanteeseen.
      *
      * @param suunta pelaajalta näppäimistösyötteenä saatu toimintasuunta
-     * @param v viite kyseisen vuoron vuororaporttiin
      */
     public void toimiHahmollaSuuntaan(Komennot suunta) {
         Koordinaatit kohderuutu = this.gladiaattori.getSijainti().getViereisetKoordinaatitSuunnassa(suunta);
@@ -238,12 +236,12 @@ public class Areena {
         if (this.onkoRuudussaHirviota(kohderuutu)) {
             Hirvio h = this.getHirvioRuudusta(kohderuutu);
             this.lisaaEfekti(this.gladiaattori.getHyokkaysefekti(kohderuutu));
-            gladiaattori.hyokkaa(h, tilanne);
+            this.gladiaattori.hyokkaa(h, this.tilanne);
         } else if (!this.onkoRuudussaEstetta(kohderuutu)) {
-            gladiaattori.siirry(kohderuutu);
-            tilanne.lisaaTapahtuma("Gladiaattori liikkuu.");
+            this.gladiaattori.siirry(kohderuutu);
+            this.tilanne.lisaaTapahtuma(this.tilanne.viestit.liikkuu(this.gladiaattori.getNimi()));
         } else {
-            tilanne.lisaaTapahtuma("Gladiaattori törmää seinään.");
+            this.tilanne.lisaaTapahtuma(this.tilanne.viestit.tormaa(this.gladiaattori.getNimi()));
         }
     }
 
@@ -280,7 +278,7 @@ public class Areena {
         }
         return false;
     }
-    
+
     public List<Koordinaatit> getEsteet() {
         return this.esteet;
     }
@@ -308,7 +306,7 @@ public class Areena {
      */
     public void paivitaTilanne() {
         this.poistaKuolleet();
-        if (this.onkoHahmoKuollut()) {
+        if (!this.gladiaattori.isElossa()) {
             tilanne.lopetaPeli();
         }
     }
@@ -320,25 +318,11 @@ public class Areena {
     private void poistaKuolleet() {
         List<Hirvio> poistettavat = new ArrayList<Hirvio>();
         for (Hirvio h : this.hirviot) {
-            if (h.getOsumapisteet() < 1) {
+            if (!h.isElossa()) {
                 poistettavat.add(h);
             }
         }
-
         this.hirviot.removeAll(poistettavat);
-    }
-
-    /**
-     * Metodi tarkistaa, onko gladiaattori kuollut (0 tai vähemmän
-     * osumapistettä).
-     *
-     * @return Boolean true/false - kuollut/elossa
-     */
-    private Boolean onkoHahmoKuollut() {
-        if (this.gladiaattori.getOsumapisteet() < 1) {
-            return true;
-        }
-        return false;
     }
 
     /**
@@ -394,5 +378,4 @@ public class Areena {
 
         return b;
     }
-
 }

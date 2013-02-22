@@ -19,6 +19,36 @@ Pelaajan tavoitteena on surmata mahdollisimman paljon hirviöitä ennen kuolemaans
 Mitä enemmän tappoja, sitä enemmän pisteitä pelaaja saa pelin päätyttyä
 gladiaattorin lopulta kuollessa.
 
+Käyttötapaukset
+===============
+
+Pelaaja:
+- liike: hahmon liikuttaminen askeleen johonkin suuntaan
+- hyökkäys: hahmon ohjaaminen hyökkäämään vieressä olevaan hirviöön
+- vuoron ohittaminen: hahmo pysyy paikallaan, hirviöt toimivat
+- hyökkäys- ja puolustusarvon säätäminen: hahmon stattien muuttaminen +/- 
+  -näppäimillä
+- nimen syöttäminen high scoreen: pelaaja antaa pelin jälkeen nimensä sitä 
+  kysyvään popup-ikkunaan ja se lisätään tulostettavaan high score -listaan 
+  sekä tallennetaan tiedostoon
+- uuden pelin aloittaminen: pelin päätyttyä pelaaja voi aloittaa seuraavan pelin 
+  sulkematta ohjelmaa
+
+Kartta
+======
+
+Pelin grafiikka koostuu normaaleista kirjainmerkeistä. Seuraava taulukko helpottaa
+niiden tunnistamista pelissä:
+
+@ - Gladiaattori: pelaajan oma hahmo.
+h - Hirviö: helppo tappaa, eivät lopu kesken.
+D - Lohikäärme: syöksee tulta, lentää ja lyö kovaa. Vaikea vastustaja, puolustusarvon
+    nostaminen suositeltavaa.
+# - Areenan seinä/pylväs areenalla. Estää liikkumisen läpi/ohi.
+. - Lattiaa, avointa tilaa jolla voi liikkua
+* - Verenroiske: jotakuta sattui juuri.
+§ - Liekkejä: lohikäärme lienee lähellä.
+
 Komennot
 ========
 
@@ -79,13 +109,4 @@ Taktiikka:
   peliin. Lohikäärmeen siivet ovat tällä hetkellä ainoa ruumiinosa, jonka 
   haavoittumisella on mitään peliteknistä vaikutusta.)
 
-Käyttötapaukset
-===============
-
-- liike
-- hyökkäys
-- vuoron ohittaminen
-- hyökkäys- ja puolustusarvon säätäminen
-- nimen syöttäminen high scoreen
-- uuden pelin aloittaminen
 

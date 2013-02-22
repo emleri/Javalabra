@@ -10,16 +10,15 @@ import java.util.List;
  * sisältää Keho-olion vahingon kirjanpitäjänä.
  */
 public class Gladiaattori extends Hahmo {
+
     private List<Hahmo> tapot; // Lista surmatuista hirviöistä, ei vielä toiminnallisuutta.
 
     /**
      * Konstruktori.
      *
-     * @param sijaintiX sijainti areenalla x-akselilla
-     * @param sijaintiY sijainti areenalla y-akselilla
-     * @param areenanLeveys areenan leveys
-     * @param areenanKorkeus areenan korkeus
+     * @param k gladiaattorin sijainti
      * @param keho gladiaattorin keho
+     * @param ase gladiaattorin ase
      */
     public Gladiaattori(Koordinaatit k, Keho keho, Ase ase) {
         super("Gladiaattori", k, keho, ase, 100, 10, 10);
@@ -31,7 +30,7 @@ public class Gladiaattori extends Hahmo {
      * hirviöön ja jos kohde kuolee, lisää sen tapettujen listaansa.
      *
      * @param h kohdehirviö
-     * @param tilanne vuoron vuororaportti, johon hyökkäyksen tulos kirjataan
+     * @param tilanne pelitilanne, johon hyökkäyksen tulos kirjataan
      * @return boolean kuoliko kohde k/e
      */
     @Override
@@ -48,11 +47,12 @@ public class Gladiaattori extends Hahmo {
     }
 
     /**
-     * Muuttaa gladiaattorin hyökkäys- ja puolustusarvoa parametrin mukaan. Arvojen
-     * summa pysyy aina samana, eli mikäli hyökkäys nousee, puolustus laskee saman 
-     * verran, vice versa. Kumpikaan arvo ei voi laskea alle viiden, mikäli näin 
-     * kävisi niin muutetaan arvoja vain viiteen asti.
-     * @param muutos arvojen muutos, lisätään hyökkäysarvoon ja vähennetään 
+     * Muuttaa gladiaattorin hyökkäys- ja puolustusarvoa parametrin mukaan.
+     * Arvojen summa pysyy aina samana, eli mikäli hyökkäys nousee, puolustus
+     * laskee saman verran, vice versa. Kumpikaan arvo ei voi laskea alle
+     * viiden, mikäli näin kävisi niin muutetaan arvoja vain viiteen asti.
+     *
+     * @param muutos arvojen muutos, lisätään hyökkäysarvoon ja vähennetään
      * puolustusarvosta
      */
     public void muutaHyokkaysarvoa(int muutos) {

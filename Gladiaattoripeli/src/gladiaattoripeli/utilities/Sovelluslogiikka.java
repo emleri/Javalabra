@@ -16,7 +16,7 @@ public class Sovelluslogiikka {
 
     /**
      * Konstruktori. Luo pelimekaniikan päärungon: sovelluslogiikan, areenan ja
-     * pelitilanteen. Käskee myös areenaa luomaan pelin alkutilan hahmoineen ja 
+     * pelitilanteen. Käskee myös areenaa luomaan pelin alkutilan hahmoineen ja
      * tallentaa gladiaattori-viitteen pelitilanteeseen.
      */
     public Sovelluslogiikka() {
@@ -49,7 +49,9 @@ public class Sovelluslogiikka {
     }
 
     /**
-     * Välittää pelaajalle komennon, joka ei johda vuoron toiminnon käyttämiseen.
+     * Välittää pelaajalle komennon, joka ei johda vuoron toiminnon
+     * käyttämiseen.
+     *
      * @param k komento
      */
     public void annaPelaajalleKomento(Komennot k) {

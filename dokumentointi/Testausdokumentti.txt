@@ -61,12 +61,13 @@ Bugin kuvaus:
 	efektejä, kunnes efektiketju olisi käyty läpi ja Piirtaja piirtäisi
 	efektittömän ruudun jonka jälkeen pysäyttäisi itse kellonsa.
 
-Kohta 3...X ei kuitenkaan toimi. Ensimmäisellä vuorolla efektejä ei piirretä 
-lainkaan. Toisella vuorolla piirretään ensimmäisen vuoron efektit, kolmannella
-toisen jne. 
-Kyse ei siis ole, että itse efektit Areenassa olisivat myöhässä, vaan ongelma 
-syntyy jossain käyttöliittymän sisäpuolella. Epäilen, että syynä saattaa olla
-jokin JLabel.repaint()-metodiin tai Swing Timeriin liittyvä ominaisuus, jota
+Kohta 3...X ei kuitenkaan toimi. Ensimmäisellä efektejä sisältävällä vuorolla 
+efektejä ei piirretä lainkaan; hirviöiden ja hahmon sijainnit päivittyvät, 
+mutta efektejä ei näy. Toisella vuorolla piirretään ensimmäisen vuoron efektit, 
+kolmannella toisen jne. 
+Kyse ei kuitenkaan ole, että itse efektit Areenassa olisivat myöhässä, vaan 
+ongelma syntyy jossain käyttöliittymän sisäpuolella. Epäilen, että syynä saattaa 
+olla jokin JLabel.repaint()-metodiin tai Swing Timeriin liittyvä ominaisuus, jota
 en tunne, mutta en joka tapauksessa onnistunut löytämään tähän ongelmaan
 ratkaisua.
 

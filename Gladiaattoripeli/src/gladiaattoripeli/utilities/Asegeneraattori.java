@@ -1,18 +1,22 @@
-
 package gladiaattoripeli.utilities;
 
 import gladiaattoripeli.domain.Ase;
 
 /**
- * Kapseloi yleisiä aseiden konstruktoriarvoja helposti käytettäviin apumetodeihin.
+ * Kapseloi yleisiä aseiden konstruktoriarvoja helposti käytettäviin
+ * apumetodeihin.
  */
 public class Asegeneraattori {
 
+    /**
+     * Konstruktori.
+     */
     public Asegeneraattori() {
     }
 
     /**
      * Palauttaa miekan.
+     *
      * @return Ase(4,0)
      */
     public Ase getMiekka() {
@@ -21,6 +25,7 @@ public class Asegeneraattori {
 
     /**
      * Palauttaa nuijan.
+     *
      * @return Ase(1, 1)
      */
     public Ase getNuija() {
@@ -29,6 +34,7 @@ public class Asegeneraattori {
 
     /**
      * Palauttaa kynnet.
+     *
      * @return Ase(2, 4)
      */
     public Ase getKynnet() {

@@ -95,13 +95,13 @@ public abstract class Hahmo {
      * @return boolean kuoliko kohde k/e
      */
     public boolean hyokkaa(Hahmo hahmo, Pelitilanne tilanne) {
-        if(hahmo.isElossa()) {
-        tilanne.lisaaTapahtuma(tilanne.viestit.lyo(this.getNimi(), hahmo.getKohdeNimi()));
-        boolean b = hahmo.puolusta(
-                tilanne,
-                this.getAse().getVahinko(),
-                this.getHyokkaysarvo() + this.arpoja.nextInt(10));
-        return b;
+        if (hahmo.isElossa()) {
+            tilanne.lisaaTapahtuma(tilanne.viestit.lyo(this.getNimi(), hahmo.getKohdeNimi()));
+            boolean b = hahmo.puolusta(
+                    tilanne,
+                    this.getAse().getVahinko(),
+                    this.getHyokkaysarvo() + this.arpoja.nextInt(10));
+            return b;
         }
         return false;
     }

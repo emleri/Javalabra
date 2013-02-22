@@ -20,9 +20,10 @@ public class Keho {
 
     /**
      * Luo uuden, raajattoman kehon.
+     *
      * @param nimi kehon omistajan nimi
-     * @param osumapisteet kehon omistajan osumapisteet, joiden perusteella raajojen
-     * osumapisteet määritellään
+     * @param osumapisteet kehon omistajan osumapisteet, joiden perusteella
+     * raajojen osumapisteet määritellään
      */
     public Keho(String nimi, int osumapisteet) {
         this.nimi = nimi;
@@ -34,6 +35,7 @@ public class Keho {
 
     /**
      * Lisää uuden ruumiinosan kehoon. Tallennusavaimena käytetään raajan nimeä.
+     *
      * @param r lisättävä osa
      */
     public void lisaaRaaja(Ruumiinosa r) {
@@ -42,6 +44,7 @@ public class Keho {
 
     /**
      * Jakaa parametrina saadun vahingon satunnaiselle ruumiinosalle.
+     *
      * @param tilanne viite pelitilanteeseen tapahtuman kirjaamista varten
      * @param vahinko vahingon määrä
      */
@@ -82,8 +85,9 @@ public class Keho {
     }
 
     /**
-     * Kapseloi raajataulukon get-metodin ja varmistaa, että haettu osa on olemassa
-     * ennen hakua.
+     * Kapseloi raajataulukon get-metodin ja varmistaa, että haettu osa on
+     * olemassa ennen hakua.
+     *
      * @param osa haettavan osan nimi
      * @return haettu osa
      */
