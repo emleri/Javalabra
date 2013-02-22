@@ -14,9 +14,12 @@ import javax.swing.JLabel;
  */
 public class TapahtumanRaportoija {
 
-    private JLabel raporttiKentta;
-    private JLabel stattiKentta;
+    private JLabel raporttiKentta; // Viite peli-ikkunan raporttikenttään
+    private JLabel stattiKentta; // Viite peli-ikkunan stattiriviin
 
+    /**
+     * Konstruktori.
+     */
     public TapahtumanRaportoija() {
     }
 
@@ -28,6 +31,16 @@ public class TapahtumanRaportoija {
         this.stattiKentta = stattiKentta;
     }
 
+    /**
+     * Käy läpi pelitapahtumia lisäten niitä yksi kerrallaan tulostettavaan
+     * tekstiin. Mikäli tekstin pituus nousee liian suureksi mahtuakseen
+     * raporttikenttään, metodi tulostaa ensimmäisen osan ja muuttaa
+     * käyttöliittymän tilan odottamaan seuraavaa osaa kunnes kaikki tapahtumat
+     * on tulostettu.
+     *
+     * @param tilanne viite pelitilanteeseen, josta tapahtumat haetaan
+     * @return mahduttiinko kaikki tulostamaan
+     */
     public boolean raportoi(Pelitilanne tilanne) {
         int riveja = 0;
         boolean lisaaTekstia = false;
@@ -64,27 +77,48 @@ public class TapahtumanRaportoija {
         return lisaaTekstia;
     }
 
+    /**
+     * Päivittää stattirivin gladiaattorin tietoja vastaavaksi.
+     *
+     * @param gladiaattori jolta statit haetaan
+     */
     public void paivitaStatit(Gladiaattori gladiaattori) {
         stattiKentta.setText("HP: " + gladiaattori.getOsumapisteet() + "   " + "Hyökkäys: " + gladiaattori.getHyokkaysarvo() + "   " + "Puolustus: " + gladiaattori.getPuolustusarvo());
         stattiKentta.repaint();
     }
 
-    public void alkutervehdys(Pelitilanne v) {
-        raporttiKentta.setText(v.viestit.alkutervehdys());
+    /**
+     * Tulostaa pelinalkuviestin.
+     *
+     * @param tilanne viite pelitilanteeseen, jonka viestigeneraattorilta viesti
+     * haetaan.
+     */
+    public void alkutervehdys(Pelitilanne tilanne) {
+        raporttiKentta.setText(tilanne.viestit.alkutervehdys());
     }
 
+    /**
+     * Gladiaattorin surmaamien hirviöiden määrän raportoiva metodi.
+     *
+     * @param gladiaattori jonka tapot tulostetaan
+     * @param raportti teksti, jonka loppuun raportti lisätään
+     */
     public void tapot(Gladiaattori gladiaattori, StringBuilder raportti) {
         List<Hahmo> tapot = gladiaattori.getTapot();
 
         raportti.append("<br><br>Ennen kuolemaansa gladiaattori surmasi ");
         raportti.append(tapot.size());
         raportti.append(" hirviötä.");
-
-//        for (Hahmo h : tapot) {
-//            raportti.append("<br>- ").append(h.toString());
-//        }
     }
 
+    /**
+     * Tulostaa high score -listan rivi riviltä. Lisää loppuun myös ohjeviestin
+     * uuden pelin aloittamisesta, mikäli kyseessä on pelin lopussa tapahtuva
+     * tulostus.
+     *
+     * @param pisteet pistelista
+     * @param loppupisteet tulostetaanko ohjeviestiä
+     */
     public void tulostaPisteet(List<Pisteet> pisteet, Boolean loppupisteet) {
         StringBuilder teksti = new StringBuilder("");
         teksti.append("<html>");
@@ -102,7 +136,5 @@ public class TapahtumanRaportoija {
         teksti.append("</html>");
         this.raporttiKentta.setText(teksti.toString());
         this.raporttiKentta.repaint();
-
-
     }
 }

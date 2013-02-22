@@ -1,7 +1,6 @@
 package gladiaattoripeli.domain;
 
 import gladiaattoripeli.utilities.Pelitilanne;
-import gladiaattoripeli.utilities.RuumiinosanNimi;
 import java.util.EnumMap;
 import java.util.Iterator;
 import java.util.Random;
@@ -13,12 +12,18 @@ import java.util.Random;
  */
 public class Keho {
 
-    private Ruumiinosa keskivartalo;
-    private Ruumiinosa paa;
-    private EnumMap<RuumiinosanNimi, Ruumiinosa> raajat;
-    private Random arpoja;
-    private String nimi;
+    private Ruumiinosa keskivartalo; // Kehon keskivartalo-ruumiinosa
+    private Ruumiinosa paa; // Kehon pää-ruumiinosa
+    private EnumMap<RuumiinosanNimi, Ruumiinosa> raajat; // Kehon raajat taulukossa, avaimena raajan nimi
+    private Random arpoja; // Satunnaislukugeneraattori
+    private String nimi; // Kehon omistajan nimi
 
+    /**
+     * Luo uuden, raajattoman kehon.
+     * @param nimi kehon omistajan nimi
+     * @param osumapisteet kehon omistajan osumapisteet, joiden perusteella raajojen
+     * osumapisteet määritellään
+     */
     public Keho(String nimi, int osumapisteet) {
         this.nimi = nimi;
         this.keskivartalo = new Ruumiinosa(RuumiinosanNimi.KESKIVARTALO, this.nimi, osumapisteet);
@@ -27,14 +32,23 @@ public class Keho {
         this.raajat = new EnumMap<RuumiinosanNimi, Ruumiinosa>(RuumiinosanNimi.class);
     }
 
+    /**
+     * Lisää uuden ruumiinosan kehoon. Tallennusavaimena käytetään raajan nimeä.
+     * @param r lisättävä osa
+     */
     public void lisaaRaaja(Ruumiinosa r) {
         this.raajat.put(r.getNimi(), r);
     }
 
-    public void otaVahinkoa(Pelitilanne v, int vahinko) {
+    /**
+     * Jakaa parametrina saadun vahingon satunnaiselle ruumiinosalle.
+     * @param tilanne viite pelitilanteeseen tapahtuman kirjaamista varten
+     * @param vahinko vahingon määrä
+     */
+    public void otaVahinkoa(Pelitilanne tilanne, int vahinko) {
         int osumakohta = arpoja.nextInt(12);
         if (osumakohta < 2) {
-            this.paa.otaVahinkoa(v, vahinko);
+            this.paa.otaVahinkoa(tilanne, vahinko);
         } else if (osumakohta < 7 && !this.raajat.isEmpty()) {
             Iterator<RuumiinosanNimi> raajaIteraattori = raajat.keySet().iterator();
             int satunnainen = arpoja.nextInt(RuumiinosanNimi.getSize());
@@ -45,9 +59,9 @@ public class Keho {
                     osa = raajaIteraattori.next();
                 }
             }
-            this.raajat.get(osa).otaVahinkoa(v, vahinko);
+            this.raajat.get(osa).otaVahinkoa(tilanne, vahinko);
         } else {
-            this.keskivartalo.otaVahinkoa(v, vahinko);
+            this.keskivartalo.otaVahinkoa(tilanne, vahinko);
         }
     }
 
@@ -67,6 +81,12 @@ public class Keho {
         return raajat;
     }
 
+    /**
+     * Kapseloi raajataulukon get-metodin ja varmistaa, että haettu osa on olemassa
+     * ennen hakua.
+     * @param osa haettavan osan nimi
+     * @return haettu osa
+     */
     public Ruumiinosa getRaaja(RuumiinosanNimi osa) {
         if (this.raajat.containsKey(osa)) {
             return this.raajat.get(osa);

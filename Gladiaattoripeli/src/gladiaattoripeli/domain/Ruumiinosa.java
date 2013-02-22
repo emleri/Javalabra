@@ -1,6 +1,5 @@
 package gladiaattoripeli.domain;
 
-import gladiaattoripeli.utilities.RuumiinosanNimi;
 import gladiaattoripeli.utilities.Pelitilanne;
 
 /**
@@ -9,11 +8,17 @@ import gladiaattoripeli.utilities.Pelitilanne;
  */
 public class Ruumiinosa {
 
-    private RuumiinosanNimi nimi;
-    private String omistajanNimi;
-    private int osumapisteet;
-    private Boolean kuollut;
+    private RuumiinosanNimi nimi; // Ruumiinosan nimi enumina
+    private String omistajanNimi; // Ruumiinosan omistajan nimi
+    private int osumapisteet; // Ruumiinosan omat osumapisteet
+    private Boolean kuollut; // Boolean-arvo joka kertoo, onko osa kuollut
 
+    /**
+     * Luo uuden ruumiinosan.
+     * @param nimi ruumiinosan nimi
+     * @param omistajanNimi ruumiinosan omistajan nimi
+     * @param osumapisteet ruumiinosan osumapisteet
+     */
     public Ruumiinosa(RuumiinosanNimi nimi, String omistajanNimi, int osumapisteet) {
         this.nimi = nimi;
         this.omistajanNimi = omistajanNimi;
@@ -21,6 +26,13 @@ public class Ruumiinosa {
         this.kuollut = false;
     }
 
+    /**
+     * Vähentää ruumiinosan osumapisteitä parametrina saadun vahingon verran ja
+     * kirjaa vahingoittumisen pelitilanteeseen. Mikäli raaja kuoli, kirjaa myös
+     * tiedon siitä ja muuttaa kuollut-muuttujan tilan vastaamaan todellisuutta.
+     * @param tilanne pelitilanne, johon tapahtumat kirjataan
+     * @param vahinko vahingon määrä
+     */
     public void otaVahinkoa(Pelitilanne tilanne, int vahinko) {
         this.osumapisteet -= vahinko;
         String vahinkoteksti = 
@@ -50,8 +62,6 @@ public class Ruumiinosa {
     public int getOsumapisteet() {
         return osumapisteet;
     }
-    
-    
 
     @Override
     public String toString() {

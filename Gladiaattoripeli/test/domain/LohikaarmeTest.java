@@ -9,7 +9,7 @@ import gladiaattoripeli.domain.Gladiaattori;
 import gladiaattoripeli.domain.Hirvio;
 import gladiaattoripeli.domain.Lohikaarme;
 import gladiaattoripeli.utilities.Hahmogeneraattori;
-import gladiaattoripeli.utilities.Koordinaatit;
+import gladiaattoripeli.domain.Koordinaatit;
 import gladiaattoripeli.utilities.Pelitilanne;
 import org.junit.After;
 import org.junit.AfterClass;

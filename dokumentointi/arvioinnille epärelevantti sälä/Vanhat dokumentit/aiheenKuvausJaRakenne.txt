@@ -1,6 +1,6 @@
 Aihe: Gladiaattoripeli
 
-Pieni, vuoropohjainen kirjaingrafiikkapeli Nethackin, ADOMin ja Dwarf Fortressin henkeen, 
+Pieni, vuoropohjainen kirjaingrafiikka-roguelike Nethackin, ADOMin ja Dwarf Fortressin henkeen, 
 jossa taistellaan areenalla erilaisia tietokoneen ohjaamia ökkömönkiäisiä vastaan.
 
 Pelin kulku:

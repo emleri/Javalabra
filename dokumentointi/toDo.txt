@@ -1,18 +1,5 @@
 Tehtävää:
-- BUGI: gladiaattorin kuolinviesti moninkertaisena!
-- Siirrä vastuita hirviöltä/gladiaattorilta hahmolle
-	- muuta lohikaarme käyttämään hahmoa, ei hirviötä/gladiaattoria
-- Testaa kattavammin (Ma-Pe)
-- Refaktoroi ja siisti (Ma-Pe)
-- Päivitä kaavioita ja dokumentaatiota (Ma-Pe)
 (- kursori) (lopuksi, jos ehtii)
 (-haavoittumisen vaikutukset)
 (-suoja tulelta pylvään takana)
-
-Testeistä valmiita:
-- Koordinaattien testit
-- Areenan testit
-- Gladiaattorin testit
-- Hirviön testit
-- Aseen testit
-- Hahmon testit
+(-onkoRuutuVapaa()-metodi)

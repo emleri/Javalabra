@@ -2,30 +2,31 @@ package gladiaattoripeli.domain;
 
 import gladiaattoripeli.utilities.Hahmogeneraattori;
 import gladiaattoripeli.utilities.Komennot;
-import gladiaattoripeli.utilities.Koordinaatit;
 import gladiaattoripeli.utilities.Pelitilanne;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 /**
- * Luokka hallinnoi hirviöiden ja gladiaattorin sijaintia ja niiden muutoksia.
+ * Luokka hallinnoi hirviöiden, gladiaattorin ja efektien sijaintia ja niiden 
+ * muutoksia.
  */
 public class Areena {
 
-    private int leveys;
-    private int korkeus;
-    private int aaltoNro;
-    private Hahmogeneraattori hahmogeneraattori;
-    private Gladiaattori gladiaattori;
-    private List<Hirvio> hirviot;
-    private List<Koordinaatit> esteet;
-    private Efekti efektit;
-    private Random arpoja;
-    private Pelitilanne tilanne;
+    private int leveys; // Areenan leveys
+    private int korkeus; // Areenan korkeus
+    private int aaltoNro; // Hirviöaallon järjestysnumero
+    private Hahmogeneraattori hahmogeneraattori; // Hahmogeneraattori hahmojen luomiseen
+    private Gladiaattori gladiaattori; // Pelihahmo
+    private List<Hirvio> hirviot; // Lista vastustajista
+    private List<Koordinaatit> esteet; // Areenalla olevat esteet
+    private Efekti efektit; // Efektilistan ensimmäinen node
+    private Random arpoja; // Satunnaislukugeneraattori
+    private Pelitilanne tilanne; // Viite pelitilanne-olioon
 
     /**
-     * Konstruktori
+     * Konstruktori. Luo pelialueen ja hahmogeneraattorin, alustaa tallennustilan
+     * peliobjekteille.
      *
      * @param leveys areenan leveys
      * @param korkeus areenan korkeus
@@ -59,7 +60,7 @@ public class Areena {
     }
 
     /**
-     * Luo pelin alussa tarvittavat hahmot: gladiaattorin ja 5 hirviötä.
+     * Luo pelin alussa tarvittavat hahmot: gladiaattorin ja 3 hirviötä.
      */
     public void luoHahmot() {
         this.gladiaattori = hahmogeneraattori.luoGladiaattori(this);
@@ -106,7 +107,7 @@ public class Areena {
     }
 
     /**
-     * Metodi luo hirviöitä satunnaisille paikoille areenan laidalle.
+     * Metodi luo hirviöitä satunnaisille paikoille areenan laidoille.
      *
      * @param maara luotavien hirviöiden määrä
      */
@@ -128,7 +129,7 @@ public class Areena {
 
     /**
      * Luo uuden 'aallon' hirviöitä, mikäli edellinen aalto on kuollut. Jokainen
-     * aalto on aina edellistä suurempi. Kolmannen aallon jälkeen taisteluun
+     * aalto on aina edellistä suurempi. Neljännen aallon jälkeen taisteluun
      * liittyy myös lohikäärme.
      */
     public void seuraavaAalto() {
@@ -159,7 +160,7 @@ public class Areena {
     }
 
     /**
-     * Lisää hirviön hirviölistaan ja siten areenalle.
+     * Lisää hirviön hirviölistaan ja siten myös pelialueelle.
      *
      * @param h lisättävä hirviö
      */
@@ -210,13 +211,9 @@ public class Areena {
     }
 
     /**
-     * Metodi komentaa jokaista areenan hirviötä yksi kerrallaan. Mikäli hirviö
-     * on gladiaattorin viereisissä koordinaateissa, se lyö gladiaattoria. Jos
-     * seuraavat koordinaatit kohti gladiaattoria ovat vapaana, hirviö liikkuu
-     * niihin. Muussa tapauksessa hirviö pysyy paikoillaan. Jokaisen hirviön
-     * toiminta kirjataan vuororaporttiin.
+     * Metodi kutsuu jokaisen hirviön liiku-metodia.
      *
-     * @param v viite kyseisen vuoron vuororaporttiin
+     * @param v viite pelitilanteeseen, jota hirviöt tarvitsevat liikkeeseensä
      */
     public void liikutaHirvioita() {
         tilanne.lisaaTapahtuma("Hirviöt liikkuvat.");
@@ -240,7 +237,7 @@ public class Areena {
 
         if (this.onkoRuudussaHirviota(kohderuutu)) {
             Hirvio h = this.getHirvioRuudusta(kohderuutu);
-            this.lisaaEfekti(this.gladiaattori.getHyokkaysEfekti(kohderuutu));
+            this.lisaaEfekti(this.gladiaattori.getHyokkaysefekti(kohderuutu));
             gladiaattori.hyokkaa(h, tilanne);
         } else if (!this.onkoRuudussaEstetta(kohderuutu)) {
             gladiaattori.siirry(kohderuutu);
@@ -282,6 +279,10 @@ public class Areena {
             return true;
         }
         return false;
+    }
+    
+    public List<Koordinaatit> getEsteet() {
+        return this.esteet;
     }
 
     /**
@@ -350,7 +351,7 @@ public class Areena {
         if (this.efektit == null) {
             this.efektit = e;
         } else {
-            this.efektit.getViimeinen().lisaaSeuraavaFrame(e);
+            this.efektit.getViimeinen().lisaaSeuraavaRuutu(e);
         }
     }
 
@@ -394,7 +395,4 @@ public class Areena {
         return b;
     }
 
-    public List<Koordinaatit> getEsteet() {
-        return this.esteet;
-    }
 }

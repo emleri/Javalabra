@@ -1,21 +1,20 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package gladiaattoripeli.UI;
 
 import gladiaattoripeli.domain.Areena;
 import gladiaattoripeli.domain.Efekti;
+import gladiaattoripeli.domain.Koordinaatit;
 import gladiaattoripeli.domain.Lohikaarme;
-import gladiaattoripeli.utilities.Koordinaatit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JLabel;
 import javax.swing.Timer;
 
 /**
+ * Kartanpiirtäjäluokka. Toimii Swing Timerin ajastamana, piirtäen joka tickillä
+ * uuden ruudun pelianimaatiota kunnes kokonaisuus on piirretty ja ajastin
+ * pysäytetään.
  *
- * @author Emleri
+ * BUGI: Piirtoa täytyy kutsua kahdesti tai se ei toimi oikein.
  */
 public class Piirtaja implements ActionListener {
 
@@ -25,6 +24,13 @@ public class Piirtaja implements ActionListener {
     private Efekti efektit;
     private Boolean piirraEfektit;
 
+    /**
+     * Konstruktori.
+     *
+     * @param ajastin Swing Timer, johon Piirtaja on kytketty
+     * @param piirtoalue alue, jolle kartta piirretään
+     * @param areena areena, joka alueelle piirretään
+     */
     public Piirtaja(Timer ajastin, JLabel piirtoalue, Areena areena) {
         this.ajastin = ajastin;
         this.piirtoalue = piirtoalue;
@@ -32,10 +38,20 @@ public class Piirtaja implements ActionListener {
         this.piirraEfektit = true;
     }
 
+    /**
+     * Hakee areenan efektiketjun aloitussolmun ja tallentaa sen.
+     */
     public void haeEfektit() {
         this.efektit = areena.getEfektit();
     }
 
+    /**
+     * Joka kellon tickillä tapahtuva piirtokomento. Piirtää areenan ja efektit,
+     * jonka jälkeen etenee efektiketjussa askeleen. Mikäli efektiketju loppuu,
+     * pysäyttää ajastimen ja siten itsensä.
+     *
+     * @param ae
+     */
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (efektit == null) {
@@ -97,6 +113,12 @@ public class Piirtaja implements ActionListener {
         }
     }
 
+    /**
+     * Tarkistaa, onko kyseisiin koordinaatteihin piirrettäviä efektejä.
+     *
+     * @param k koordinaatit
+     * @return on/ei
+     */
     private Boolean voikoPiirtaaEfekteja(Koordinaatit k) {
         if (this.efektit == null) {
             return false;

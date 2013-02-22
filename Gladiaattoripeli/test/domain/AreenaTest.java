@@ -6,7 +6,7 @@ import gladiaattoripeli.domain.Hahmo;
 import gladiaattoripeli.domain.Hirvio;
 import gladiaattoripeli.utilities.Hahmogeneraattori;
 import gladiaattoripeli.utilities.Komennot;
-import gladiaattoripeli.utilities.Koordinaatit;
+import gladiaattoripeli.domain.Koordinaatit;
 import gladiaattoripeli.utilities.Pelitilanne;
 import java.util.List;
 import org.junit.After;

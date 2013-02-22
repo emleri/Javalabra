@@ -10,16 +10,20 @@ import java.util.List;
  */
 public class Sovelluslogiikka {
 
-    private Areena areena;
-    private HighScorenKasittelija pisteyttaja;
-    private Pelitilanne tilanne;
+    private Areena areena; // Pelialue ja hahmojen liikkeiden koordinoija
+    private HighScorenKasittelija pisteyttaja; // Pisteidentallentaja
+    private Pelitilanne tilanne; // Pelitilanne
 
+    /**
+     * Konstruktori. Luo pelimekaniikan päärungon: sovelluslogiikan, areenan ja
+     * pelitilanteen. Käskee myös areenaa luomaan pelin alkutilan hahmoineen ja 
+     * tallentaa gladiaattori-viitteen pelitilanteeseen.
+     */
     public Sovelluslogiikka() {
         this.tilanne = new Pelitilanne();
         this.areena = new Areena(23, 21, tilanne);
         this.areena.alustaPeli();
         tilanne.setGladiaattori(this.areena.getGladiaattori());
-//        tilanne.setHirviot(this.areena.getHirviot());
         this.pisteyttaja = new HighScorenKasittelija();
     }
 
@@ -44,6 +48,10 @@ public class Sovelluslogiikka {
         }
     }
 
+    /**
+     * Välittää pelaajalle komennon, joka ei johda vuoron toiminnon käyttämiseen.
+     * @param k komento
+     */
     public void annaPelaajalleKomento(Komennot k) {
         if (k.equals(Komennot.HYOKKAAVAMMIN)) {
             this.areena.getGladiaattori().muutaHyokkaysarvoa(+1);
@@ -90,6 +98,9 @@ public class Sovelluslogiikka {
         return this.areena;
     }
 
+    /**
+     * Alustaa kaikki kolme pääluokkaa ja aloittaa pelin alusta.
+     */
     public void uusiPeli() {
         this.areena.alustaPeli();
         this.tilanne.alustaTilanne();

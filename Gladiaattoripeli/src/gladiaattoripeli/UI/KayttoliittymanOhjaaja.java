@@ -21,6 +21,9 @@ public class KayttoliittymanOhjaaja {
     private GraafinenKayttoliittyma graafinen;
     private Tila tila;
 
+    /**
+     * Konstruktori.
+     */
     public KayttoliittymanOhjaaja() {
         this.logiikka = new Sovelluslogiikka();
         this.piirtaja = new KartanPiirtaja();
@@ -50,50 +53,51 @@ public class KayttoliittymanOhjaaja {
                 graafinen.setVisible(true);
             }
         });
-        //invokeLateriin kayttoliittyma 
-
     }
 
     /**
      * Metodi välittää NappaimistonKuuntelijalta saadun komennon eteenpäin
      * sovelluslogiikan suoritettavaksi ja päivittää näyttökentät.
      *
-     * @param k parametrina eteenpäin välitettävä suunta, johon gladiaattorin
-     * tulee toimia
+     * @param k parametrina eteenpäin välitettävä komento, jonka mukaan
+     * gladiaattorin tulee toimia
      */
     public void suoritaToiminto(Komennot k) {
-            if (this.tila == Tila.PELI) {
-                if (k.onSuunta(k)) {
-                    this.logiikka.pelaaVuoro(k);
-                    this.paivita();
-                } else if (k.equals(Komennot.ODOTA)) {
-                    this.logiikka.pelaaHirvioidenVuoro();
-                    this.paivita();
-                } else {
-                    this.logiikka.annaPelaajalleKomento(k);
-                    this.raportoija.paivitaStatit(this.logiikka.getAreena().getGladiaattori());
-                }
-            } else if (this.tila == Tila.LISAATEKSTIA) {
+        if (this.tila == Tila.PELI) {
+            if (k.onSuunta(k)) {
+                this.logiikka.pelaaVuoro(k);
                 this.paivita();
-            } else if (this.tila == Tila.HIGHSCORE) {
-                this.kysyHighScorea();
-                this.tila = Tila.VALIKKO;
-            } else if (this.tila == Tila.VALIKKO) {
-                if (k == Komennot.HYVAKSY) {
-                    this.logiikka.uusiPeli();
-                    this.tila = Tila.PELI;
-                    this.piirtaja.piirra(this.logiikka.getAreena());
-                    this.raportoija.alkutervehdys(this.tilanne);
-                    this.raportoija.paivitaStatit(this.logiikka.getAreena().getGladiaattori());
-                }
+            } else if (k.equals(Komennot.ODOTA)) {
+                this.logiikka.pelaaHirvioidenVuoro();
+                this.paivita();
+            } else {
+                this.logiikka.annaPelaajalleKomento(k);
+                this.raportoija.paivitaStatit(this.logiikka.getAreena().getGladiaattori());
             }
+        } else if (this.tila == Tila.LISAATEKSTIA) {
+            this.paivita();
+        } else if (this.tila == Tila.HIGHSCORE) {
+            this.kysyHighScorea();
+            this.tila = Tila.VALIKKO;
+        } else if (this.tila == Tila.VALIKKO) {
+            if (k == Komennot.HYVAKSY) {
+                this.logiikka.uusiPeli();
+                this.tila = Tila.PELI;
+                this.piirtaja.piirra(this.logiikka.getAreena());
+                this.raportoija.alkutervehdys(this.tilanne);
+                this.raportoija.paivitaStatit(this.logiikka.getAreena().getGladiaattori());
+            }
+        }
 
-            if (this.tilanne.isPeliOhi() && this.tila == Tila.PELI) {
-                this.tila = Tila.HIGHSCORE;
-            }
-        
+        if (this.tilanne.isPeliOhi() && this.tila == Tila.PELI) {
+            this.tila = Tila.HIGHSCORE;
+        }
+
     }
 
+    /**
+     * Päivittää näyttökentät.
+     */
     public void paivita() {
         this.piirtaja.piirra(logiikka.getAreena());
         this.piirtaja.piirra(logiikka.getAreena());
@@ -105,8 +109,12 @@ public class KayttoliittymanOhjaaja {
         }
     }
 
+    /**
+     * Luo uuden ikkunan, jossa kysytään pelaajan nimeä syötettäväksi
+     * pelipisteiden kanssa high scoreen. Lähettää sitten tuloksena saadut tiedot
+     * sovelluslogiikalle tallennettavaksi.
+     */
     public void kysyHighScorea() {
-        // Dialogi-ikkuna kysymään nimeä high scoreen.
         String nimi = (String) JOptionPane.showInputDialog(
                 null,
                 "Pelaajan nimi:",

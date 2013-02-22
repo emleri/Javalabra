@@ -10,8 +10,12 @@
 Gladiaattoripeli
 ================
 
-Gladiaattoripeli on roguelike-areenapeli, jossa pelaaja ohjaa taistelijahahmoa
-jonka tavoitteena on surmata mahdollisimman paljon hirviöitä ennen kuolemaansa.
+Aihemäärittely
+==============
+
+Gladiaattoripeli on roguelike-taistelupeli, jossa yksinäinen pelaajan ohjaama
+gladiaattori kohtaa taistelussa areenalle aalto toisensa jälkeen vyöryvät hirviöt. 
+Pelaajan tavoitteena on surmata mahdollisimman paljon hirviöitä ennen kuolemaansa;
 Mitä enemmän tappoja, sitä enemmän pisteitä pelaaja saa pelin päätyttyä
 gladiaattorin lopulta kuollessa.
 
@@ -74,3 +78,14 @@ Taktiikka:
 * (Raajojen vahingoittumisen vaikutuksia ei ole pääasiassa vielä implementoitu 
   peliin. Lohikäärmeen siivet ovat tällä hetkellä ainoa ruumiinosa, jonka 
   haavoittumisella on mitään peliteknistä vaikutusta.)
+
+Käyttötapaukset
+===============
+
+- liike
+- hyökkäys
+- vuoron ohittaminen
+- hyökkäys- ja puolustusarvon säätäminen
+- nimen syöttäminen high scoreen
+- uuden pelin aloittaminen
+

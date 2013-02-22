@@ -1,5 +1,5 @@
 
-package gladiaattoripeli.utilities;
+package gladiaattoripeli.domain;
 
 /**
  * Yksinkertainen enum-luokka helpottamaan ruumiinosien käsittelyä.
@@ -17,11 +17,15 @@ public enum RuumiinosanNimi {
     
     private static int size = 9;
 
+    /**
+     * Palauttaa nimien määrän.
+     * @return nimien määrä
+     */
     public static int getSize() {
         return size;
     }
     
-    private String nimi;
+    private String nimi; // Ruumiinosan nimi String-muuttujana.
     
     RuumiinosanNimi(String nimi) {
         this.nimi = nimi;

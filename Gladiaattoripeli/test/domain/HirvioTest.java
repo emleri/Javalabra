@@ -8,8 +8,9 @@ import gladiaattoripeli.domain.Areena;
 import gladiaattoripeli.domain.Gladiaattori;
 import gladiaattoripeli.domain.Hirvio;
 import gladiaattoripeli.domain.Keho;
+import gladiaattoripeli.domain.Koordinaatit;
+import gladiaattoripeli.utilities.Asegeneraattori;
 import gladiaattoripeli.utilities.Hahmogeneraattori;
-import gladiaattoripeli.utilities.Koordinaatit;
 import gladiaattoripeli.utilities.Pelitilanne;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -25,6 +26,7 @@ import org.junit.Test;
 public class HirvioTest {
 
     private Hahmogeneraattori hg;
+    private Asegeneraattori ag;
     private Hirvio h;
     private Pelitilanne t;
     private Gladiaattori g;
@@ -43,6 +45,7 @@ public class HirvioTest {
     @Before
     public void setUp() {
         hg = new Hahmogeneraattori();
+        ag = new Asegeneraattori();
         h = hg.luoHirvio();
         t = new Pelitilanne();
         g = hg.luoGladiaattori(new Areena(5, 5, t));
@@ -118,21 +121,21 @@ public class HirvioTest {
     @Test
     public void liikuKunEiTilaa() {
         Areena a = new Areena(10, 10, t);
-        Hirvio h1 = new Hirvio(5, new Keho("öö", 1));
+        Hirvio h1 = new Hirvio(5, new Keho("öö", 1), ag.getNuija());
         h1.siirry(new Koordinaatit(0, 1));
-        Hirvio h2 = new Hirvio(5, new Keho("ää", 1));
+        Hirvio h2 = new Hirvio(5, new Keho("ää", 1), ag.getNuija());
         h2.siirry(new Koordinaatit(1, 1));
-        Hirvio h3 = new Hirvio(5, new Keho("aa", 1));
+        Hirvio h3 = new Hirvio(5, new Keho("aa", 1), ag.getNuija());
         h3.siirry(new Koordinaatit(1, 0));
-        Hirvio h4 = new Hirvio(5, new Keho("aa", 1));
+        Hirvio h4 = new Hirvio(5, new Keho("aa", 1), ag.getNuija());
         h4.siirry(new Koordinaatit(0, -1));
-        Hirvio h5 = new Hirvio(5, new Keho("aa", 1));
+        Hirvio h5 = new Hirvio(5, new Keho("aa", 1), ag.getNuija());
         h5.siirry(new Koordinaatit(-1, -1));
-        Hirvio h6 = new Hirvio(5, new Keho("aa", 1));
+        Hirvio h6 = new Hirvio(5, new Keho("aa", 1), ag.getNuija());
         h6.siirry(new Koordinaatit(-1, 0));
-        Hirvio h7 = new Hirvio(5, new Keho("aa", 1));
+        Hirvio h7 = new Hirvio(5, new Keho("aa", 1), ag.getNuija());
         h7.siirry(new Koordinaatit(-1, 1));
-        Hirvio h8 = new Hirvio(5, new Keho("aa", 1));
+        Hirvio h8 = new Hirvio(5, new Keho("aa", 1), ag.getNuija());
         h8.siirry(new Koordinaatit(1, -1));
         h.siirry(new Koordinaatit(0, 0));
         a.lisaaHirvio(h);

@@ -73,3 +73,6 @@ vahinkoviestien värikoodit: 3h
 
 21.2.
 - Testit valmiiksi, dokumentaation hiomista: ~2h
+
+22.2.
+- Laaja refaktorointi: Gladiaattorin ja Hirviön yhteiset toiminnallisuudet -> Hahmo. Dokumentointia, JavaDoc valmiiksi, uusi ja värikäs luokkakaavio, kaikkea pientä korjailua. ~8h

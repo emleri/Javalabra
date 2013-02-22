@@ -1,132 +1,60 @@
 package gladiaattoripeli.domain;
 
-import gladiaattoripeli.utilities.Koordinaatit;
 import gladiaattoripeli.utilities.Pelitilanne;
-import java.util.Random;
 
 /**
- * Pelin vastustajia kuvaava luokka, joka kokoaa yhteen vahingoittumis-,
- * sijainti- ja hyökkäysmekanismit. Perii Liikutettava-luokalta
- * sijaintiominaisuutensa ja sisältää Keho-olion vahingon kirjanpitäjänä.
+ * Pelin vastustajia kuvaava luokka, joka laajentaa Hahmon toiminnallisuutta. 
+ * Luokka lisää hahmolle tekoälyn, joka ohjaa sitä taistelemaan gladiaattoria
+ * vastaan.
  */
 public class Hirvio extends Hahmo {
-
-    private int osumapisteet;
-    private Keho keho;
-    private Ase ase;
-    private String nimi;
-    private int hyokkays;
-    private int puolustusarvo;
+    /**
+     * Konstruktori välittää vain parametrit eteenpäin yläluokan konstruktorille.
+     * @param osumapisteet hirviön osumapisteet
+     * @param keho viite hirviölle annettavaan kehoon
+     * @param ase viite hirviölle annettavaan aseeseen
+     */
+    public Hirvio(int osumapisteet, Keho keho, Ase ase) {
+        super("Hirviö", new Koordinaatit(0, 0), keho, ase, osumapisteet, 7, 13);
+    }
 
     /**
-     * Konstruktori. Osa toteutuksesta siirtyy pian hahmogeneraattorin vastuulle,
-     * JavaD päivitetään sitten.
-     * @param sijaintiX
-     * @param sijaintiY
-     * @param osumapisteet
+     * Hirviön (kehnon) tekoälyn toteuttava metodi.
+     * 
+     * Mikäli hirviö ei ole gladiaattorin viereisessä ruudussa, se siirtyy siihen 
+     * viereiseen ruutuun, joka vie sen lähimmäksi gladiaattoria. Mikäli kyseinen
+     * ruutu on varattu, se ottaa askeleen satunnaiseen vapaaseen suuntaan. Mikäli 
+     * tilaa liikkua mihinkään suuntaan ei ole, hirviö pysyy paikallaan.
+     * 
+     * Mikäli hirviö on gladiaattorin viereisessä ruudussa, se kutsuu hyökkää-
+     * metodiaan kohteena gladiaattori.
+     * 
+     * @param gladiaattori viite gladiaattoriin
+     * @param tilanne tilanne tapahtumien raportointia varten
+     * @param areena areena sijaintien tarkistamiseen
      */
-    public Hirvio(int osumapisteet, Keho keho) {
-        super(new Koordinaatit(0, 0));
-        this.osumapisteet = osumapisteet;
-        this.keho = keho;
-        this.hyokkays = 7;
-        this.puolustusarvo = 13;
-        this.nimi = "Hirviö";
-    }
-
-    public void setAse(Ase ase) {
-        this.ase = ase;
-    }
-    
-    /**
-     * Hirviö ottaa metodissa vastaan hyökkäyksen gladiaattorilta ja raportoi 
-     * sen tulokset vuororaporttiin.
-     * @param tilanne vuororaportti
-     * @param vahinko vahingon määrä
-     * @param hyokkaysarvo gladiaattorin osumarolli
-     */
-    @Override
-    public boolean puolusta(Pelitilanne tilanne, int vahinko, int hyokkaysarvo) {
-        if (tilanne == null || vahinko < 0 || hyokkaysarvo < 0) {
-            throw new IllegalArgumentException();
-        }
-
-        if (hyokkaysarvo > this.puolustusarvo) {
-            this.osumapisteet -= vahinko;
-            this.keho.otaVahinkoa(tilanne, vahinko);
-            if (this.osumapisteet < 1) {
-                tilanne.lisaaTapahtuma(tilanne.viestit.onKuollut(this.nimi));
-                return true;
-            }
-        } else {
-            tilanne.lisaaTapahtuma(tilanne.viestit.vaistaa(this.nimi));
-        }
-        return false;
-    }
-    
     public void liiku(Gladiaattori gladiaattori, Pelitilanne tilanne, Areena areena) {
-            if (this.koordinaatit.onVieressa(gladiaattori.getSijainti())) {
-                areena.lisaaEfekti(this.getHyokkaysefekti(gladiaattori.getSijainti()));
-                this.hyokkaa(gladiaattori, tilanne);
+        if (this.getSijainti().onVieressa(gladiaattori.getSijainti())) {
+            areena.lisaaEfekti(this.getHyokkaysefekti(gladiaattori.getSijainti()));
+            this.hyokkaa(gladiaattori, tilanne);
+        } else {
+            Koordinaatit kohderuutu = this.getSijainti().getViereinenRuutuKohtiKoordinaatteja(gladiaattori.getSijainti());
+            if (!areena.onkoRuudussaHirviota(kohderuutu) && !areena.onkoRuudussaEstetta(kohderuutu)) {
+                this.siirry(kohderuutu);
             } else {
-                Koordinaatit kohderuutu = this.koordinaatit.getViereinenRuutuKohtiKoordinaatteja(gladiaattori.getSijainti());
-                if (!areena.onkoRuudussaHirviota(kohderuutu) && !areena.onkoRuudussaEstetta(kohderuutu)) {
-                    this.siirry(kohderuutu);
-                } else {
-                    int varmistus = 0;
-                    while (true) {
-                        kohderuutu = this.getSijainti().getSatunnainenRuutuVieressa();
-                        if (!areena.onkoRuudussaHirviota(kohderuutu) && !areena.onkoRuudussaEstetta(kohderuutu)) {
-                            this.siirry(kohderuutu);
-                            break;
-                        }
-                        varmistus++;
-                        if (varmistus > 50) {
-                            break;
-                        }
+                int varmistus = 0;
+                while (true) {
+                    kohderuutu = this.getSijainti().getSatunnainenRuutuVieressa();
+                    if (!areena.onkoRuudussaHirviota(kohderuutu) && !areena.onkoRuudussaEstetta(kohderuutu)) {
+                        this.siirry(kohderuutu);
+                        break;
+                    }
+                    varmistus++;
+                    if (varmistus > 50) {
+                        break;
                     }
                 }
             }
-    }
-
-    public int getOsumapisteet() {
-        return osumapisteet;
-    }
-
-    /**
-     * Hirviö suorittaa hyökkäyksen parametrina saamaansa gladiaattoriin.
-     *
-     * @param hahmo gladiaattori
-     * @param tilanne vuoron vuororaportti, johon hyökkäyksen tulos kirjataan
-     */
-    @Override
-    public void hyokkaa(Hahmo hahmo, Pelitilanne tilanne) {
-        tilanne.lisaaTapahtuma(tilanne.viestit.lyo("Hirviö", "gladiaattoria"));
-        hahmo.puolusta(tilanne, this.ase.getVahinko(), hyokkays + new Random().nextInt(10));
-    }
-
-    @Override
-    public String toString() {
-        return this.nimi + ", " + this.osumapisteet + " osumapistettä";
-    }
-
-    public Efekti getHyokkaysefekti(Koordinaatit k) {
-        return this.ase.getHyokkaysefekti(k);
-    }
-
-    protected Keho getKeho() {
-        return this.keho;
-    }
-
-    public void setNimi(String nimi) {
-        this.nimi = nimi;
-    }
-    
-    public String getNimi() {
-        return this.nimi;
-    }
-
-    public int getPuolustusarvo() {
-        return this.puolustusarvo;
+        }
     }
 }

@@ -1,7 +1,6 @@
 package gladiaattoripeli.utilities;
 
 import gladiaattoripeli.domain.Gladiaattori;
-import gladiaattoripeli.domain.Hirvio;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,8 +13,8 @@ public class Pelitilanne {
 
     private List<String> tapahtumat; // vuoron tapahtumaraportit
     private Gladiaattori gladiaattori; // viite Areenan gladiaattoriin
-    private Boolean peliOhi;
-    public Viestigeneraattori viestit;
+    private Boolean peliOhi; // kertoo, jatkuuko peli
+    public Viestigeneraattori viestit; // apuväline peliviestien luomiseen
 
     /**
      * Luokan konstruktori. Luo tyhjän tapahtumalokin ja surmattujen hirviöiden
@@ -28,6 +27,9 @@ public class Pelitilanne {
         this.viestit = new Viestigeneraattori();
     }
 
+    /**
+     * Alustaa pelitilanteen alkutilaansa.
+     */
     public void alustaTilanne() {
         this.uusiVuoro();
         this.peliOhi = false;

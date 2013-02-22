@@ -5,7 +5,7 @@
 package domain;
 
 import gladiaattoripeli.domain.Efekti;
-import gladiaattoripeli.utilities.Koordinaatit;
+import gladiaattoripeli.domain.Koordinaatit;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.*;
@@ -56,21 +56,21 @@ public class EfektiTest {
     @Test
     public void lisaaSeuraavaFrameTest() {
         Efekti b = new Efekti('y');
-        e.lisaaSeuraavaFrame(b);
+        e.lisaaSeuraavaRuutu(b);
         assertEquals(e.getSeuraava(), b);
     }
     
     @Test(expected = IllegalArgumentException.class)
     public void lisaaSeuraavaFrameNull() {
-        e.lisaaSeuraavaFrame(null);
+        e.lisaaSeuraavaRuutu(null);
     }
     
     @Test
     public void getViimeinenKunUseampia() {
-        e.lisaaSeuraavaFrame(new Efekti('r'));
-        e.getSeuraava().lisaaSeuraavaFrame(new Efekti('z'));
+        e.lisaaSeuraavaRuutu(new Efekti('r'));
+        e.getSeuraava().lisaaSeuraavaRuutu(new Efekti('z'));
         Efekti y = new Efekti('y');
-        e.getSeuraava().getSeuraava().lisaaSeuraavaFrame(y);
+        e.getSeuraava().getSeuraava().lisaaSeuraavaRuutu(y);
         assertEquals(e.getViimeinen(), y);
     }
     

@@ -6,7 +6,7 @@ package domain;
 
 import gladiaattoripeli.domain.Ase;
 import gladiaattoripeli.domain.Efekti;
-import gladiaattoripeli.utilities.Koordinaatit;
+import gladiaattoripeli.domain.Koordinaatit;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

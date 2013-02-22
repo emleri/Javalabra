@@ -10,14 +10,14 @@ import java.awt.event.KeyListener;
  */
 public class NappaimistonKuuntelija implements KeyListener {
 
-    private KayttoliittymanOhjaaja ohjaaja;
+    private KayttoliittymanOhjaaja ohjaaja; // Viite käyttöliittymän ohjaajaan
 
     public NappaimistonKuuntelija(KayttoliittymanOhjaaja ohjaaja) {
         this.ohjaaja = ohjaaja;
     }
 
     /**
-     * Lukee näppäinkomentoja ja välittää ne KayttoliittymanOhjaajan kautta
+     * Lukee näppäinkomennon ja välittää sen KayttoliittymanOhjaajan kautta
      * Sovelluslogiikalle.
      *
      * @param e

@@ -1,7 +1,7 @@
-package utilities;
+package domain;
 
 import gladiaattoripeli.utilities.Komennot;
-import gladiaattoripeli.utilities.Koordinaatit;
+import gladiaattoripeli.domain.Koordinaatit;
 import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;

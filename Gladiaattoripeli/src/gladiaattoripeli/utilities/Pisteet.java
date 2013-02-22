@@ -1,17 +1,19 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package gladiaattoripeli.utilities;
 
 /**
  * High score -pisteet ja niiden omistajan kapseloiva apuluokka.
- * @author Emleri
  */
 public class Pisteet implements Comparable<Pisteet> {
-    private String nimi;
-    private int pisteet;
+    private String nimi; // Pelaajan nimi
+    private int pisteet; // Pelaajan pisteet
 
+    /**
+     * Konstruktori. Käyttää nimen asettamiseen omaa setNimi()-metodiaan varmistaakseen
+     * yhteensopivuuden pisteentallentajan kanssa.
+     * @param pisteet
+     * @param nimi
+     */
     public Pisteet(int pisteet, String nimi) {
         this.setNimi(nimi);
         this.pisteet = pisteet;
@@ -21,7 +23,12 @@ public class Pisteet implements Comparable<Pisteet> {
         return nimi;
     }
     
-    public void setNimi(String nimi) {
+    /**
+     * Korvaa parametrina saadusta nimestä HighScorenKasittelija-luokan käyttöön 
+     * varatut ':'-merkin '.'-merkillä ja asettaa sen sitten nimi-kentän arvoksi.
+     * @param nimi
+     */
+    public final void setNimi(String nimi) {
         String kasiteltyNimi = nimi.replace(':', '.');
         this.nimi = kasiteltyNimi;
     }

@@ -1,5 +1,6 @@
-package gladiaattoripeli.utilities;
+package gladiaattoripeli.domain;
 
+import gladiaattoripeli.utilities.Komennot;
 import java.util.Random;
 
 /**
@@ -7,10 +8,15 @@ import java.util.Random;
  */
 public class Koordinaatit {
 
-    private int x;
-    private int y;
-    private Random arpoja;
+    private int x; // sijainti x-akselilla
+    private int y; // sijainti y-akselilla
+    private Random arpoja; // satunnaislukugeneraattori
 
+    /**
+     * Koordinaattien konstruktori.
+     * @param x x-sijainti
+     * @param y y-sijainti
+     */
     public Koordinaatit(int x, int y) {
         this.x = x;
         this.y = y;
@@ -43,17 +49,17 @@ public class Koordinaatit {
     }
 
     /**
-     * Laskee yhteen kahdet koordinaatit.
-     * @param k
-     * @return
+     * Laskee yhteen kahdet koordinaatit ja palauttaa ne uusina koordinaatteina.
+     * @param k summan toinen puoli
+     * @return uudet koordinaatit, jotka ovat kahden muun summa
      */
     public Koordinaatit koordinaattienSumma(Koordinaatit k) {
         return new Koordinaatit(this.x + k.getX(), this.y + k.getY());
     }
 
     /**
-     * Palauttaa parametrina saadusta suunnasta viereisen ruudun koordinaatit 
-     * itsestään nähden.
+     * Palauttaa parametrina saadusta suunnasta itsestään nähden viereisen ruudun 
+     * koordinaatit.
      * @param suunta suunta, josta viereinen ruutu haetaan
      * @return viereisen ruudun koordinaatit
      */
@@ -85,6 +91,12 @@ public class Koordinaatit {
         throw new IllegalArgumentException("Parametrina saatu komento ei ole suunta!");
     }
     
+    /**
+     * Apumetodi viereisten koordinaattien hakemiselle vähentämään toistuvia koodirivejä.
+     * @param x
+     * @param y
+     * @return uudet koordinaatit: nykyiset + x, y
+     */
     private Koordinaatit getViereisetApu(int x, int y) {
         Koordinaatit viereiset = new Koordinaatit(x, y);
         viereiset.lisaaKoordinaatit(this);
@@ -138,6 +150,11 @@ public class Koordinaatit {
         return viereinen;
     }
 
+    /**
+     * Tarkistaa, ovatko parametrina saadut koordinaatit viereisessä ruudussa.
+     * @param k tarkistettavat koordinaatit
+     * @return boolean true/false k/e
+     */
     public boolean onVieressa(Koordinaatit k) {
         if (k.equals(this)) {
             return false;

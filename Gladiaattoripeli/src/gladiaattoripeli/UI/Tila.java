@@ -1,13 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package gladiaattoripeli.UI;
 
 /**
- *
- * @author Emleri
+ * Käyttöliittymän tarvitsemat toimintotilat.
  */
 public enum Tila {
+
     PELI, VALIKKO, HIGHSCORE, LISAATEKSTIA;
 }

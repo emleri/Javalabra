@@ -3,7 +3,7 @@ package domain;
 import gladiaattoripeli.domain.Keho;
 import gladiaattoripeli.domain.Ruumiinosa;
 import gladiaattoripeli.utilities.Pelitilanne;
-import gladiaattoripeli.utilities.RuumiinosanNimi;
+import gladiaattoripeli.domain.RuumiinosanNimi;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.*;

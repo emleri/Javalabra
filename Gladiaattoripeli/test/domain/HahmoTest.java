@@ -5,7 +5,7 @@ import gladiaattoripeli.domain.Areena;
 import gladiaattoripeli.domain.Gladiaattori;
 import gladiaattoripeli.domain.Keho;
 import gladiaattoripeli.utilities.Hahmogeneraattori;
-import gladiaattoripeli.utilities.Koordinaatit;
+import gladiaattoripeli.domain.Koordinaatit;
 import gladiaattoripeli.utilities.Komennot;
 import gladiaattoripeli.utilities.Pelitilanne;
 import org.junit.After;

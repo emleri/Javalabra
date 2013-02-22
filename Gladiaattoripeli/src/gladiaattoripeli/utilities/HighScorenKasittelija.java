@@ -9,19 +9,32 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- *
- * @author Emleri
+ * Tiedostontallentaja/lukija, joka käsittelee pelin pisteitä. Pisteiden 
+ * tallentamisessa tekstiksi käytetään ':'-jakomerkkiä joka merkitsee nimen ja 
+ * pisteiden välisen rajan. Yhdet pisteet tallennetaan aina yhdelle tiedoston 
+ * riville, jolloin niiden lukeminen Scanner.nextLine()-metodilla on helppoa.
+ * 
+ * Pistetiedosto ei koskaan sisällä kuin kymmenen parhaan pelaajan nimet. Joka 
+ * tallennuskerralla top 10 ulkopuolelle jäävät nimet pyyhitään pois.
  */
 public class HighScorenKasittelija {
+    private File highScore; // Pistetiedosto polussa /highScore.txt
+    private Scanner lukija; // tiedostonlukija
+    private FileWriter kirjoittaja; // tiedostonkirjoittaja
 
-    private File highScore;
-    private Scanner lukija;
-    private FileWriter kirjoittaja;
-
+    /**
+     * Konstruktori, asettaa pisteiden tiedostopolun.
+     */
     public HighScorenKasittelija() {
         this.highScore = new File("highScore.txt");
     }
 
+    /**
+     * Lisää pistetiedostoon uudet pisteet. Purkaa tekstitiedoston listaksi, lisää 
+     * listaan pisteet, järjestää listan ja kirjoittaa sen kymmenen parasta nimeä
+     * lopuksi takaisin tiedostoon.
+     * @param pisteet lisättävät pisteet
+     */
     public void lisaaHighScore(Pisteet pisteet) {
         List<Pisteet> highScoreLista = this.getHighScore();
 
@@ -43,6 +56,10 @@ public class HighScorenKasittelija {
         }
     }
 
+    /**
+     * Lukee tiedoston listaksi pisteitä ja palauttaa sen.
+     * @return
+     */
     public List<Pisteet> getHighScore() {
         try {
             this.lukija = new Scanner(this.highScore);

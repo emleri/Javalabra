@@ -1,7 +1,7 @@
 package utilities;
 
 import gladiaattoripeli.utilities.Komennot;
-import gladiaattoripeli.utilities.Koordinaatit;
+import gladiaattoripeli.domain.Koordinaatit;
 import gladiaattoripeli.utilities.Sovelluslogiikka;
 import org.junit.After;
 import org.junit.AfterClass;
